@@ -1,5 +1,5 @@
 {
-  "name": "ReadMe WebApp",
+  "name": "ReadMe",
   "version": "0.0.1",
   "description": "Machine Learning app that finds patterns in daily life",
   "authors": [
@@ -11,5 +11,9 @@
   "scripts": {
     "start": "node src/server/server.js",
     "test": "grunt test"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
   }
 }
