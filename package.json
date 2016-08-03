@@ -13,6 +13,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "mongoose": "^4.5.8"
+    "mongoose": "^4.5.8",
+    "express": "^4.14.0"
   }
 }
