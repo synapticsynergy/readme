@@ -7,11 +7,13 @@ var userSchema = mongoose.Schema({
   days: [
     {
       date: Date,
+      // the DO things
       activities: [
         {
           name: String,
         }
       ],
+      // the ARE things
       metrics: [
         {
           name: String,
@@ -19,11 +21,15 @@ var userSchema = mongoose.Schema({
       ],
     }
   ],
+  // things that the user has already done
+  // for auto-complete or something
   activites: [
     {
       name: String,
     }
   ],
+  // metrics the user has already nominated
+  // same, autocomplete or something
   metrics: [
     {
       name: String
