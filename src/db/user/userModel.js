@@ -27,14 +27,14 @@ var userSchema = mongoose.Schema({
   ],
   // things that the user has already done
   // for auto-complete or something
-  activites: [
+  userActivities: [
     {
       name: String,
     }
   ],
   // metrics the user has already nominated
   // same, autocomplete or something
-  metrics: [
+  userMetrics: [
     {
       name: String
     }
