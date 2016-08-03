@@ -19,7 +19,10 @@ var userSchema = mongoose.Schema({
           name: String,
         }
       ],
-      journal: String
+      // one journal entry per day 
+      // sentiment possibly from watson?
+      journalEntry: String,
+      sentiment: String
     }
   ],
   // things that the user has already done
