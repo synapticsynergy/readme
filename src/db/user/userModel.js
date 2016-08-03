@@ -19,6 +19,7 @@ var userSchema = mongoose.Schema({
           name: String,
         }
       ],
+      journal: String
     }
   ],
   // things that the user has already done
