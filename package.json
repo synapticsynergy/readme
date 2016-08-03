@@ -1,0 +1,15 @@
+{
+  "name": "ReadMe WebApp",
+  "version": "0.0.1",
+  "description": "Machine Learning app that finds patterns in daily life",
+  "authors": [
+    "Mark Pruett",
+    "Sam Wainwright",
+    "Blake Danson"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/server/server.js",
+    "test": "grunt test"
+  }
+}
