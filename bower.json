@@ -1,0 +1,23 @@
+{
+  "name": "readme",
+  "description": "Machine Learning app that finds patterns in daily life",
+  "main": "index.html",
+  "authors": [
+    "doitlikepruett <doitlikepruett@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://readme-prod.herokuapp.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "^1.5.8",
+    "angular": "^1.5.8",
+    "angular-ui-router": "^0.3.1",
+    "bootstrap": "^3.3.7"
+  }
+}

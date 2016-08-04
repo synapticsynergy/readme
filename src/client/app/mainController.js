@@ -2,9 +2,9 @@
   'use strict';
   angular
     .module('app.mainController')
-    .controller('mainController', mainController);
+    .controller('MainController', MainController);
 
-    function mainController($scope){
+    function MainController($scope){
 
       /*jshint validthis: true */
       var vm = this;
