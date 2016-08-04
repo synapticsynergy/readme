@@ -111,4 +111,16 @@ describe('userController', function () {
         });
     });
   });
+
+  describe('findCorrelations', function () {
+    it('should find correlations', function () {
+      return userController.findUser(testEmail)
+        .then(function (user) {
+          return user.findCorrelations('headache');
+        })
+        .then(function (correlations) {
+          assert.isArray(correlations);
+        });
+    });
+  });
 });
