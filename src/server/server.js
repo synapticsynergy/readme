@@ -20,7 +20,8 @@ app.route('/user')
   //Add a user.
   .post(function(req, res) {
     //grab email, firstname, lastname from req.body
-
+    //artificial testing.
+    console.log('postman working');
 
     if (req.body) {
       console.log(req.body, 'state of data');
@@ -31,25 +32,25 @@ app.route('/user')
 
 
 
-app.route('/api/users/:id')
-  .get(function(req, res) {
-    var idPath = req.path.split('/');
-    var id = idPath[idPath.length - 1];
-    var userString = JSON.stringify(Users.getOne(id));
-    res.send(userString);
-  })
-  .put(function(req, res) {
-    var idPath = req.path.split('/');
-    var id = idPath[idPath.length - 1];
-    var userString = JSON.stringify(Users.updateOne(id, req.body));
-    res.send(userString);
-  })
-  .delete(function(req, res) {
-    var idPath = req.path.split('/');
-    var id = idPath[idPath.length - 1];
-    var userString = JSON.stringify(Users.deleteOne(id));
-    res.send(userString);
-  });
+// app.route('/api/users/:id')
+//   .get(function(req, res) {
+//     var idPath = req.path.split('/');
+//     var id = idPath[idPath.length - 1];
+//     var userString = JSON.stringify(Users.getOne(id));
+//     res.send(userString);
+//   })
+//   .put(function(req, res) {
+//     var idPath = req.path.split('/');
+//     var id = idPath[idPath.length - 1];
+//     var userString = JSON.stringify(Users.updateOne(id, req.body));
+//     res.send(userString);
+//   })
+//   .delete(function(req, res) {
+//     var idPath = req.path.split('/');
+//     var id = idPath[idPath.length - 1];
+//     var userString = JSON.stringify(Users.deleteOne(id));
+//     res.send(userString);
+//   });
 
 
 
