@@ -80,7 +80,7 @@ User.prototype.findCorrelations = function (metric) {
 User.prototype.getDay = function (date) {
   for (var x = 0; x < this.days.length; x++) {
     var day = this.days[x];
-    if (day.date === date) {
+    if (day.date === typeof date === 'object' ? date.toString() : date) {
       return new Promise(function (resolve, reject) {
         resolve(day);
       });
@@ -89,7 +89,7 @@ User.prototype.getDay = function (date) {
 
   // if day not found, add it and return it
   this.days.push({
-    date: date,
+    date: date.toString(),
     activities: [],
     metrics: [],
     journalEntry: '',
@@ -97,7 +97,7 @@ User.prototype.getDay = function (date) {
   });
   return this.save()
     .then(function (user) {
-      return user.getDay(date);
+      return user.days[user.days.length - 1];
     });
 }
 
