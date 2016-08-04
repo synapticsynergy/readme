@@ -60,7 +60,7 @@ User.getDay = function (date) {
   }
 
   // if day not found, add it and return it
-  return {
+  var newDay = {
     date: date,
     // the DO things
     activities: [],
@@ -71,6 +71,8 @@ User.getDay = function (date) {
     journalEntry: '',
     sentiment: ''
   };
+  this.days.push(newDay);
+  return newDay;
 }
 
 module.exports = {
