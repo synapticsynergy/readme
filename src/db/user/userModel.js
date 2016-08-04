@@ -8,17 +8,9 @@ var userSchema = mongoose.Schema({
     {
       date: Date,
       // the DO things
-      activities: [
-        {
-          name: String,
-        }
-      ],
+      activities: [String],
       // the ARE things
-      metrics: [
-        {
-          name: String,
-        }
-      ],
+      metrics: [String],
       // one journal entry per day 
       // sentiment possibly from watson?
       journalEntry: String,
@@ -27,18 +19,10 @@ var userSchema = mongoose.Schema({
   ],
   // things that the user has already done
   // for auto-complete or something
-  userActivities: [
-    {
-      name: String,
-    }
-  ],
+  userActivities: [String],
   // metrics the user has already nominated
   // same, autocomplete or something
-  userMetrics: [
-    {
-      name: String
-    }
-  ]
+  userMetrics: [String]
 });
 
 module.exports = mongoose.model('User', userSchema);
