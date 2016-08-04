@@ -1,13 +1,28 @@
 (function() {
   'use strict';
-  angular.module('app', ['ui.router', 'app.mainController']).config(config);
+  angular
+    .module('app', ['app.mainController', 'app.landingController', 'ui.router'])
 
-  function config($stateProvider) {
-    $stateProvider.state('home', {
-      url: '/',
-      templateUrl: 'app/home/home.tmpl.html',
-      controller: 'homeController'
-    })
-  }
+    .config(function config($stateProvider) {
+      $stateProvider
+        .state('landing', {
+          url: '/',
+          templateUrl: 'app/landing/landing.tmpl.html',
+          controller: 'LandingController'
+        })
+
+        .state('account', {
+          url: '/account',
+          templateUrl: 'app/account/account.tmpl.html',
+          controller: 'AccountController'
+        })
+
+        .state('home', {
+          url: '/home',
+          templateUrl: 'app/home/home.tmpl.html',
+          controller: 'HomeController'
+        })        
+  })
+
 })();   
 

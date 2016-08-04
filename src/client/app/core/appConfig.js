@@ -1,12 +1,12 @@
 (function() {
   'use strict';
-  angular.module('app.config', []).config(config);
+  angular.module('app.config', ['app.landingController']).config(config);
 
   function config($stateProvider) {
-    $stateProvider.state('home', {
+    $stateProvider.state('landing', {
       url: '/',
-      templateUrl: 'app/home/home.tmpl.html',
-      controller: 'HomeController'
+      templateUrl: 'app/landing/landing.tmpl.html',
+      controller: 'LandingController'
     })
   }
 })();
