@@ -30,7 +30,7 @@ build/Release
 node_modules
 jspm_packages
 bower_components
-client/lib
+src/client/lib
 
 # Optional npm cache directory
 .npm
