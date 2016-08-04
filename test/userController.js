@@ -85,7 +85,7 @@ describe('userController', function () {
     it('should delete a metric', function () {
       return userController.findUser(testEmail)
         .then(function (user) {
-          return user.deleteActivity('headache', testDate);
+          return user.deleteMetric('headache', testDate);
         })
         .then(function (user) {
           return user.getDay(testDate);
