@@ -18,40 +18,40 @@ function removeUser (email) {
   });
 }
 
-User.addActivity = function (activity, day) {
+User.prototype.addActivity = function (activity, day) {
   this.getDay(day).activities.push(activity);
   return this.save();
 }
 
-User.deleteActivity = function (activity, day) {
+User.prototype.deleteActivity = function (activity, day) {
   this.getDay(day).activities.splice(
     this.getDay(day).activities.indexOf(activity), 1
   );
   return this.save();
 }
 
-User.addMetric = function (metric, day) {
+User.prototype.addMetric = function (metric, day) {
   this.getDay(day).metrics.push(metric);
   return this.save();
 }
 
-User.deleteMetric = function (metric, day) {
+User.prototype.deleteMetric = function (metric, day) {
   this.getDay(day).metrics.splice(
     this.getDay(day).metrics.indexOf(metric), 1
   );
   return this.save();
 }
 
-User.saveJournal = function (journal, day) {
+User.prototype.saveJournal = function (journal, day) {
   this.getDay(day).journal = journal
   return this.save();
 }
 
-User.getCorrelations = function (metric) {
+User.prototype.getCorrelations = function (metric) {
   return {}
 }
 
-User.getDay = function (date) {
+User.prototype.getDay = function (date) {
   for (var x = 0; x < this.days.length; x++) {
     var day = this.days[x];
     if (day.date === date) {
@@ -60,7 +60,7 @@ User.getDay = function (date) {
   }
 
   // if day not found, add it and return it
-  var newDay = {
+  return {
     date: date,
     // the DO things
     activities: [],
@@ -71,8 +71,6 @@ User.getDay = function (date) {
     journalEntry: '',
     sentiment: ''
   };
-  this.days.push(newDay);
-  return newDay;
 }
 
 module.exports = {

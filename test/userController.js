@@ -38,7 +38,7 @@ describe('userController', function () {
 
   describe('addActivity', function () {
     it('should add an activity', function () {
-      userController.findUser(testEmail)
+      return userController.findUser(testEmail)
         .then(function (user) {
           return user.addActivity('bowling', testDate);
         })
@@ -51,7 +51,7 @@ describe('userController', function () {
 
   describe('deleteActivity', function () {
     it('should delete an activity', function () {
-      userController.findUser(testEmail)
+      return userController.findUser(testEmail)
         .then(function (user) {
           return user.deleteActivity('bowling', testDate);
         })
@@ -64,7 +64,7 @@ describe('userController', function () {
 
   describe('addMetric', function () {
     it('should add a metric', function () {
-      userController.findUser(testEmail)
+      return userController.findUser(testEmail)
         .then(function (user) {
           return user.addMetric('headache', testDate);
         })
@@ -77,7 +77,7 @@ describe('userController', function () {
 
   describe('deleteMetric', function () {
     it('should delete a metric', function () {
-      userController.findUser(testEmail)
+      return userController.findUser(testEmail)
         .then(function (user) {
           return user.deleteMetric('headache', testDate);
         })
@@ -90,7 +90,7 @@ describe('userController', function () {
 
   describe('saveJournal', function () {
     it('should save the journal', function () {
-      userController.findUser(testEmail)
+      return userController.findUser(testEmail)
         .then(function (user) {
           return user.saveJournal('test journal', testDate)
         })
