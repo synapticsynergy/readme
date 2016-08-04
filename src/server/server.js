@@ -26,7 +26,7 @@ app.route('/user')
     if (req.body) {
       console.log(req.body, 'state of data');
     }
-    var adding = JSON.stringify(Users.create(req.body));
+    var adding = JSON.stringify(User.newUser(req.body.email,req.body.firstname,req.body.lastname));
     res.status(201).send(adding);
   });
 
