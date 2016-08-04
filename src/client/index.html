@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html ng-app='app'>
 <head>
   <title>ReadMe</title>
 </head>
-<body>
-  <div>
+<body ng-controller="MainController as main">
+  <div ui-view>
     Yo
   </div>
 
@@ -13,7 +13,7 @@
   <!-- Dependencies -->
   <script src="/bower_components/jquery/dist/jquery.js"></script>
   <script src="/bower_components/angular/angular.js"></script>
-  <script src="/bower_components/angular-route/angular-route.js"></script>
+  <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
   <!--Bootstrapping -->
