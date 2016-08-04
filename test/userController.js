@@ -43,7 +43,9 @@ describe('userController', function () {
           return user.addActivity('bowling', testDate);
         })
         .then(function (user) {
-          var day = user.getDay(testDate);
+          return user.getDay(testDate);
+        })
+        .then(function (day) {
           assert.include(day.activities, 'bowling');
         });
     });
@@ -56,7 +58,9 @@ describe('userController', function () {
           return user.deleteActivity('bowling', testDate);
         })
         .then(function (user) {
-          var day = user.getDay(testDate);
+          return user.getDay(testDate);
+        })
+        .then(function (day) {
           assert.notInclude(day.activities, 'bowling');
         });
     });
@@ -69,7 +73,9 @@ describe('userController', function () {
           return user.addMetric('headache', testDate);
         })
         .then(function (user) {
-          var day = user.getDay(testDate);
+          return user.getDay(testDate);
+        })
+        .then(function (day) {
           assert.include(day.metrics, 'headache');
         });
     });
@@ -79,23 +85,28 @@ describe('userController', function () {
     it('should delete a metric', function () {
       return userController.findUser(testEmail)
         .then(function (user) {
-          return user.deleteMetric('headache', testDate);
+          return user.deleteActivity('headache', testDate);
         })
         .then(function (user) {
-          var day = user.getDay(testDate);
+          return user.getDay(testDate);
+        })
+        .then(function (day) {
           assert.notInclude(day.metrics, 'headache');
         });
-      });
+    });
   });
 
   describe('saveJournal', function () {
     it('should save the journal', function () {
       return userController.findUser(testEmail)
         .then(function (user) {
-          return user.saveJournal('test journal', testDate)
+          return user.saveJournal('test journal', testDate);
         })
         .then(function (user) {
-          var journal = user.getDay(testDate).journal
+          return user.getDay(testDate);
+        })
+        .then(function (day) {
+          var journal = day.journalEntry;
           assert.equal('test journal', journal);
         });
     });
