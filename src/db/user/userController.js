@@ -19,58 +19,82 @@ function removeUser (email) {
 }
 
 User.prototype.addActivity = function (activity, day) {
-  this.getDay(day).activities.push(activity);
-  return this.save();
+  var user = this;
+  return user.getDay(day)
+    .then(function (day) {
+      day.activities.push(activity);
+      return user.save();
+    });
 }
 
 User.prototype.deleteActivity = function (activity, day) {
-  this.getDay(day).activities.splice(
-    this.getDay(day).activities.indexOf(activity), 1
-  );
-  return this.save();
+  var user = this;
+  return user.getDay(day)
+    .then(function (day) {
+      day.activities.splice(
+        day.activities.indexOf(activity), 1
+      );
+      return user.save();
+    });
 }
 
 User.prototype.addMetric = function (metric, day) {
-  this.getDay(day).metrics.push(metric);
-  return this.save();
+  var user = this;
+  return user.getDay(day)
+    .then(function (day) {
+      day.metrics.push(metric);
+      return user.save();
+    });
 }
 
 User.prototype.deleteMetric = function (metric, day) {
-  this.getDay(day).metrics.splice(
-    this.getDay(day).metrics.indexOf(metric), 1
-  );
-  return this.save();
+  var user = this;
+  return user.getDay(day)
+    .then(function (day) {
+      day.metrics.splice(
+        day.metrics.indexOf(metric), 1
+      );
+      return user.save();
+    });
 }
 
 User.prototype.saveJournal = function (journal, day) {
-  this.getDay(day).journal = journal
-  return this.save();
+  var user = this;
+  return user.getDay(day)
+    .then(function (day) {
+      day.journalEntry = journal;
+      return user.save();
+    });
 }
 
 User.prototype.getCorrelations = function (metric) {
-  return {}
+  return new Promise(function (resolve, reject) {
+    resolve({});
+  });
 }
 
 User.prototype.getDay = function (date) {
   for (var x = 0; x < this.days.length; x++) {
     var day = this.days[x];
     if (day.date === date) {
-      return day;
+      return new Promise(function (resolve, reject) {
+        resolve(day);
+      });
     }
   }
 
   // if day not found, add it and return it
-  return {
+  this.days.push({
     date: date,
-    // the DO things
     activities: [],
-    // the ARE things
     metrics: [],
-    // one journal entry per day 
-    // sentiment possibly from watson?
     journalEntry: '',
     sentiment: ''
-  };
+  });
+  return this.save()
+    .then(function (user) {
+      return user.getDay(date);
+    });
 }
 
 module.exports = {
