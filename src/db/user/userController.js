@@ -1,4 +1,5 @@
 const User = require('./userModel');
+const findCorrelations = require('../../ml/correlations');
 
 function newUser (email, firstname, lastname) {
   return User.create({
@@ -69,9 +70,10 @@ User.prototype.saveJournal = function (journal, day) {
     });
 }
 
-User.prototype.getCorrelations = function (metric) {
+User.prototype.findCorrelations = function (metric) {
+  var user = this;
   return new Promise(function (resolve, reject) {
-    resolve({});
+    resolve(findCorrelations(user, metric));
   });
 }
 
