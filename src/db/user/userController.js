@@ -9,9 +9,9 @@ function newUser (email, firstname, lastname) {
   });
 }
 
-function findUser (email) {
-  return User.findOne({
-    email: email
+function findUser (id) {
+  return User.findById({
+    _id: id
   });
 }
 
@@ -105,5 +105,5 @@ module.exports = {
   newUser: newUser,
   findUser: findUser,
   removeUser: removeUser,
-  User: User  
+  User: User
 }

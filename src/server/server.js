@@ -16,36 +16,46 @@ app.use(express.static(path.join(__dirname, '/../client')));
 app.route('/user')
   //Add a user.
   .post(function(req, res) {
-    if (req.body) {
-      console.log(req.body, 'state of data');
-      var adding = JSON.stringify(User.newUser(req.body.email,req.body.firstname,req.body.lastname));
-      res.status(201).send(adding);
-    } else {
-      console.error('Error adding user');
-    }
+
+      User.newUser(req.body.email,req.body.firstname,req.body.lastname)
+        .then(function(user) {
+          var adding = JSON.stringify(user);
+          res.status(201).send(adding);
+        })
+        .catch(function(err) {
+          console.error(err,'Error adding user');
+        });
   });
 
 
-//User specific, by email
-app.route('/api/users/:email')
+//User specific, by id
+app.route('/api/users/:id')
   .get(function(req, res) {
     var idPath = req.path.split('/');
     var id = idPath[idPath.length - 1];
-    var userString = JSON.stringify(Users.getOne(id));
-    res.send(userString);
-  })
-  .put(function(req, res) {
-    var idPath = req.path.split('/');
-    var id = idPath[idPath.length - 1];
-    var userString = JSON.stringify(Users.updateOne(id, req.body));
-    res.send(userString);
-  })
-  .delete(function(req, res) {
-    var idPath = req.path.split('/');
-    var id = idPath[idPath.length - 1];
-    var userString = JSON.stringify(Users.deleteOne(id));
-    res.send(userString);
+
+    User.findUser(id)
+      .then(function(user) {
+        var userString = JSON.stringify(user);
+        res.send(userString);
+      })
+      .catch(function(err) {
+        console.error(err, 'Error Getting User');
+      });
+
   });
+  // .put(function(req, res) {
+  //   var idPath = req.path.split('/');
+  //   var id = idPath[idPath.length - 1];
+  //   var userString = JSON.stringify(Users.updateOne(id, req.body));
+  //   res.send(userString);
+  // })
+  // .delete(function(req, res) {
+  //   var idPath = req.path.split('/');
+  //   var id = idPath[idPath.length - 1];
+  //   var userString = JSON.stringify(Users.deleteOne(id));
+  //   res.send(userString);
+  // });
 
 
 
