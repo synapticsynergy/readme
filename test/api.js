@@ -54,7 +54,7 @@ describe('RESTful API', function () {
       it('responds with a 200 when finding a valid user from an email address', function(done) {
 
         request
-          .post('/user/find')
+          .post('/user/email')
           .set('Accept', "application/x-www-form-urlencoded")
           .send({email: 'shmoe@test.com'})
           .expect(200)
@@ -65,7 +65,21 @@ describe('RESTful API', function () {
 
         done();
       });
-    })
+    });
+
+    describe('DELETE',  function() {
+
+      it('responds with a 200 when finding deleting a user from an email address', function(done) {
+
+        request
+          .delete('/user/email')
+          .set('Accept', "application/x-www-form-urlencoded")
+          .send({email: 'shmoe@test.com'})
+          .expect(200);
+
+        done();
+      });
+    });
 
   });
 

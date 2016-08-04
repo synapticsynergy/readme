@@ -27,10 +27,9 @@ app.route('/user')
       });
   });
 
-
-app.route('/user/find')
+// find user by email
+app.route('/user/email')
   .post(function(req, res) {
-    console.log(req.body.email, 'where is the email');
     User.findUser(req.body.email)
       .then(function(user) {
         var userString = JSON.stringify(user);
@@ -39,7 +38,20 @@ app.route('/user/find')
       .catch(function(err) {
         console.error(err,'Error finding user');
       });
-  });
+  })
+  .delete(function(req, res) {
+    console.log(req.body.email,'delete request data');
+    User.removeUser(req.body.email)
+      .then(function(user) {
+        var userString = JSON.stringify(user);
+        console.log(userString);
+        res.send(userString);
+      })
+      .catch(function(err) {
+        console.error(err, 'Error removing user');
+      })
+  })
+
 
 
 //User specific, by id
