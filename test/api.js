@@ -35,20 +35,6 @@ describe('RESTful API', function () {
     return userController.removeUser(newUser.email);
   });
 
-  // describe('/api/users', function () {
-
-  //   describe('GET', function () {
-
-  //     it('responds with a 200 (OK)', function (done) {
-
-  //       request(app)
-  //         .get('/api/users')
-  //         .expect(200, done);
-
-  //     });
-
-  //   });
-
     describe('POST', function () {
 
       it('responds with a 201 (Created) when a valid user is sent', function (done) {

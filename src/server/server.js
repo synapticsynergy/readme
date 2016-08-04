@@ -26,26 +26,26 @@ app.route('/user')
   });
 
 
-
-// app.route('/api/users/:id')
-//   .get(function(req, res) {
-//     var idPath = req.path.split('/');
-//     var id = idPath[idPath.length - 1];
-//     var userString = JSON.stringify(Users.getOne(id));
-//     res.send(userString);
-//   })
-//   .put(function(req, res) {
-//     var idPath = req.path.split('/');
-//     var id = idPath[idPath.length - 1];
-//     var userString = JSON.stringify(Users.updateOne(id, req.body));
-//     res.send(userString);
-//   })
-//   .delete(function(req, res) {
-//     var idPath = req.path.split('/');
-//     var id = idPath[idPath.length - 1];
-//     var userString = JSON.stringify(Users.deleteOne(id));
-//     res.send(userString);
-//   });
+//User specific, by email
+app.route('/api/users/:email')
+  .get(function(req, res) {
+    var idPath = req.path.split('/');
+    var id = idPath[idPath.length - 1];
+    var userString = JSON.stringify(Users.getOne(id));
+    res.send(userString);
+  })
+  .put(function(req, res) {
+    var idPath = req.path.split('/');
+    var id = idPath[idPath.length - 1];
+    var userString = JSON.stringify(Users.updateOne(id, req.body));
+    res.send(userString);
+  })
+  .delete(function(req, res) {
+    var idPath = req.path.split('/');
+    var id = idPath[idPath.length - 1];
+    var userString = JSON.stringify(Users.deleteOne(id));
+    res.send(userString);
+  });
 
 
 
