@@ -1,8 +1,10 @@
 const User = require('./userModel');
 
-function newUser (email) {
+function newUser (email, firstname, lastname) {
   return User.create({
-    email: email
+    email: email,
+    firstname: firstname,
+    lastname: lastname
   });
 }
 
