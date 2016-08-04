@@ -19,31 +19,31 @@ function removeUser (email) {
 }
 
 User.addActivity = function (activity, day) {
-  this.days[day].activities.push(activity);
+  this.getDay(day).activities.push(activity);
   return this.save();
 }
 
 User.deleteActivity = function (activity, day) {
-  this.days[day].activities.splice(
-    this.days[day].activities.indexOf(activity), 1
+  this.getDay(day).activities.splice(
+    this.getDay(day).activities.indexOf(activity), 1
   );
   return this.save();
 }
 
 User.addMetric = function (metric, day) {
-  this.days[day].metrics.push(metric);
+  this.getDay(day).metrics.push(metric);
   return this.save();
 }
 
 User.deleteMetric = function (metric, day) {
-  this.days[day].metrics.splice(
-    this.days[day].metrics.indexOf(metric), 1
+  this.getDay(day).metrics.splice(
+    this.getDay(day).metrics.indexOf(metric), 1
   );
   return this.save();
 }
 
 User.saveJournal = function (journal, day) {
-  this.days[day].journal = journal
+  this.getDay(day).journal = journal
   return this.save();
 }
 
