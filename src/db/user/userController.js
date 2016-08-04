@@ -58,6 +58,19 @@ User.getDay = function (date) {
       return day;
     }
   }
+
+  // if day not found, add it and return it
+  return {
+    date: date,
+    // the DO things
+    activities: [],
+    // the ARE things
+    metrics: [],
+    // one journal entry per day 
+    // sentiment possibly from watson?
+    journalEntry: '',
+    sentiment: ''
+  };
 }
 
 module.exports = {
