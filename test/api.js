@@ -4,6 +4,7 @@ var userController = require('../src/db/user/userController');
 var User = userController.User;
 var request = require('supertest')('http://localhost:3000');
 var app = require('../src/server/server.js');
+var expect = require('chai').expect;
 
 
 // Return a JSON object back from the response
@@ -48,7 +49,41 @@ describe('RESTful API', function () {
 
     });
 
+    describe('POST',  function() {
+
+      it('responds with a 200 when finding a valid user from an email address', function(done) {
+
+        request
+          .post('/user/find')
+          .set('Accept', "application/x-www-form-urlencoded")
+          .send({email: 'shmoe@test.com'})
+          .expect(200)
+          .end(function(err, data) {
+            var parsedData = JSON.parse(data.text);
+            expect(parsedData.email).to.equal('shmoe@test.com');
+          });
+
+        done();
+      });
+    })
+
   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

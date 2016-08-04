@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var userController = require('../src/db/user/userController');
 var User = userController.User;
 
+
 describe('userController', function () {
   var testEmail = '1@asdfccc.com';
   var testDate = new Date(2016, 6, 6);

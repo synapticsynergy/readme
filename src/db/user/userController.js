@@ -1,6 +1,7 @@
 const User = require('./userModel');
 const findCorrelations = require('../../ml/correlations');
 
+
 function newUser (email, firstname, lastname) {
   return User.create({
     email: email,
@@ -9,9 +10,9 @@ function newUser (email, firstname, lastname) {
   });
 }
 
-function findUser (id) {
-  return User.findById({
-    _id: id
+function findUser (email) {
+  return User.findOne({
+    email: email
   });
 }
 
