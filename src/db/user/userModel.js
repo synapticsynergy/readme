@@ -6,7 +6,7 @@ var userSchema = mongoose.Schema({
   lastname: String,
   days: [
     {
-      date: Date,
+      date: String,
       // the DO things
       activities: [String],
       // the ARE things
