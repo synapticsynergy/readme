@@ -1,6 +1,7 @@
 const User = require('./userModel');
 const findCorrelations = require('../../ml/correlations');
 
+
 function newUser (email, firstname, lastname) {
   return User.create({
     email: email,
@@ -105,5 +106,5 @@ module.exports = {
   newUser: newUser,
   findUser: findUser,
   removeUser: removeUser,
-  User: User  
+  User: User
 }

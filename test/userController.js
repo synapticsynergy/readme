@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var userController = require('../src/db/user/userController');
 var User = userController.User;
 
+
 describe('userController', function () {
   var testEmail = '1@asdfccc.com';
   var testDate = new Date(2016, 6, 6);
@@ -10,7 +11,7 @@ describe('userController', function () {
 
   before(function () {
     // ensures the db is connected before tests run
-    return mongoose.connect(databaseUrl);
+    return mongoose.createConnection(databaseUrl);
   });
 
   after(function () {

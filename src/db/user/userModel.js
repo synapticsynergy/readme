@@ -11,7 +11,7 @@ var userSchema = mongoose.Schema({
       activities: [String],
       // the ARE things
       metrics: [String],
-      // one journal entry per day 
+      // one journal entry per day
       // sentiment possibly from watson?
       journalEntry: String,
       sentiment: String
