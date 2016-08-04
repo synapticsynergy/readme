@@ -1,7 +1,7 @@
 var chai = require('chai');
 var expect = chai.expect;
 var request = require('supertest');
-var app = require('../index.js');
+var app = require('../src/server/server.js');
 var Users = require('../src/db/user/userController.js');
 
 chai.use(require('chai-things'));
@@ -19,7 +19,7 @@ var testUsers = [
   },
   {
     firstname: 'Bobby',
-    lastname: 'Kid'
+    lastname: 'Kid',
     email: 'bobby@kid.com'
   }
 ];
