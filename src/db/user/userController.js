@@ -50,3 +50,19 @@ User.saveJournal = function (journal, day) {
 User.getCorrelations = function (metric) {
   return {}
 }
+
+User.getDay = function (date) {
+  for (var x = 0; x < this.days.length; x++) {
+    var day = this.days[x];
+    if (day.date === date) {
+      return day;
+    }
+  }
+}
+
+module.exports = {
+  newUser: newUser,
+  findUser: findUser,
+  removeUser: removeUser,
+  User: User  
+}
