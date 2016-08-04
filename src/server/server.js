@@ -14,20 +14,15 @@ app.use(express.static(path.join(__dirname, '/../client')));
 //Routes
 //
 app.route('/user')
-  .get(function(req, res){
-
-  })
   //Add a user.
   .post(function(req, res) {
-    //grab email, firstname, lastname from req.body
-    //artificial testing.
-    console.log('postman working');
-
     if (req.body) {
       console.log(req.body, 'state of data');
+      var adding = JSON.stringify(User.newUser(req.body.email,req.body.firstname,req.body.lastname));
+      res.status(201).send(adding);
+    } else {
+      console.error('Error adding user');
     }
-    var adding = JSON.stringify(User.newUser(req.body.email,req.body.firstname,req.body.lastname));
-    res.status(201).send(adding);
   });
 
 

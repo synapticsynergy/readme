@@ -1,28 +1,9 @@
-var chai = require('chai');
-var expect = chai.expect;
-var request = require('supertest');
+var assert = require('chai').assert;
+var mongoose = require('mongoose');
+var userController = require('../src/db/user/userController');
+var User = userController.User;
+var request = require('supertest')('http://localhost:3000');
 var app = require('../src/server/server.js');
-var Users = require('../src/db/user/userController.js');
-
-chai.use(require('chai-things'));
-
-var testUsers = [
-  {
-    firstname: 'Bill',
-    lastname: 'Joe',
-    email: 'bill@joe.com'
-  },
-  {
-    firstname: 'Sammy',
-    lastname: 'Coolio',
-    email: 'cool@coolio.com'
-  },
-  {
-    firstname: 'Bobby',
-    lastname: 'Kid',
-    email: 'bobby@kid.com'
-  }
-];
 
 
 // Return a JSON object back from the response
@@ -32,12 +13,26 @@ var getBody = function (res) {
 };
 
 describe('RESTful API', function () {
+  var testEmail = 'shmoe@test.com';
+  var firstname = 'shmoe';
+  var lastname = 'cool';
+  var newUser = {
+        firstname: firstname,
+        lastname: lastname,
+        email: testEmail
+  };
 
-  beforeEach(function () {
-    // Send a deep copy in so internal mutations do not affect our `testUsers` array above
-    // Note: This copy technique works because we don't have any functions
-    var usersCopy = JSON.parse(JSON.stringify(testUsers));
-    Users.setAll(usersCopy);
+  var testDate = new Date(2016, 6, 6);
+  var databaseUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/readme';
+
+  before(function () {
+    // ensures the db is connected before tests run
+    return mongoose.createConnection(databaseUrl);
+  });
+
+  after(function () {
+    // clean up test data after all tests run
+    return userController.removeUser(newUser.email);
   });
 
   // describe('/api/users', function () {
@@ -56,14 +51,9 @@ describe('RESTful API', function () {
 
     describe('POST', function () {
 
-      var newUser = {
-        name: 'Josh',
-        email: 'josh@josh.io'
-      };
-
       it('responds with a 201 (Created) when a valid user is sent', function (done) {
 
-        request(app)
+        request
           .post('/user')
           .send(newUser)
           .expect(201, done);

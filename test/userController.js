@@ -10,7 +10,7 @@ describe('userController', function () {
 
   before(function () {
     // ensures the db is connected before tests run
-    return mongoose.connect(databaseUrl);
+    return mongoose.createConnection(databaseUrl);
   });
 
   after(function () {
