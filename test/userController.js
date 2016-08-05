@@ -6,6 +6,8 @@ var User = userController.User;
 
 describe('userController', function () {
   var testEmail = '1@asdfccc.com';
+  var testFirstName = 'budleigh';
+  var testLastName = 'salterton';
   var testDate = new Date(2016, 6, 6);
   var databaseUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/readme';
 
@@ -19,18 +21,16 @@ describe('userController', function () {
     return userController.removeUser(testEmail);
   });
 
-  describe('newUser', function () {
+  describe('findOrCreateUser', function () {
     it('should create a new user', function () {
-      return userController.newUser(testEmail)
+      return userController.findOrCreateUser(testEmail, testFirstName, testLastName)
         .then(function (user) {
           assert.instanceOf(user, User);
         });
     });
-  });
 
-  describe('findUser', function () {
-    it('should find a user', function () {
-      return userController.findUser(testEmail)
+    it('should find a previously created user', function () {
+      return userController.findOrCreateUser(testEmail)
         .then(function (user) {
           assert.instanceOf(user, User);
         });
@@ -39,7 +39,7 @@ describe('userController', function () {
 
   describe('addActivity', function () {
     it('should add an activity', function () {
-      return userController.findUser(testEmail)
+      return userController.findOrCreateUser(testEmail)
         .then(function (user) {
           return user.addActivity('bowling', testDate);
         })
@@ -54,7 +54,7 @@ describe('userController', function () {
 
   describe('deleteActivity', function () {
     it('should delete an activity', function () {
-      return userController.findUser(testEmail)
+      return userController.findOrCreateUser(testEmail)
         .then(function (user) {
           return user.deleteActivity('bowling', testDate);
         })
@@ -69,7 +69,7 @@ describe('userController', function () {
 
   describe('addMetric', function () {
     it('should add a metric', function () {
-      return userController.findUser(testEmail)
+      return userController.findOrCreateUser(testEmail)
         .then(function (user) {
           return user.addMetric('headache', testDate);
         })
@@ -84,7 +84,7 @@ describe('userController', function () {
 
   describe('deleteMetric', function () {
     it('should delete a metric', function () {
-      return userController.findUser(testEmail)
+      return userController.findOrCreateUser(testEmail)
         .then(function (user) {
           return user.deleteMetric('headache', testDate);
         })
@@ -99,7 +99,7 @@ describe('userController', function () {
 
   describe('saveJournal', function () {
     it('should save the journal', function () {
-      return userController.findUser(testEmail)
+      return userController.findOrCreateUser(testEmail)
         .then(function (user) {
           return user.saveJournal('test journal', testDate);
         })
@@ -115,7 +115,7 @@ describe('userController', function () {
 
   describe('findCorrelations', function () {
     it('should find correlations', function () {
-      return userController.findUser(testEmail)
+      return userController.findOrCreateUser(testEmail)
         .then(function (user) {
           return user.findCorrelations('headache');
         })
