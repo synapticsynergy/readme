@@ -36,68 +36,45 @@ describe('RESTful API', function () {
     return userController.removeUser(newUser.email);
   });
 
-    describe('POST', function () {
+  describe('POST', function () {
 
-      it('responds with a 201 (Created) when a valid user is sent', function (done) {
+    it('responds with a 201 (Created) when a valid user is sent', function (done) {
 
-        request
-          .post('/user')
-          .send(newUser)
-          .expect(201, done);
+      request
+        .post('/user')
+        .send(newUser)
+        .expect(201, done);
 
-      });
-
-    });
-
-    describe('POST',  function() {
-
-      it('responds with a 200 when finding a valid user from an email address', function(done) {
-
-        request
-          .post('/user/email')
-          .set('Accept', "application/x-www-form-urlencoded")
-          .send({email: 'shmoe@test.com'})
-          .expect(200)
-          .end(function(err, data) {
-            var parsedData = JSON.parse(data.text);
-            expect(parsedData.email).to.equal('shmoe@test.com');
-          });
-
-        done();
-      });
-    });
-
-    describe('DELETE',  function() {
-
-      it('responds with a 200 when finding deleting a user from an email address', function(done) {
-
-        request
-          .delete('/user/email')
-          .set('Accept', "application/x-www-form-urlencoded")
-          .send({email: 'shmoe@test.com'})
-          .expect(200);
-
-        done();
-      });
     });
 
   });
 
+  describe('POST',  function() {
 
+    it('responds with a 200 when finding a valid user from an email address', function(done) {
 
+      request
+        .post('/user/email')
+        .set('Accept', "application/x-www-form-urlencoded")
+        .send({email: 'shmoe@test.com'})
+        .expect(200)
+        .end(function(err, data) {
+          var parsedData = JSON.parse(data.text);
+          expect(parsedData.email).to.equal('shmoe@test.com');
+          done();
+        });
+    });
+  });
 
+  describe('DELETE',  function() {
 
+    it('responds with a 200 when finding deleting a user from an email address', function(done) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+      request
+        .delete('/user/email')
+        .set('Accept', "application/x-www-form-urlencoded")
+        .send({email: 'shmoe@test.com'})
+        .expect(200, done);
+    });
+  });
+});
