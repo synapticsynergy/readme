@@ -5,11 +5,16 @@
     'app.home.insights',
     'app.home.journal'
       ])
-  .controller('HomeController',
-    HomeController);
+  .controller('HomeController', HomeController);
 
   function HomeController($scope) {
     /*jshint validthis: true */
     var home = this;
   }
+
+  .factory('homeFactory', homeFactory);
+
+   function homeFactory () {
+    
+   }
 })();
