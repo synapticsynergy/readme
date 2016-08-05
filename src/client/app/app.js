@@ -42,14 +42,6 @@
 
     app.config(function config($stateProvider, $urlRouterProvider) {
 
-       // Configure routes for your application
-      // $routeProvider
-      //   .when( '/home', {
-      //     controller: 'HomeController',
-      //     templateUrl: 'app/home/home.tmpl.html',
-      //     requiresLogin: true
-      //   })
-
       $stateProvider
         .state('landing', {
           url: '/',
@@ -63,7 +55,31 @@
           templateUrl: 'app/home/home.tmpl.html',
           controller: 'HomeController',
           controllerAs: 'home',
-          data: { requiresLogin: true }
+          // data: { requiresLogin: true }
+        })
+        .state('home.entries', {
+          url: '/entries',
+          templateUrl: 'app/home/home-states/entries.tmpl.html',
+          controller: 'HomeController',
+          controllerAs: 'home',
+          parent: 'home'
+          // data: { requiresLogin: true }
+        })
+        .state('home.journal', {
+          url: '/journal',
+          templateUrl: 'app/home/home-states/journal.tmpl.html',
+          controller: 'HomeController',
+          controllerAs: 'home',
+          parent: 'home'
+          // data: { requiresLogin: true }
+        })
+        .state('home.insights', {
+          url: '/insights',
+          templateUrl: 'app/home/home-states/insights.tmpl.html',
+          controller: 'HomeController',
+          controllerAs: 'home',
+          parent: 'home'
+          // data: { requiresLogin: true }
         })
 
       $urlRouterProvider.otherwise('/');
