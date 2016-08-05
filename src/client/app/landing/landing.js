@@ -3,8 +3,9 @@
   angular.module('app.landing', []).controller('LandingController',
     LandingController);
 
-  function LandingController($scope) {
+  function LandingController($scope, auth) {
     /*jshint validthis: true */
     var landing = this;
+    $scope.auth = auth;
   }
 })();
