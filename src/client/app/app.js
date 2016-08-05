@@ -1,7 +1,15 @@
 (function() {
   'use strict';
   var app = angular
-    .module('app', ['app.landing', 'app.home', 'ui.router', 'auth0', 'angular-storage', 'angular-jwt', 'ngRoute']);
+    .module('app', [
+      'app.landing',
+      'app.home',
+      'ui.router',
+      'auth0',
+      'angular-storage',
+      'angular-jwt', 
+      'ngRoute'
+      ]);
 
     app.config(['$routeProvider', 'authProvider', '$httpProvider', '$locationProvider', 'jwtInterceptorProvider',
       function myAppConfig ($routeProvider, authProvider, $httpProvider, $locationProvider, jwtInterceptorProvider) {
@@ -42,14 +50,6 @@
 
     app.config(function config($stateProvider, $urlRouterProvider) {
 
-       // Configure routes for your application
-      // $routeProvider
-      //   .when( '/home', {
-      //     controller: 'HomeController',
-      //     templateUrl: 'app/home/home.tmpl.html',
-      //     requiresLogin: true
-      //   })
-
       $stateProvider
         .state('landing', {
           url: '/',
@@ -62,8 +62,32 @@
           url: '/home',
           templateUrl: 'app/home/home.tmpl.html',
           controller: 'HomeController',
-          controllerAs: 'home',
-          data: { requiresLogin: true }
+          controllerAs: 'home'
+          // data: { requiresLogin: true }
+        })
+        .state('home.entries', {
+          url: '/entries',
+          templateUrl: 'app/home/home-states/entries/entries.tmpl.html',
+          controller: 'EntriesController',
+          controllerAs: 'entries'
+          
+          // data: { requiresLogin: true }
+        })
+        .state('home.journal', {
+          url: '/journal',
+          templateUrl: 'app/home/home-states/journal/journal.tmpl.html',
+          controller: 'JournalController',
+          controllerAs: 'journal'
+          
+          // data: { requiresLogin: true }
+        })
+        .state('home.insights', {
+          url: '/insights',
+          templateUrl: 'app/home/home-states/insights/insights.tmpl.html',
+          controller: 'InsightsController',
+          controllerAs: 'insights'
+          
+          // data: { requiresLogin: true }
         })
 
       $urlRouterProvider.otherwise('/');
@@ -72,12 +96,4 @@
   // This hooks all auth events to check everything as soon as the app starts
       auth.hookEvents();
     }]);
-
-
-
-
-
 })();
-
-
-

@@ -26,8 +26,13 @@
       </div>
     <div class='container'>
       <div class='row'>
-        <div class='col-md-4' href='/entries'>Daily Entries</div>
-        <div class='col-md-4' href='/journal'>Daily Journal</div>
-        <div class='col-md-4' href='/insights'>Your Insights</div>
+        <div class='col-md-4' ui-sref='home.entries' ui-sref-active='active'>Daily Entries</div>
+        <div class='col-md-4' ui-sref='home.journal' ui-sref-active='active'>Daily Journal</div>
+        <div class='col-md-4' ui-sref='home.insights' ui-sref-active='active'>Your Insights</div>
+      </div>
+    </div>
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-8' ui-view></div>
       </div>
     </div>

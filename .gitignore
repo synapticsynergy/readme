@@ -39,4 +39,4 @@ src/client/lib
 .node_repl_history
 
 .floo
-.floobits
+.flooignore
