@@ -1,0 +1,36 @@
+var findCorrelations = require('../src/ml/correlations');
+var assert = require('chai').assert;
+
+var testUser = {
+  days: [
+    {
+      activities: ['run', 'eat', 'sleep', 'dance'],
+      metrics: ['headache', 'sad']
+    },
+    {
+      activities: ['eat', 'sleep', 'dance'],
+      metrics: ['happy']
+    },
+    {
+      activities: ['run', 'eat', 'sleep', 'movie'],
+      metrics: ['headache']
+    },
+    {
+      activities: ['run', 'eat', 'sleep', 'dance'],
+      metrics: ['headache', 'sad']
+    },
+    {
+      activities: ['eat', 'sleep', 'dance', 'sing'],
+      metrics: ['happy']
+    }
+  ]
+};
+
+describe('correlations', function () {
+  it('should find correlations', function () {
+    var headache = findCorrelations(testUser, 'headache');
+    var happy = findCorrelations(testUser, 'happy');
+    assert.isAbove(headache.run, .1);
+    assert.isAbove(happy.sing, .1);
+  });
+});
