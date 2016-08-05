@@ -30,7 +30,13 @@ describe('correlations', function () {
   it('should find correlations', function () {
     var headache = findCorrelations(testUser, 'headache');
     var happy = findCorrelations(testUser, 'happy');
-    assert.isAbove(headache.run, .1);
-    assert.isAbove(happy.sing, .1);
+
+    assert.isAbove(headache.filter(function (cor) {
+      return 'run' in cor;
+    })[0].run, .1);
+
+    assert.isAbove(happy.filter(function (cor) {
+      return 'sing' in cor;
+    })[0].sing, .1);
   });
 });
