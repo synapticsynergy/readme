@@ -1,10 +1,10 @@
 (function() {
   'use strict';
-  angular.module('app.landingController', []).controller('LandingController',
+  angular.module('app.landing', []).controller('LandingController',
     LandingController);
 
   function LandingController($scope) {
     /*jshint validthis: true */
-    var vm = this;
+    var landing = this;
   }
 })();
