@@ -40,11 +40,11 @@
 
         //Remove this when testing
         //Angular HTTP Interceptor function
-        // jwtInterceptorProvider.tokenGetter = ['store', function(store) {
-        //     return store.get('token');
-        // }];
-        // //Push interceptor function to $httpProvider's interceptors
-        // $httpProvider.interceptors.push('jwtInterceptor');
+        jwtInterceptorProvider.tokenGetter = ['store', function(store) {
+            return store.get('token');
+        }];
+        //Push interceptor function to $httpProvider's interceptors
+        $httpProvider.interceptors.push('jwtInterceptor');
 
     }]);
 
