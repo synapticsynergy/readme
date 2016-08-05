@@ -1,7 +1,18 @@
 (function() {
   'use strict';
   var app = angular
-    .module('app', ['app.landing', 'app.home', 'ui.router', 'auth0', 'angular-storage', 'angular-jwt', 'ngRoute']);
+    .module('app', [
+      'app.landing',
+      'app.entries',
+      'app.insights',
+      'app.journal',
+      'app.home',
+      'ui.router',
+      'auth0',
+      'angular-storage',
+      'angular-jwt', 
+      'ngRoute'
+      ]);
 
     app.config(['$routeProvider', 'authProvider', '$httpProvider', '$locationProvider', 'jwtInterceptorProvider',
       function myAppConfig ($routeProvider, authProvider, $httpProvider, $locationProvider, jwtInterceptorProvider) {
@@ -59,25 +70,25 @@
         })
         .state('home.entries', {
           url: '/entries',
-          templateUrl: 'app/home/home-states/entries.tmpl.html',
-          controller: 'HomeController',
-          controllerAs: 'home',
+          templateUrl: 'app/home/home-states/entries/entries.tmpl.html',
+          controller: 'EntriesController',
+          controllerAs: 'entries',
           parent: 'home'
           // data: { requiresLogin: true }
         })
         .state('home.journal', {
           url: '/journal',
-          templateUrl: 'app/home/home-states/journal.tmpl.html',
-          controller: 'HomeController',
-          controllerAs: 'home',
+          templateUrl: 'app/home/home-states/journal/journal.tmpl.html',
+          controller: 'JournalController',
+          controllerAs: 'journal',
           parent: 'home'
           // data: { requiresLogin: true }
         })
         .state('home.insights', {
           url: '/insights',
-          templateUrl: 'app/home/home-states/insights.tmpl.html',
-          controller: 'HomeController',
-          controllerAs: 'home',
+          templateUrl: 'app/home/home-states/insights/insights.tmpl.html',
+          controller: 'InsightsController',
+          controllerAs: 'insights',
           parent: 'home'
           // data: { requiresLogin: true }
         })
@@ -88,11 +99,6 @@
   // This hooks all auth events to check everything as soon as the app starts
       auth.hookEvents();
     }]);
-
-
-
-
-
 })();
 
 
