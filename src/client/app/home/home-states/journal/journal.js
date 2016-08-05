@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('app.journal', []).controller('JournalController',
+  angular.module('app.home.journal', []).controller('JournalController',
     JournalController);
 
   function JournalController($scope) {

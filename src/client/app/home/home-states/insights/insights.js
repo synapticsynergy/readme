@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('app.insights', []).controller('InsightsController',
+  angular.module('app.home.insights', []).controller('InsightsController',
     InsightsController);
 
   function InsightsController($scope) {

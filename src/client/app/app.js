@@ -3,9 +3,6 @@
   var app = angular
     .module('app', [
       'app.landing',
-      'app.entries',
-      'app.insights',
-      'app.journal',
       'app.home',
       'ui.router',
       'auth0',
@@ -65,31 +62,31 @@
           url: '/home',
           templateUrl: 'app/home/home.tmpl.html',
           controller: 'HomeController',
-          controllerAs: 'home',
+          controllerAs: 'home'
           // data: { requiresLogin: true }
         })
         .state('home.entries', {
           url: '/entries',
           templateUrl: 'app/home/home-states/entries/entries.tmpl.html',
           controller: 'EntriesController',
-          controllerAs: 'entries',
-          parent: 'home'
+          controllerAs: 'entries'
+          
           // data: { requiresLogin: true }
         })
         .state('home.journal', {
           url: '/journal',
           templateUrl: 'app/home/home-states/journal/journal.tmpl.html',
           controller: 'JournalController',
-          controllerAs: 'journal',
-          parent: 'home'
+          controllerAs: 'journal'
+          
           // data: { requiresLogin: true }
         })
         .state('home.insights', {
           url: '/insights',
           templateUrl: 'app/home/home-states/insights/insights.tmpl.html',
           controller: 'InsightsController',
-          controllerAs: 'insights',
-          parent: 'home'
+          controllerAs: 'insights'
+          
           // data: { requiresLogin: true }
         })
 
@@ -100,6 +97,3 @@
       auth.hookEvents();
     }]);
 })();
-
-
-
