@@ -14,7 +14,19 @@
 
   .factory('homeFactory', homeFactory);
 
-   function homeFactory () {
-    
+   function homeFactory ($http, $q) {
+
+     var services = {};
+
+     services.insertData = function(params){
+       return $http.post('/user', params);
+     }
+
+     services.getUserData = function(userIdOrEmail){
+       return $http.get('/user/' + userIdOrEmail);
+     }
+
+     return services;
    }
+
 })();
