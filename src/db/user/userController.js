@@ -1,19 +1,26 @@
 const User = require('./userModel');
 const findCorrelations = require('../../ml/correlations');
 
-
-function newUser (email, firstname, lastname) {
-  return User.create({
-    email: email,
-    firstname: firstname,
-    lastname: lastname
-  });
-}
-
-function findUser (email) {
+function findOrCreateUser (email, firstname, lastname) {
+  // use just the email to find them in case this is
+  // coming from a place we assume the user has already
+  // been created
   return User.findOne({
     email: email
-  });
+  })
+    .then(function (user) {
+      if (!user) {
+        return User.create({
+          email: email,
+          firstname: firstname,
+          lastname: lastname
+        });
+      }
+
+      else {
+        return user;
+      }
+    });
 }
 
 function removeUser (email) {
@@ -103,8 +110,7 @@ User.prototype.getDay = function (date) {
 }
 
 module.exports = {
-  newUser: newUser,
-  findUser: findUser,
+  findOrCreateUser: findOrCreateUser,
   removeUser: removeUser,
   User: User
 }
