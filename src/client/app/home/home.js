@@ -5,16 +5,27 @@
     'app.home.insights',
     'app.home.journal'
       ])
-  .controller('HomeController', HomeController);
+  .controller('HomeController', HomeController)
+  .factory('homeFactory', homeFactory);
 
   function HomeController($scope) {
     /*jshint validthis: true */
     var home = this;
   }
 
-  .factory('homeFactory', homeFactory);
+ function homeFactory ($http, $q) {
 
-   function homeFactory () {
-    
+   var services = {};
+
+   services.insertData = function(params){
+     return $http.post('/user', params);
    }
+
+   services.getUserData = function(userIdOrEmail){
+     return $http.get('/user/' + userIdOrEmail);
+   }
+
+   return services;
+  }
+
 })();
