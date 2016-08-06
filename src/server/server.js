@@ -49,7 +49,6 @@ app.route('/user/activity')
         return user.addActivity(activity,date);
       })
       .then(function(user) {
-        console.log(user.days[0].activities,'userdata');
         var userString = JSON.stringify(user);
         res.send(userString);
       })
@@ -69,11 +68,40 @@ app.route('/user/activity')
           var userString = JSON.stringify(user);
           res.send(userString);
         });
-  })
+  });
 
 
   // Metric Routes.
+  app.route('/user/metric')
+  .post(function(req, res) {
+    var metric = req.body.metric;
+    var date = Date();
 
+    User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
+      .then(function(user) {
+        return user.addMetric(metric,date);
+      })
+      .then(function(user) {
+        var userString = JSON.stringify(user);
+        res.send(userString);
+      })
+      .catch(function(err) {
+        console.error(err,'Error finding user');
+      });
+  })
+  .delete(function(req, res) {
+    var metric = req.body.metric;
+    var date = Date();
+
+    User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
+        .then(function (user) {
+          return user.deleteActivity(metric, date);
+        })
+        .then(function(user) {
+          var userString = JSON.stringify(user);
+          res.send(userString);
+        });
+  });
 
 
 //User specific, by id

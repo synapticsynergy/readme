@@ -107,7 +107,7 @@ describe('RESTful API', function () {
     it('responds with a 200 when adding a metric', function(done) {
 
       newUser.metric = 'headache';
-      newUser.day = testDate
+      newUser.day = testDate;
 
 
       request
@@ -117,7 +117,7 @@ describe('RESTful API', function () {
         .expect(200)
         .end(function(err, data) {
           var parsedData = JSON.parse(data.text);
-          expect(parsedData.activity).to.equal({ran: 1});
+          expect(parsedData.days[0].metrics[0]).to.equal("headache");
           done();
         });
     });
@@ -127,7 +127,7 @@ describe('RESTful API', function () {
 
     it('responds with a 200 when deleting a metric', function(done) {
 
-      newUser.activity = 'ran';
+      newUser.metric = 'headache';
       newUser.day = testDate;
 
       request
