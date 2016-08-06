@@ -3,10 +3,11 @@
   angular.module('app.home.entries', []).controller('EntriesController',
     EntriesController);
 
-  function EntriesController($scope, homeFactory) {
+  function EntriesController($scope, $timeout, $q, $log, homeFactory) {
     /*jshint validthis: true */
     var entries = this;
 
+    //Date Picker Variable
     entries.userDate;
 
     entries.autoCompleteDisabled = true;
@@ -24,5 +25,12 @@
           entries.userMetrics = response.userMetrics;
         })
     }
+
+    entries.selectedItem = function(item){
+      
+    }
+
+
+  //end of Entries Controller  
   }
 })();
