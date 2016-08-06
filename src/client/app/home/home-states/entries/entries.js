@@ -19,7 +19,9 @@
 
     entries.daysMetrics = [];
 
+    entries.userActivities = window.localStorage.userActivities;
 
+    entries.userMetrics = window.localStorage.userActivities;
 
     entries.userActivitiesStub = ['run', 'rage', 'slide', 'skip', 'hop', 'hold', 'hodor'];
 
@@ -33,30 +35,43 @@
     //     })
     // }
 
-    entries.addItem = function(selection) {
-      entries.daysActivities.push(selection);
-      entries.activityForm.$setPristine();
+    entries.addItem = function(selection, type) {
+      if (type === 'activity') {
+        entries.daysActivities.push(selection);
+        entries.activityForm.$setPristine();
+      } else {
+        entries.daysMetrics.push(selection);
+        entries.metricForm.$setPristine();
+      }
+      console.log('activities', entries.daysActivities);
+      console.log('metrics', entries.daysMetrics);
     }
 
-    entries.removeItem = function(index) {
-      entries.daysActivities.splice(index, 1);
+    entries.removeItem = function(index, type) {
+      if (type === 'activity') {
+        entries.daysActivities.splice(index, 1);
+      } else {
+        entries.daysMetrics.splice(index, 1);
+      }
     }
 
     entries.postData = function(type) {
 
       var url = type === 'activity' ? '/user/activity' : '/user/metric';
+      var datums = type === 'activity' ? entries.daysActivities : entries.daysMetrics;
 
       $http({
-        method: "POST",
-        url: url,
-        activity: entries.daysActivities,
-        day: entries.userDate
-      }).then(function success(data){
-        console.log("Posted!", data)
-      }, function error(data){
-        console.log("Error!", data)
+          method: "POST",
+          url: url,
+          datums: datums,
+          day: entries.userDate
+        }).then(function success(data){
+          console.log("Posted!", data)
+        }, function error(data){
+          console.log("Error!", data)
       })
+
     }
-  
   }
+
 })();
