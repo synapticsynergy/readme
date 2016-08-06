@@ -41,7 +41,7 @@ app.route('/user')
 // Activity routes.
 app.route('/user/activity')
   .post(function(req, res) {
-    var activity = req.body.activity;
+    var activity = req.body.datums;
     var date = req.body.day;
 
     User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
@@ -57,7 +57,7 @@ app.route('/user/activity')
       });
   })
   .delete(function(req, res) {
-    var activity = req.body.activity;
+    var activity = req.body.datums;
     var date = req.body.day;
 
     User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
@@ -77,7 +77,7 @@ app.route('/user/activity')
   // Metric Routes.
   app.route('/user/metric')
     .post(function(req, res) {
-      var metric = req.body.metric;
+      var metric = req.body.datums;
       var date = req.body.day;
 
       User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
@@ -93,7 +93,7 @@ app.route('/user/activity')
         });
     })
     .delete(function(req, res) {
-      var metric = req.body.metric;
+      var metric = req.body.datums;
       var date = req.body.day;
 
       User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
@@ -107,7 +107,7 @@ app.route('/user/activity')
         .catch(function(err) {
           console.error(err,'Error deleting metric');
         });
-  });
+    });
 
   // Save Journal Route.
   app.route('/user/journal')
@@ -132,7 +132,8 @@ app.route('/user/activity')
   // returns an array of activities with correlation calculated, based on the given metric and its occurances corresponding to the activities.
   app.route('/user/correlation')
     .post(function(req, res) {
-      var metric = req.body.metric;
+      var metric = req.body.datums;
+      console.log(metric,'is this sending through');
 
       User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
         .then(function(user) {
