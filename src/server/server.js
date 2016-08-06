@@ -41,8 +41,8 @@ app.route('/user')
 // Activity routes.
 app.route('/user/activity')
   .post(function(req, res) {
-    var activity = req.body.activity;
-    var date = Date();
+    var activity = req.body.datums;
+    var date = req.body.day;
 
     User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
       .then(function(user) {
@@ -53,55 +53,100 @@ app.route('/user/activity')
         res.send(userString);
       })
       .catch(function(err) {
-        console.error(err,'Error finding user');
+        console.error(err,'Error finding adding activity');
       });
   })
   .delete(function(req, res) {
-    var activity = req.body.activity;
-    var date = Date();
+    var activity = req.body.datums;
+    var date = req.body.day;
 
     User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
-        .then(function (user) {
-          return user.deleteActivity(activity, date);
-        })
-        .then(function(user) {
-          var userString = JSON.stringify(user);
-          res.send(userString);
-        });
-  });
-
-
-  // Metric Routes.
-  app.route('/user/metric')
-  .post(function(req, res) {
-    var metric = req.body.metric;
-    var date = Date();
-
-    User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
-      .then(function(user) {
-        return user.addMetric(metric,date);
+      .then(function (user) {
+        return user.deleteActivity(activity, date);
       })
       .then(function(user) {
         var userString = JSON.stringify(user);
         res.send(userString);
       })
       .catch(function(err) {
-        console.error(err,'Error finding user');
+        console.error(err,'Error finding deleting activity');
       });
-  })
-  .delete(function(req, res) {
-    var metric = req.body.metric;
-    var date = Date();
+  });
 
-    User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
+
+  // Metric Routes.
+  app.route('/user/metric')
+    .post(function(req, res) {
+      var metric = req.body.datums;
+      var date = req.body.day;
+
+      User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
+        .then(function(user) {
+          return user.addMetric(metric,date);
+        })
+        .then(function(user) {
+          var userString = JSON.stringify(user);
+          res.send(userString);
+        })
+        .catch(function(err) {
+          console.error(err,'Error adding metric');
+        });
+    })
+    .delete(function(req, res) {
+      var metric = req.body.datums;
+      var date = req.body.day;
+
+      User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
         .then(function (user) {
           return user.deleteActivity(metric, date);
         })
         .then(function(user) {
           var userString = JSON.stringify(user);
           res.send(userString);
+        })
+        .catch(function(err) {
+          console.error(err,'Error deleting metric');
         });
-  });
+    });
+
+  // Save Journal Route.
+  app.route('/user/journal')
+    .post(function(req, res) {
+      var entry = req.body.entry;
+      var day = req.body.day;
+
+      User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
+        .then(function(user) {
+          return user.saveJournal(entry,day);
+        })
+        .then(function(user) {
+          var userString = JSON.stringify(user);
+          res.send(userString);
+        })
+        .catch(function(err) {
+          console.error(err,'Error adding journal entry');
+        });
+    });
+
+  // Find Correlation Route.
+  // returns an array of activities with correlation calculated, based on the given metric and its occurances corresponding to the activities.
+  app.route('/user/correlation')
+    .post(function(req, res) {
+      var metric = req.body.datums;
+      console.log(metric,'is this sending through');
+
+      User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
+        .then(function(user) {
+          return user.findCorrelations(metric);
+        })
+        .then(function(array) {
+          var arrayString = JSON.stringify(array);
+          res.send(arrayString);
+        })
+        .catch(function(err) {
+          console.error(err,'Error finding correlation');
+        });
+    });
 
 
 
