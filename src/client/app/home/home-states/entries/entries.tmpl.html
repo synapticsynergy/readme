@@ -1,27 +1,44 @@
-<div>
+<div class='container'>
   Welcome to your entries 
-</div>
-<div>
-<p>Pick a date to add activities to:</p>
-<md-content>
-<md-datepicker ng-model="entries.userDate" ng-change ='entries.changeAuto()' md-placeholder="Enter date"></md-datepicker>
-</md-content>
+  
+  <p>Pick a date to add activities to:</p>
 
-<p ng-show='entries.userDate'>Choose the activities you did on {{entries.userDate | date: "EEEE, MMMM d"}}</p>
+  <md-content>
+    <md-datepicker ng-model="entries.userDate" ng-change ='entries.changeAuto()' md-placeholder="Enter date"></md-datepicker>
+    
+    <div ng-show='entries.userDate'>Choose the activities you did on {{entries.userDate | date: "EEEE, MMMM d"}}
 
-<form ng-submit="$event.preventDefault()">
-<md-autocomplete
-          ng-show='entries.userDate'
-          md-selected-item="entries.selectedItem"
-          md-search-text="entries.searchText" 
-          ng-disabled="entries.autoCompleteDisabled"
-          md-items="item in entries.userActivitiesStub | filter: entries.searchText"
-          md-item-text="item"
-          md-min-length="1"
-          placeholder="Enter an activity">
-        <md-item-template>
-          <span md-highlight-text="entries.searchText" md-highlight-flags="^i">{{item}}</span>
-        </md-item-template>
-</md-autocomplete>
-</form>
+    <form ng-submit="entries.addItem(entries.searchText)" name="entries.activityForm">
+      <md-autocomplete
+                ng-show='entries.userDate'
+                md-selected-item="entries.selectedItem"
+                md-search-text="entries.searchText" 
+                ng-disabled="entries.autoCompleteDisabled"
+                md-items="item in entries.userActivitiesStub | filter: entries.searchText"
+                md-item-text="item"
+                md-min-length="1"
+                placeholder="Enter an activity">
+          <md-item-template>
+            <span md-highlight-text="entries.searchText" md-highlight-flags="^i">{{item}}</span>
+          </md-item-template>
+      </md-autocomplete>
+    </form>
+  </md-content>
+
+  <div>
+    <h4>Today's Activities</h4>
+    <ul>
+      <li ng-repeat="item in entries.daysActivities track by $index">
+        {{item}}
+        <span ng-click="entries.removeItem($index)">x</span>
+      </li>
+    </ul>
+
+    <md-button class="md-raised"> Submit Activities </md-button> 
+  </div>
+  
 </div>
+
+
+
+

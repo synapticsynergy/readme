@@ -12,6 +12,8 @@
 
     entries.autoCompleteDisabled = true;
 
+    entries.daysActivities = [];
+
     entries.changeAuto = function() {
       entries.userDate ? entries.autoCompleteDisabled = false : entries.autoCompleteDisabled = true;
     }
@@ -26,8 +28,13 @@
         })
     }
 
-    entries.selectedItem = function(item){
-      
+    entries.addItem = function(selection) {
+      entries.daysActivities.push(selection);
+      entries.activityForm.$setPristine();
+    }
+
+    entries.removeItem = function(index) {
+      entries.daysActivities.splice(index, 1);
     }
 
 
