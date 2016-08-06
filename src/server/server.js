@@ -42,7 +42,6 @@ app.route('/user')
 app.route('/user/activity')
   .post(function(req, res) {
     var activity = req.body.activity;
-    console.log(req.body.activity,'activity in route');
     var date = Date();
 
     User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
@@ -57,6 +56,19 @@ app.route('/user/activity')
       .catch(function(err) {
         console.error(err,'Error finding user');
       });
+  })
+  .delete(function(req, res) {
+    var activity = req.body.activity;
+    var date = Date();
+
+    User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
+        .then(function (user) {
+          return user.deleteActivity(activity, date);
+        })
+        .then(function(user) {
+          var userString = JSON.stringify(user);
+          res.send(userString);
+        });
   })
 
 

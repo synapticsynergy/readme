@@ -128,8 +128,7 @@ describe('RESTful API', function () {
     it('responds with a 200 when deleting a metric', function(done) {
 
       newUser.activity = 'ran';
-      newUser.day = testDate
-
+      newUser.day = testDate;
 
       request
         .delete('/user/metric')
