@@ -4,10 +4,11 @@
   <p>Pick a date to add activities to:</p>
 
   <md-content>
-    <md-datepicker ng-model="entries.userDate" ng-change ='entries.changeAuto()' md-placeholder="Enter date"></md-datepicker>
+    <md-datepicker ng-model="entries.userDate" ng-change ='entries.changeAutoComplete()' md-placeholder="Enter date"></md-datepicker>
     
     <div ng-show='entries.userDate'>Choose the activities you did on {{entries.userDate | date: "EEEE, MMMM d"}}
 
+<!-- Activities-->
     <form ng-submit="entries.addItem(entries.searchText)" name="entries.activityForm">
       <md-autocomplete
                 ng-show='entries.userDate'
@@ -34,9 +35,39 @@
       </li>
     </ul>
 
-    <md-button class="md-raised"> Submit Activities </md-button> 
+    <md-button class="md-raised" ng-click="entries.postData('activity')"> Submit Activities </md-button> 
   </div>
-  
+
+  <!-- Metrics-->
+      <form ng-submit="entries.addItem(entries.searchText)" name="entries.metricsForm">
+      <md-autocomplete
+                ng-show='entries.userDate'
+                md-selected-item="entries.selectedItem"
+                md-search-text="entries.searchText" 
+                ng-disabled="entries.autoCompleteDisabled"
+                md-items="item in entries.userActivitiesStub | filter: entries.searchText"
+                md-item-text="item"
+                md-min-length="1"
+                placeholder="Enter an activity">
+          <md-item-template>
+            <span md-highlight-text="entries.searchText" md-highlight-flags="^i">{{item}}</span>
+          </md-item-template>
+      </md-autocomplete>
+    </form>
+  </md-content>
+
+  <div>
+    <h4>Today's Activities</h4>
+    <ul>
+      <li ng-repeat="item in entries.daysActivities track by $index">
+        {{item}}
+        <span ng-click="entries.removeItem($index)">x</span>
+      </li>
+    </ul>
+
+    <md-button class="md-raised" ng-click="entries.postData('activity')"> Submit Activities </md-button> 
+  </div>
+
 </div>
 
 
