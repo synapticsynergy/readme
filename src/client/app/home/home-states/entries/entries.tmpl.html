@@ -2,22 +2,26 @@
   Welcome to your entries 
 </div>
 <div>
+<p>Pick a date to add activities to:</p>
 <md-content>
 <md-datepicker ng-model="entries.userDate" ng-change ='entries.changeAuto()' md-placeholder="Enter date"></md-datepicker>
 </md-content>
 
-<p>Choose the activities you did on {{userDate | date: "EEEE, MMMM d"}}</p>
+<p ng-show='entries.userDate'>Choose the activities you did on {{entries.userDate | date: "EEEE, MMMM d"}}</p>
+
+<form ng-submit="$event.preventDefault()">
 <md-autocomplete
+          ng-show='entries.userDate'
           md-selected-item="entries.selectedItem"
-          md-search-text="entries.searchText"
+          md-search-text="entries.searchText" 
           ng-disabled="entries.autoCompleteDisabled"
-          md-items="item in entries.userActivitiesStub"
-          md-item-text="item.display"
-          md-min-length=1
+          md-items="item in entries.userActivitiesStub | filter: entries.searchText"
+          md-item-text="item"
+          md-min-length="1"
           placeholder="Enter an activity">
         <md-item-template>
-          <span md-highlight-text="entries.searchText" md-highlight-flags="^i">{{item.display}}</span>
+          <span md-highlight-text="entries.searchText" md-highlight-flags="^i">{{item}}</span>
         </md-item-template>
 </md-autocomplete>
-
+</form>
 </div>

@@ -16,11 +16,7 @@
       entries.userDate ? entries.autoCompleteDisabled = false : entries.autoCompleteDisabled = true;
     }
 
-    entries.userActivitiesStub = 'run, rage, slide, skip, hop, hold, hodor';
-
-    //AutoComplete Logic
-
-
+    entries.userActivitiesStub = ['run', 'rage', 'slide', 'skip', 'hop', 'hold', 'hodor'];
 
     entries.init = function () {
       getUserData(window.userEmail)
@@ -29,5 +25,12 @@
           entries.userMetrics = response.userMetrics;
         })
     }
+
+    entries.selectedItem = function(item){
+      
+    }
+
+
+  //end of Entries Controller  
   }
 })();
