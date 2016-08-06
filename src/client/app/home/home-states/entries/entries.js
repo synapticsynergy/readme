@@ -7,6 +7,16 @@
     /*jshint validthis: true */
     var entries = this;
 
+    entries.userDate;
+
+    entries.autoCompleteDisabled = true;
+
+    entries.changeAuto = function() {
+      entries.userDate ? entries.autoCompleteDisabled = false : entries.autoCompleteDisabled = true;
+    }
+
+    entries.userActivitiesStub = ['run', 'rage', 'slide', 'skip', 'hop', 'hold', 'hodor'];
+
     entries.init = function () {
       getUserData(window.userEmail)
         .then(function(response){

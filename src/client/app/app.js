@@ -8,7 +8,8 @@
       'auth0',
       'angular-storage',
       'angular-jwt',
-      'ngRoute'
+      'ngRoute',
+      'ngMaterial'
       ]);
 
     app.config(['$routeProvider', 'authProvider', '$httpProvider', '$locationProvider', 'jwtInterceptorProvider',
