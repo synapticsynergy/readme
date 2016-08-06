@@ -138,5 +138,44 @@ describe('RESTful API', function () {
     });
   });
 
+// Journal Route test
+  describe('POST',  function() {
+
+    it('responds with a 200 when adding a metric', function(done) {
+
+      newUser.entry = 'I am super happy.';
+      newUser.day = testDate;
+
+      request
+        .post('/user/journal')
+        .set('Accept', "application/x-www-form-urlencoded")
+        .send(newUser)
+        .expect(200)
+        .end(function(err, data) {
+          var parsedData = JSON.parse(data.text);
+          expect(parsedData.days[0].journalEntry).to.equal('I am super happy.');
+          done();
+        });
+    });
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
 
