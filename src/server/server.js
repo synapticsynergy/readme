@@ -104,43 +104,6 @@ app.route('/user/activity')
   });
 
 
-//User specific, by id
-// app.route('/user/:id')
-//   .get(function(req, res) {
-//     var idPath = req.path.split('/');
-//     var id = idPath[idPath.length - 1];
-
-//     User.findUser(id)
-//       .then(function(user) {
-//         var userString = JSON.stringify(user);
-//         res.send(userString);
-//       })
-//       .catch(function(err) {
-//         console.error(err, 'Error Getting User');
-//       });
-
-//   });
-  // .put(function(req, res) {
-  //   var idPath = req.path.split('/');
-  //   var id = idPath[idPath.length - 1];
-  //   var userString = JSON.stringify(Users.updateOne(id, req.body));
-  //   res.send(userString);
-  // })
-  // .delete(function(req, res) {
-  //   var idPath = req.path.split('/');
-  //   var id = idPath[idPath.length - 1];
-  //   var userString = JSON.stringify(Users.deleteOne(id));
-  //   res.send(userString);
-  // });
-
-
-
-
-
-
-
-
-
 
 var port = process.env.PORT || 3000;
 var databaseUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/readme';

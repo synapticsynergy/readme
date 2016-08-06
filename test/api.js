@@ -138,29 +138,5 @@ describe('RESTful API', function () {
     });
   });
 
-
-
-
-
-
-
-
-
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
