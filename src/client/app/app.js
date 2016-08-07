@@ -22,14 +22,30 @@
         })
 
         //Called when login is successful
-        authProvider.on('loginSuccess', ['$location', 'profilePromise', 'idToken', 'store',
-          function($location, profilePromise, idToken, store) {
+        authProvider.on('loginSuccess', ['$location', 'profilePromise', 'idToken', 'store', '$http',
+          function($location, profilePromise, idToken, store, $http) {
 
             console.log("Login Success");
-            profilePromise.then(function(profile) {
-              store.set('profile', profile);
-              store.set('token', idToken);
-            });
+            profilePromise
+              .then(function(profile) {
+                store.set('profile', profile);
+                store.set('token', idToken);
+              })
+              .then(function(){
+                     var profile = JSON.parse(window.localStorage.profile);
+                     var name = profile.name.split(' ');
+                      return $http({
+                        method: "POST",
+                        url: '/user',
+                        email: profile.email,
+                        firstname: name[0],
+                        lastname: name[1]
+                      });
+              })
+              .then(function(userData){
+                console.log(userData)
+                window.localStorage.setItem('userData', JSON.stringify(userData));
+              });
 
             $location.path('/home');
         }]);
