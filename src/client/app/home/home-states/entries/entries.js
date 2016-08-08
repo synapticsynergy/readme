@@ -60,11 +60,13 @@
       var url = type === 'activity' ? '/user/activity' : '/user/metric';
       var datums = type === 'activity' ? entries.daysActivities : entries.daysMetrics;
 
+      console.log("These are the datums", datums);
+
       $http({
           method: "POST",
           url: url,
           datums: datums,
-          day: entries.userDate
+          date: entries.userDate
         }).then(function success(data){
           console.log("Posted!", data)
         }, function error(data){

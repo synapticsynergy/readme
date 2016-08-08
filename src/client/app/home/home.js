@@ -13,7 +13,7 @@
     var home = this;
   }
 
- function homeFactory ($http, $q) {
+ function homeFactory ($http) {
 
    var services = {};
 
@@ -21,9 +21,16 @@
      return $http.post('/user', params);
    }
 
-   services.getUserData = function(userIdOrEmail){
-     return $http.get('/user/' + userIdOrEmail);
-   }
+   services.getUserData = function(){
+     var name = JSON.parse(window.localStorage.profile).split(' ');
+     return $http.post({
+        method: "POST",
+        url: '/user',
+        email: JSON.parse(window.localStorage.profile).email,
+        firstname: name[0],
+        firstname: name[1]
+      });
+    }
 
    return services;
   }
