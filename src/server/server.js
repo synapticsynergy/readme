@@ -77,12 +77,12 @@ app.route('/user/activity')
   // Metric Routes.
   app.route('/user/metric')
     .post(function(req, res) {
-      var metric = req.body.datums;
+      var metrics = req.body.datums;
       var date = req.body.date;
 
       User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
         .then(function(user) {
-          return user.addMetric(metric,date);
+          return user.addMetric(metrics,date);
         })
         .then(function(user) {
           var userString = JSON.stringify(user);

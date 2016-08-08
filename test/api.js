@@ -106,7 +106,7 @@ describe('RESTful API', function () {
 
     it('responds with a 200 when adding a metric', function(done) {
 
-      newUser.datums = 'headache';
+      newUser.datums = ['headache','happy','lost weight'];
       newUser.date = testDate;
 
 
@@ -117,7 +117,7 @@ describe('RESTful API', function () {
         .expect(200)
         .end(function(err, data) {
           var parsedData = JSON.parse(data.text);
-          expect(parsedData.days[0].metrics[0]).to.equal("headache");
+          expect(parsedData.days[0].metrics[2]).to.equal("lost weight");
           done();
         });
     });
