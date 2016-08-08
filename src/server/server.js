@@ -42,6 +42,7 @@ app.route('/user')
 app.route('/user/activity')
   .post(function(req, res) {
     var activity = req.body.datums;
+    console.log(activity);
     var date = req.body.day;
 
     User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
