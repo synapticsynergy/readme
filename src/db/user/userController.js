@@ -29,11 +29,11 @@ function removeUser (email) {
   });
 }
 
-User.prototype.addActivity = function (activity, day) {
+User.prototype.addActivity = function (activities, day) {
   var user = this;
   return user.getDay(day)
     .then(function (day) {
-      day.activities.push(activity);
+      day.activities = day.activities.concat(activities);
       return user.save();
     });
 }

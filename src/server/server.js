@@ -41,13 +41,12 @@ app.route('/user')
 // Activity routes.
 app.route('/user/activity')
   .post(function(req, res) {
-    var activity = req.body.datums;
-    console.log(activity);
-    var date = req.body.day;
+    var activities = req.body.datums;
+    var date = req.body.date;
 
     User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
       .then(function(user) {
-        return user.addActivity(activity,date);
+        return user.addActivity(activities ,date);
       })
       .then(function(user) {
         var userString = JSON.stringify(user);
@@ -59,7 +58,7 @@ app.route('/user/activity')
   })
   .delete(function(req, res) {
     var activity = req.body.datums;
-    var date = req.body.day;
+    var date = req.body.date;
 
     User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
       .then(function (user) {
@@ -79,7 +78,7 @@ app.route('/user/activity')
   app.route('/user/metric')
     .post(function(req, res) {
       var metric = req.body.datums;
-      var date = req.body.day;
+      var date = req.body.date;
 
       User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
         .then(function(user) {
@@ -95,7 +94,7 @@ app.route('/user/activity')
     })
     .delete(function(req, res) {
       var metric = req.body.datums;
-      var date = req.body.day;
+      var date = req.body.date;
 
       User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
         .then(function (user) {
@@ -114,7 +113,7 @@ app.route('/user/activity')
   app.route('/user/journal')
     .post(function(req, res) {
       var entry = req.body.entry;
-      var day = req.body.day;
+      var day = req.body.date;
 
       User.findOrCreateUser(req.body.email,req.body.firstname,req.body.lastname)
         .then(function(user) {

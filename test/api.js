@@ -67,8 +67,8 @@ describe('RESTful API', function () {
 
     it('responds with a 200 when adding an activity', function(done) {
 
-      newUser.datums = 'ran';
-      newUser.day = testDate
+      newUser.datums = ['ran', 'ate breakfast', 'slept in'];
+      newUser.date = testDate;
 
 
       request
@@ -78,7 +78,7 @@ describe('RESTful API', function () {
         .expect(200)
         .end(function(err, data) {
           var parsedData = JSON.parse(data.text);
-          expect(parsedData.days[0].activities[0]).to.equal("ran");
+          expect(parsedData.days[0].activities[2]).to.equal("slept in");
           done();
         });
     });
@@ -89,7 +89,7 @@ describe('RESTful API', function () {
     it('responds with a 200 when deleting an activity', function(done) {
 
       newUser.datums = "ran";
-      newUser.day = testDate
+      newUser.date = testDate
 
 
       request
@@ -107,7 +107,7 @@ describe('RESTful API', function () {
     it('responds with a 200 when adding a metric', function(done) {
 
       newUser.datums = 'headache';
-      newUser.day = testDate;
+      newUser.date = testDate;
 
 
       request
@@ -128,7 +128,7 @@ describe('RESTful API', function () {
     it('responds with a 200 when deleting a metric', function(done) {
 
       newUser.datums = 'headache';
-      newUser.day = testDate;
+      newUser.date = testDate;
 
       request
         .delete('/user/metric')
@@ -144,7 +144,7 @@ describe('RESTful API', function () {
     it('responds with a 200 when adding a journal entry', function(done) {
 
       newUser.entry = 'I am super happy.';
-      newUser.day = testDate;
+      newUser.date = testDate;
 
       request
         .post('/user/journal')
@@ -164,7 +164,7 @@ describe('POST',  function() {
 
     it('responds with a 200 when requesting a metric correlation', function(done) {
 
-      newUser.datums = "headache";
+      // newUser.datums = "headache";
 
       request
         .post('/user/correlation')
@@ -174,7 +174,7 @@ describe('POST',  function() {
         .end(function(err, data) {
           var parsedData = JSON.parse(data.text);
           console.log(parsedData,'looking for correlation');
-          expect(parsedData.headache).to.exist();
+          expect(parsedData).to.equal(0);
           done();
         });
     });
