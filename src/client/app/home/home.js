@@ -32,6 +32,10 @@
       });
     }
 
+    services.userActivities = window.localStorage.userActivities;
+
+    services.userMetrics = window.localStorage.userActivities;
+
    return services;
   }
 
