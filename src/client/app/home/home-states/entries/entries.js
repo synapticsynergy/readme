@@ -27,20 +27,14 @@
 
     entries.userMetricsStub = ['headache', 'angry', 'happy', 'sad', 'joyful'];
 
-    // entries.init = function () {
-    //   getUserData(window.userEmail)
-    //     .then(function(response){
-    //       entries.userActivities = response.userActivities;
-    //       entries.userMetrics = response.userMetrics;
-    //     })
-    // }
-
     entries.addItem = function(selection, type) {
       if (type === 'activity') {
         entries.daysActivities.push(selection);
+        entries.searchTextAct = null;
         entries.activityForm.$setPristine();
       } else {
         entries.daysMetrics.push(selection);
+        entries.searchTextMet = null;
         entries.metricForm.$setPristine();
       }
       console.log('activities', entries.daysActivities);
@@ -67,10 +61,12 @@
           url: url,
           datums: datums,
           date: entries.userDate
-        }).then(function success(data){
-          console.log("Posted!", data)
-        }, function error(data){
-          console.log("Error!", data)
+        }).then(function success(resp){
+          console.log("Posted!", resp)
+          type === 'activity' ? entries.daysActivities = [] : entries.daysMetrics = [];
+        }, function error(resp){
+          console.log("Error!", resp)
+          alert('Sorry, there was an error adding your datums')
       })
 
     }

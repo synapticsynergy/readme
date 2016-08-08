@@ -8,7 +8,10 @@
     
     <div ng-show='entries.userDate'>Choose the activities you did on {{entries.userDate | date: "EEEE, MMMM d"}}
 
-<!-- Activities-->
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <!-- Activities-->
     <form ng-submit="entries.addItem(entries.searchTextAct, 'activity')" name="entries.activityForm">
       <md-autocomplete
                 ng-show='entries.userDate'
@@ -37,8 +40,9 @@
 
     <md-button class="md-raised" ng-click="entries.postData('activity')"> Submit Activities </md-button> 
   </div>
-
-  <!-- Metrics-->
+        </div>
+        <div class="col-lg-6">
+            <!-- Metrics-->
       <form ng-submit="entries.addItem(entries.searchTextMet, 'metrics')" name="entries.metricForm">
       <md-autocomplete
                 ng-show='entries.userDate'
@@ -65,10 +69,17 @@
       </li>
     </ul>
 
-    <md-button class="md-raised" ng-click="entries.postData('metric')"> Submit Activities </md-button> 
+    <md-button class="md-raised" ng-click="entries.postData('metric')"> Submit Metrics </md-button> 
   </div>
 
 </div>
+        </div>
+    </div>
+</div>
+
+
+
+  
 
 
 
