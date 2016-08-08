@@ -8,19 +8,22 @@
     
     <div ng-show='entries.userDate'>Choose the activities you did on {{entries.userDate | date: "EEEE, MMMM d"}}
 
-<!-- Activities-->
-    <form ng-submit="entries.addItem(entries.searchText, 'activity')" name="entries.activityForm">
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <!-- Activities-->
+    <form ng-submit="entries.addItem(entries.searchTextAct, 'activity')" name="entries.activityForm">
       <md-autocomplete
                 ng-show='entries.userDate'
                 md-selected-item="entries.selectedItem"
-                md-search-text="entries.searchText" 
+                md-search-text="entries.searchTextAct" 
                 ng-disabled="entries.autoCompleteDisabled"
-                md-items="item in entries.userActivitiesStub | filter: entries.searchText"
+                md-items="item in entries.userActivitiesStub | filter: entries.searchTextAct"
                 md-item-text="item"
                 md-min-length="1"
                 placeholder="Enter an activity">
           <md-item-template>
-            <span md-highlight-text="entries.searchText" md-highlight-flags="^i">{{item}}</span>
+            <span md-highlight-text="entries.searchTextAct" md-highlight-flags="^i">{{item}}</span>
           </md-item-template>
       </md-autocomplete>
     </form>
@@ -37,20 +40,21 @@
 
     <md-button class="md-raised" ng-click="entries.postData('activity')"> Submit Activities </md-button> 
   </div>
-
-  <!-- Metrics-->
-      <form ng-submit="entries.addItem(entries.searchText, 'metrics')" name="entries.metricForm">
+        </div>
+        <div class="col-lg-6">
+            <!-- Metrics-->
+      <form ng-submit="entries.addItem(entries.searchTextMet, 'metrics')" name="entries.metricForm">
       <md-autocomplete
                 ng-show='entries.userDate'
                 md-selected-item="entries.selectedItem"
-                md-search-text="entries.searchText" 
+                md-search-text="entries.searchTextMet" 
                 ng-disabled="entries.autoCompleteDisabled"
-                md-items="item in entries.userMetricsStub | filter: entries.searchText"
-                md-item-text="item"
+                md-items="metric in entries.userMetricsStub | filter: entries.searchTextMet"
+                md-item-text="metric"
                 md-min-length="1"
                 placeholder="Enter a metric">
           <md-item-template>
-            <span md-highlight-text="entries.searchText" md-highlight-flags="^i">{{item}}</span>
+            <span md-highlight-text="entries.searchTextMet" md-highlight-flags="^i">{{metric}}</span>
           </md-item-template>
       </md-autocomplete>
     </form>
@@ -65,10 +69,17 @@
       </li>
     </ul>
 
-    <md-button class="md-raised" ng-click="entries.postData('metric')"> Submit Activities </md-button> 
+    <md-button class="md-raised" ng-click="entries.postData('metric')"> Submit Metrics </md-button> 
   </div>
 
 </div>
+        </div>
+    </div>
+</div>
+
+
+
+  
 
 
 
