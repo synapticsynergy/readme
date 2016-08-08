@@ -29,11 +29,11 @@ function removeUser (email) {
   });
 }
 
-User.prototype.addActivity = function (activity, day) {
+User.prototype.addActivity = function (activities, day) {
   var user = this;
   return user.getDay(day)
     .then(function (day) {
-      day.activities.push(activity);
+      day.activities = day.activities.concat(activities);
       return user.save();
     });
 }
@@ -49,11 +49,11 @@ User.prototype.deleteActivity = function (activity, day) {
     });
 }
 
-User.prototype.addMetric = function (metric, day) {
+User.prototype.addMetric = function (metrics, day) {
   var user = this;
   return user.getDay(day)
     .then(function (day) {
-      day.metrics.push(metric);
+      day.metrics = day.metrics.concat(metrics);
       return user.save();
     });
 }
