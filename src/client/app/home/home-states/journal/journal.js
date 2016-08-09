@@ -22,7 +22,7 @@
 
     journal.save = function () {
       // there must be a better way to do the following
-      var day = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDay());
+      var day = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
       day = day.toString();
       Journal.saveJournal(journal.dailyMemo, day);
     }
@@ -37,7 +37,7 @@
         url: '/user/journal',
         data: {
           entry: text,
-          email: JSON.parse(window.localStorage.getItem('userData')).config.email,
+          email: JSON.parse(window.localStorage.getItem('userData')).email,
           date: day.toString()
         }
       });
