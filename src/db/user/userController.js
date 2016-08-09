@@ -36,7 +36,7 @@ User.prototype.addActivity = function (activities, day) {
       day.activities = day.activities.concat(activities);
       return user.save();
     });
-}
+};
 
 User.prototype.deleteActivity = function (activity, day) {
   var user = this;
@@ -47,7 +47,7 @@ User.prototype.deleteActivity = function (activity, day) {
       );
       return user.save();
     });
-}
+};
 
 User.prototype.addMetric = function (metrics, day) {
   var user = this;
@@ -56,7 +56,7 @@ User.prototype.addMetric = function (metrics, day) {
       day.metrics = day.metrics.concat(metrics);
       return user.save();
     });
-}
+};
 
 User.prototype.deleteMetric = function (metric, day) {
   var user = this;
@@ -67,7 +67,7 @@ User.prototype.deleteMetric = function (metric, day) {
       );
       return user.save();
     });
-}
+};
 
 User.prototype.saveJournal = function (journal, day) {
   var user = this;
@@ -76,19 +76,19 @@ User.prototype.saveJournal = function (journal, day) {
       day.journalEntry = journal;
       return user.save();
     });
-}
+};
 
 User.prototype.findCorrelations = function (metric) {
   var user = this;
   return new Promise(function (resolve, reject) {
     resolve(findCorrelations(user, metric));
   });
-}
+};
 
 User.prototype.getDay = function (date) {
   for (var x = 0; x < this.days.length; x++) {
     var day = this.days[x];
-    if (day.date === typeof date === 'object' ? date.toString() : date) {
+    if (day.date === date) {
       return new Promise(function (resolve, reject) {
         resolve(day);
       });
@@ -107,10 +107,10 @@ User.prototype.getDay = function (date) {
     .then(function (user) {
       return user.days[user.days.length - 1];
     });
-}
+};
 
 module.exports = {
   findOrCreateUser: findOrCreateUser,
   removeUser: removeUser,
   User: User
-}
+};
