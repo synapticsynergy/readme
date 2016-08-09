@@ -1,3 +1,40 @@
 <div>
   Welcome to your insights 
 </div>
+
+<div layout="column" layout-align="center center" style="min-height: 300px;" ng-cloak>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Activities-->
+    <h4>Enter an activity or metric to find correlations:</h4>
+    <form ng-submit="insights.submitSelection(insights.searchText)" name="insights.correlForm">
+      <md-autocomplete
+                md-selected-item="insights.selectedItem"
+                md-search-text="insights.searchText" 
+                md-items="item in insights.userActivitiesStub | filter: insights.searchText"
+                md-item-text="item"
+                md-min-length="1"
+                placeholder="Search...">
+          <md-item-template>
+            <span md-highlight-text="insights.searchText" md-highlight-flags="^i">{{item}}</span>
+          </md-item-template>
+      </md-autocomplete>
+    </form>
+  </md-content>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="row">
+        <div ng-repeat="item in insights.currentCorrelationData" class='col-sm-12'>
+          <ul>
+            <li ng-repeat="(key, value) in item">{{key}}: {{value}}</li>
+          </ul>
+        </div>
+    </div>
+    </div>
+   </div> 
+</div>
