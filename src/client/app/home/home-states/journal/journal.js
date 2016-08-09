@@ -18,10 +18,10 @@
         journal.save();
         journal.message = 'saved!';
       }, 2000);
-    }
+    };
 
     journal.save = function () {
-      var day = new Date().getDate();
+      var day = new Date();
       day = day.toString();
       Journal.saveJournal(journal.dailyMemo, day);
     }
@@ -39,7 +39,7 @@
           date: day.toString()
         }
       });
-    }
+    };
 
     return services;
   }
