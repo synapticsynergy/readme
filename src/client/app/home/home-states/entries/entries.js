@@ -53,14 +53,16 @@
 
       var url = type === 'activity' ? '/user/activity' : '/user/metric';
       var datums = type === 'activity' ? entries.daysActivities : entries.daysMetrics;
-
-      console.log("These are the datums", datums);
-
       $http({
           method: "POST",
           url: url,
-          datums: datums,
-          date: entries.userDate
+          data: {
+            email: window.localStorage.userData.email,
+            firstname: "Mark",
+            lastname: "Pruett",
+            datums: datums,
+            date: entries.userDate
+          }
         }).then(function success(resp){
           console.log("Posted!", resp)
           type === 'activity' ? entries.daysActivities = [] : entries.daysMetrics = [];
