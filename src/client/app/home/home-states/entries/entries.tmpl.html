@@ -18,7 +18,7 @@
                 md-selected-item="entries.selectedItem"
                 md-search-text="entries.searchTextAct" 
                 ng-disabled="entries.autoCompleteDisabled"
-                md-items="item in entries.userActivitiesStub | filter: entries.searchTextAct"
+                md-items="item in entries.userActivities | filter: entries.searchTextAct"
                 md-item-text="item"
                 md-min-length="1"
                 placeholder="Enter an activity">
@@ -49,7 +49,7 @@
                 md-selected-item="entries.selectedItem"
                 md-search-text="entries.searchTextMet" 
                 ng-disabled="entries.autoCompleteDisabled"
-                md-items="metric in entries.userMetricsStub | filter: entries.searchTextMet"
+                md-items="metric in entries.userMetrics | filter: entries.searchTextMet"
                 md-item-text="metric"
                 md-min-length="1"
                 placeholder="Enter a metric">

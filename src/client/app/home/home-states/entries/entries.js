@@ -18,11 +18,8 @@
     entries.daysActivities = [];
     entries.daysMetrics = [];
 
-    entries.userActivities = store.get('profile').userActivities;
-    entries.userMetrics = store.get('profile').userMetrics;
-
-    entries.userActivitiesStub = ['run', 'rage', 'slide', 'skip', 'hop','hold', 'hodor'];
-    entries.userMetricsStub = ['headache', 'angry', 'happy', 'sad','joyful'];
+    entries.userActivities = store.get('userData').userActivities;
+    entries.userMetrics = store.get('userData').userMetrics;
 
     entries.addItem = function(selection, type) {
       if (type === 'activity') {
