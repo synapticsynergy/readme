@@ -4,11 +4,13 @@
   .controller('JournalController', JournalController)
   .factory('Journal', Journal);
 
-  function JournalController($scope, Journal) {
+  function JournalController($scope, Journal, homeFactory) {
     /*jshint validthis: true */
     var journal = this;
-    journal.dailyMemo = '';
     journal.message = '';
+    journal.date = (new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())).toString();
+    journal.day = homeFactory.getDay(journal.date);
+    journal.dailyMemo = journal.day.journalEntry;
     journal.bounceTimeout = null;
 
     journal.onChange = function () {
