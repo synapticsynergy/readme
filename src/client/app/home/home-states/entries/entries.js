@@ -46,15 +46,13 @@
 
     entries.postData = function(type) {
       var url = type === 'activity' ? '/user/activity' : '/user/metric';
-      var datums = type === 'activity' ? entries.daysActivities : entries
-        .daysMetrics;
+      var datums = type === 'activity' ? entries.daysActivities : entries.daysMetrics;
+      var profile = store.get('userData');
       $http({
         method: "POST",
         url: url,
         data: {
-          email: window.localStorage.userData.email,
-          firstname: store.get('profile').given_name,
-          lastname: store.get('profile').family_name,
+          email: profile.email,
           datums: datums,
           date: entries.userDate
         }

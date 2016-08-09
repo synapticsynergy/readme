@@ -17,9 +17,11 @@
       return $http({
         method: "POST",
         url: '/user',
-        email: profile.email,
-        firstname: profile.given_name,
-        lastname: profile.family_name
+        data: {
+          email: profile.email,
+          firstname: profile.given_name,
+          lastname: profile.family_name
+        }
       }).then(function(returnedData) {
         store.set('userData', returnedData.data);
       })
