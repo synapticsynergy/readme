@@ -10,7 +10,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node src/server/server.js",
-    "test": "mocha"
+    "test": "mocha",
+    "postinstall": "bower install"
   },
   "dependencies": {
     "body-parser": "^1.15.2",

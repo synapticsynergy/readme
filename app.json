@@ -1,0 +1,23 @@
+{
+  "name": "readme",
+  "description": "",
+  "scripts": {},
+  "env": {
+    "AUTH_SECRET": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "mongolab"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
