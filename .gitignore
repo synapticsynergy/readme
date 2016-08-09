@@ -40,3 +40,6 @@ src/client/lib
 
 .floo
 .flooignore
+
+# webstorm
+.idea/
