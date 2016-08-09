@@ -3,8 +3,7 @@
   angular.module('app.home.entries', []).controller('EntriesController',
     EntriesController);
 
-  function EntriesController($http, $scope, homeFactory) {
-  
+  function EntriesController($http, $scope, homeFactory, store) {
     var entries = this;
 
     entries.userDate;
@@ -12,20 +11,18 @@
     entries.autoCompleteDisabled = true;
 
     entries.changeAutoComplete = function() {
-      entries.userDate ? entries.autoCompleteDisabled = false : entries.autoCompleteDisabled = true;
+      entries.userDate ? entries.autoCompleteDisabled = false : entries.autoCompleteDisabled =
+        true;
     }
 
     entries.daysActivities = [];
-
     entries.daysMetrics = [];
 
-    entries.userActivities = window.localStorage.userActivities;
+    entries.userActivities = store.get('profile').userActivities;
+    entries.userMetrics = store.get('profile').userMetrics;
 
-    entries.userMetrics = window.localStorage.userActivities;
-
-    entries.userActivitiesStub = ['run', 'rage', 'slide', 'skip', 'hop', 'hold', 'hodor'];
-
-    entries.userMetricsStub = ['headache', 'angry', 'happy', 'sad', 'joyful'];
+    entries.userActivitiesStub = ['run', 'rage', 'slide', 'skip', 'hop','hold', 'hodor'];
+    entries.userMetricsStub = ['headache', 'angry', 'happy', 'sad','joyful'];
 
     entries.addItem = function(selection, type) {
       if (type === 'activity') {
@@ -37,8 +34,6 @@
         entries.searchTextMet = null;
         entries.metricForm.$setPristine();
       }
-      console.log('activities', entries.daysActivities);
-      console.log('metrics', entries.daysMetrics);
     }
 
     entries.removeItem = function(index, type) {
@@ -50,26 +45,26 @@
     }
 
     entries.postData = function(type) {
-
       var url = type === 'activity' ? '/user/activity' : '/user/metric';
       var datums = type === 'activity' ? entries.daysActivities : entries.daysMetrics;
-
-      console.log("These are the datums", datums);
-
+      var profile = store.get('userData');
       $http({
-          method: "POST",
-          url: url,
+        method: "POST",
+        url: url,
+        data: {
+          email: profile.email,
           datums: datums,
           date: entries.userDate
-        }).then(function success(resp){
-          console.log("Posted!", resp)
-          type === 'activity' ? entries.daysActivities = [] : entries.daysMetrics = [];
-        }, function error(resp){
-          console.log("Error!", resp)
-          alert('Sorry, there was an error adding your datums')
+        }
+      }).then(function success(resp) {
+        console.log("Posted!", resp)
+        type === 'activity' ? entries.daysActivities = [] : entries.daysMetrics = [];
+        homeFactory.getUserData();
+      }, function error(resp) {
+        console.log("Error!", resp)
+        alert('Sorry, there was an error adding your datums')
       })
-
     }
-  }
 
+  }
 })();
