@@ -21,7 +21,9 @@
     }
 
     journal.save = function () {
-      Journal.saveJournal(journal.dailyMemo, new Date().getDate().toString());
+      var day = new Date().getDate();
+      day = day.toString();
+      Journal.saveJournal(journal.dailyMemo, day);
     }
   }
 
@@ -29,10 +31,13 @@
     var services = {};
 
     services.saveJournal = function (text, day) {
-      return $http.post({
+      return $http({
+        method: 'POST',
         url: '/user/journal',
-        entry: text,
-        day: day.toString()
+        data: {
+          entry: text,
+          date: day.toString()
+        }
       });
     }
 
