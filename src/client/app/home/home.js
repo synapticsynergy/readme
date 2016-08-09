@@ -25,7 +25,17 @@
       }).then(function(returnedData) {
         store.set('userData', returnedData.data);
       })
-    }
+    };
+
+    services.getDay = function (date) {
+      var user = JSON.parse(window.localStorage.getItem('userData'));
+      for (var x = 0; x < user.days.length; x++) {
+        var day = user.days[x];
+        if (day.date === date) {
+          return day;
+        }
+      }
+    };
     return services;
   }
 })();
