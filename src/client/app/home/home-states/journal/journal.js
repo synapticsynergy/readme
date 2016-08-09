@@ -21,7 +21,8 @@
     };
 
     journal.save = function () {
-      var day = new Date();
+      // there must be a better way to do the following
+      var day = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDay());
       day = day.toString();
       Journal.saveJournal(journal.dailyMemo, day);
     }
@@ -36,6 +37,7 @@
         url: '/user/journal',
         data: {
           entry: text,
+          email: JSON.parse(window.localStorage.getItem('userData')).config.email,
           date: day.toString()
         }
       });
