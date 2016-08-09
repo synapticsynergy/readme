@@ -33,6 +33,11 @@ User.prototype.addActivity = function (activities, day) {
   var user = this;
   return user.getDay(day)
     .then(function (day) {
+      activities.forEach(function (activity) {
+        if (user.userActivities.indexOf(activity) === -1) {
+          user.userActivities.push(activity);
+        }
+      });
       day.activities = day.activities.concat(activities);
       return user.save();
     });
@@ -53,6 +58,11 @@ User.prototype.addMetric = function (metrics, day) {
   var user = this;
   return user.getDay(day)
     .then(function (day) {
+      metrics.forEach(function (metric) {
+        if (user.userMetrics.indexOf(metric) === -1) {
+          user.userMetrics.push(metric);
+        }
+      });
       day.metrics = day.metrics.concat(metrics);
       return user.save();
     });
