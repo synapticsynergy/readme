@@ -1,22 +1,27 @@
-<div ng-init=insights.logIt()>
+<div>
   Welcome to your insights 
 </div>
 
 <div layout="column" layout-align="center center" style="min-height: 300px;" ng-cloak>
-  <form name="insightsForm">
-    <p>Note that invalid styling only applies if invalid and dirty</p>
-    <md-input-container class="md-block">
-      <label>Activity</label>
-      <md-select name="myModel" ng-model="myModel" required>
-          <md-option ng-repeat='activity in entries.userActivityStub'></md-option>
-      </md-select>
-      <div class="errors" ng-messages="insightsForm.myModel.$error" ng-if="insightsForm.$dirty">
-        <div ng-message="required">Required</div>
-      </div>
-    </md-input-container>
-    <div layout="row">
-      <md-button ng-click="clearValue()" ng-disabled="!myModel" style="margin-right: 20px;">Clear</md-button>
-      <md-button ng-click="save()" ng-disabled="insightsForm.$invalid" class="md-primary" layout layout-align="center end">Save</md-button>
-    </div>
-  </form>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Activities-->
+    <h4>Enter an activity or metric to find correlations:</h4>
+    <form ng-submit="insights.submitSelection(insights.searchText)" name="insights.correlForm">
+      <md-autocomplete
+                md-selected-item="insights.selectedItem"
+                md-search-text="insights.searchText" 
+                md-items="item in insights.userActivitiesStub | filter: insights.searchText"
+                md-item-text="item"
+                md-min-length="1"
+                placeholder="Search...">
+          <md-item-template>
+            <span md-highlight-text="insights.searchText" md-highlight-flags="^i">{{item}}</span>
+          </md-item-template>
+      </md-autocomplete>
+    </form>
+  </md-content>
+  <div>{{insights.correlationData}}</div>
 </div>
