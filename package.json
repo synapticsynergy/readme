@@ -2,6 +2,9 @@
   "name": "ReadMe",
   "version": "0.0.1",
   "description": "Machine Learning app that finds patterns in daily life",
+  "engines": {
+    "node": "6.3.1"
+  },
   "authors": [
     "Mark Pruett",
     "Sam Wainwright",
