@@ -33,10 +33,10 @@ describe('correlations', function () {
 
     assert.isAbove(headache.filter(function (cor) {
       return 'run' in cor;
-    })[0].run, .1);
+    })[0].run, 0.1);
 
     assert.isAbove(happy.filter(function (cor) {
       return 'sing' in cor;
-    })[0].sing, .1);
+    })[0].sing, 0.1);
   });
 });

@@ -27,14 +27,14 @@ function gatherActivities (user) {
 
 function findCorrelation (user, activity, target) {
   // this is the 'correlation table'
-  var yy,  // both target and activity present
-      nn,  // neither target nor activity present
-      yn,  // target present, but not activity
-      ny,  // target not present, but activity present
-      ya,  // target present
-      na,  // target not present
-      ay,  // activity present
-      an;  // activity not present
+  var yy;  // both target and activity present
+  var nn;  // neither target nor activity present
+  var yn;  // target present, but not activity
+  var ny;  // target not present, but activity present
+  var ya;  // target present
+  var na;  // target not present
+  var ay;  // activity present
+  var an;  // activity not present
 
   // count() looks at all instances to gather counts
   // given the conditions specified by the variable
@@ -47,8 +47,8 @@ function findCorrelation (user, activity, target) {
   na = count(user, activity, target, -1, 0);
   ay = count(user, activity, target, 0, 1);
   an = count(user, activity, target, 0, -1);
-  
-  // get phi formula numerator and denominator 
+
+  // get phi formula numerator and denominator
   // given above variables
   var phiN = (yy * nn) - (yn * ny);
   var phiD = Math.sqrt(ya * na * ay * an);

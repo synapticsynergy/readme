@@ -1,19 +1,18 @@
-(function() {
+(function () {
   'use strict';
   angular.module('app.landing', []).controller('LandingController',
     LandingController);
 
-  function LandingController($scope, auth) {
-    /*jshint validthis: true */
+  function LandingController ($location, auth) {
+    // jshint validthis: true
     var landing = this;
-    $scope.auth = auth;
+    landing.auth = auth;
 
-    $scope.logout = function() {
+    landing.logout = function () {
       auth.signout();
-      store.remove('profile');
-      store.remove('token');
+      window.localStorage.removeItem('profile');
+      window.localStorage.removeItem('token');
       $location.path('/landing.tmpl.html');
-      console.log('Logging Out');
     };
   }
 })();

@@ -1,11 +1,11 @@
-(function() {
+(function () {
   'use strict';
   angular.module('app.home.journal', [])
   .controller('JournalController', JournalController)
   .factory('Journal', Journal);
 
-  function JournalController($scope, Journal, homeFactory) {
-    /*jshint validthis: true */
+  function JournalController ($scope, Journal, homeFactory) {
+    // jshint validthis: true
     var journal = this;
     journal.message = '';
     journal.date = (new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())).toString();
@@ -29,7 +29,7 @@
       var day = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
       day = day.toString();
       Journal.saveJournal(journal.dailyMemo, day);
-    }
+    };
   }
 
   function Journal ($http) {

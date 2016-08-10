@@ -15,9 +15,7 @@ function findOrCreateUser (email, firstname, lastname) {
           firstname: firstname,
           lastname: lastname
         });
-      }
-
-      else {
+      } else {
         return user;
       }
     });
@@ -32,13 +30,13 @@ function removeUser (email) {
 User.prototype.addActivity = function (activities, day) {
   var user = this;
   return user.getDay(day)
-    .then(function (day) {
+    .then(function (foundDay) {
       activities.forEach(function (activity) {
         if (user.userActivities.indexOf(activity) === -1) {
           user.userActivities.push(activity);
         }
       });
-      day.activities = day.activities.concat(activities);
+      foundDay.activities = foundDay.activities.concat(activities);
       return user.save();
     });
 };
@@ -46,9 +44,9 @@ User.prototype.addActivity = function (activities, day) {
 User.prototype.deleteActivity = function (activity, day) {
   var user = this;
   return user.getDay(day)
-    .then(function (day) {
-      day.activities.splice(
-        day.activities.indexOf(activity), 1
+    .then(function (foundDay) {
+      foundDay.activities.splice(
+        foundDay.activities.indexOf(activity), 1
       );
       return user.save();
     });
@@ -57,13 +55,13 @@ User.prototype.deleteActivity = function (activity, day) {
 User.prototype.addMetric = function (metrics, day) {
   var user = this;
   return user.getDay(day)
-    .then(function (day) {
+    .then(function (foundDay) {
       metrics.forEach(function (metric) {
         if (user.userMetrics.indexOf(metric) === -1) {
           user.userMetrics.push(metric);
         }
       });
-      day.metrics = day.metrics.concat(metrics);
+      foundDay.metrics = foundDay.metrics.concat(metrics);
       return user.save();
     });
 };
@@ -71,9 +69,9 @@ User.prototype.addMetric = function (metrics, day) {
 User.prototype.deleteMetric = function (metric, day) {
   var user = this;
   return user.getDay(day)
-    .then(function (day) {
-      day.metrics.splice(
-        day.metrics.indexOf(metric), 1
+    .then(function (foundDay) {
+      foundDay.metrics.splice(
+        foundDay.metrics.indexOf(metric), 1
       );
       return user.save();
     });
@@ -82,15 +80,15 @@ User.prototype.deleteMetric = function (metric, day) {
 User.prototype.saveJournal = function (journal, day) {
   var user = this;
   return user.getDay(day)
-    .then(function (day) {
-      day.journalEntry = journal;
+    .then(function (foundDay) {
+      foundDay.journalEntry = journal;
       return user.save();
     });
 };
 
 User.prototype.findCorrelations = function (metric) {
   var user = this;
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     resolve(findCorrelations(user, metric));
   });
 };
@@ -99,7 +97,7 @@ User.prototype.getDay = function (date) {
   for (var x = 0; x < this.days.length; x++) {
     var day = this.days[x];
     if (day.date === date) {
-      return new Promise(function (resolve, reject) {
+      return new Promise(function (resolve) {
         resolve(day);
       });
     }
