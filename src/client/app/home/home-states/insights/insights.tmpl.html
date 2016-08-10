@@ -13,7 +13,7 @@
       <md-autocomplete
                 md-selected-item="insights.selectedItem"
                 md-search-text="insights.searchText" 
-                md-items="item in insights.userActivitiesStub | filter: insights.searchText"
+                md-items="item in insights.userMetrics | filter: insights.searchText"
                 md-item-text="item"
                 md-min-length="1"
                 placeholder="Search...">
