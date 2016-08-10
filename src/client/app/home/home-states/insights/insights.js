@@ -9,7 +9,7 @@
 
     insights.userMetrics = store.get('userData').userMetrics;
 
-    insights.currentCorrelationData = store.get('currentCorrelationData') || [{'Null': 'null'}];
+    insights.currentCorrelationData = [{'Null': 'null'}];
 
     insights.getCorrelations = function(selection) {
       var profile = store.get('userData');
@@ -34,7 +34,7 @@
       .then(function(dataArr){
         console.log('This is the correl data', dataArr)
           store.set('currentCorrelationData', dataArr);
-          insights.currentCorrelationData = store.get('dataArr');
+          insights.currentCorrelationData = dataArr;
       })
       .catch(function(err){
         console.log('There was an error getting your correlations', err);
