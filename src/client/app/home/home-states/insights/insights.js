@@ -12,10 +12,12 @@
     insights.currentCorrelationData = store.get('currentCorrelationData') || [{'Null': 'null'}];
 
     insights.getCorrelations = function(selection) {
+      var profile = store.get('userData');
       return $http({
           method: "POST",
           url: '/user/correlation',
           data: {
+            email: profile.email,
             datums: selection
           }
         }).then(function success(resp){
@@ -27,7 +29,6 @@
     }
 
     insights.submitSelection = function(selection) {
-      
       insights.getCorrelations(selection)
       .then(function(dataArr){
         console.log('This is the correl data', dataArr)
