@@ -19,6 +19,7 @@ app.route('/user')
       })
       .catch(function (err) {
         console.error(err, 'Error adding user');
+        res.status(404).send(err);
       });
   })
   .delete(function (req, res) {
@@ -29,6 +30,7 @@ app.route('/user')
       })
       .catch(function (err) {
         console.error(err, 'Error removing user');
+        res.status(404).send(err);
       });
   });
 
@@ -48,6 +50,7 @@ app.route('/user/activity')
       })
       .catch(function (err) {
         console.error(err, 'Error finding adding activity');
+        res.status(404).send(err);
       });
   })
   .delete(function (req, res) {
@@ -64,6 +67,7 @@ app.route('/user/activity')
       })
       .catch(function (err) {
         console.error(err, 'Error finding deleting activity');
+        res.status(404).send(err);
       });
   });
 
@@ -83,6 +87,7 @@ app.route('/user/metric')
       })
       .catch(function (err) {
         console.error(err, 'Error adding metric');
+        res.status(404).send(err);
       });
   })
   .delete(function (req, res) {
@@ -99,6 +104,7 @@ app.route('/user/metric')
       })
       .catch(function (err) {
         console.error(err, 'Error deleting metric');
+        res.status(404).send(err);
       });
   });
 
@@ -118,6 +124,7 @@ app.route('/user/journal')
       })
       .catch(function (err) {
         console.error(err, 'Error adding journal entry');
+        res.status(404).send(err);
       });
   });
 
@@ -137,6 +144,7 @@ app.route('/user/correlation')
       })
       .catch(function (err) {
         console.error(err, 'Error finding correlation');
+        res.status(404).send(err);
       });
   });
 
