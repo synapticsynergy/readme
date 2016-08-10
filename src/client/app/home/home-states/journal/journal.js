@@ -10,7 +10,9 @@
     journal.message = '';
     journal.date = (new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())).toString();
     journal.day = homeFactory.getDay(journal.date);
-    journal.dailyMemo = journal.day.journalEntry;
+    if (journal.day !== undefined) {
+      journal.dailyMemo = journal.day.journalEntry;
+    }
     journal.bounceTimeout = null;
 
     journal.onChange = function () {
