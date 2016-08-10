@@ -57,9 +57,8 @@
         console.log("Posted!", resp)
         type === 'activity' ? entries.daysActivities = [] : entries.daysMetrics = [];
         homeFactory.getUserData();
-      }, function error(resp) {
-        console.log("Error!", resp)
-        alert('Sorry, there was an error adding your datums')
+      }).catch(function(err){
+        console.log('There was an error adding your datums', err)
       })
     }
 
