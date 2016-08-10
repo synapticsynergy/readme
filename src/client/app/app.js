@@ -1,52 +1,57 @@
-(function() {
+(function () {
   'use strict';
+
   var app = angular.module('app', ['app.landing', 'app.home', 'ui.router',
     'auth0', 'angular-storage', 'angular-jwt', 'ngRoute', 'ngMaterial'
   ]);
+
   app.config(['$routeProvider', 'authProvider', '$httpProvider',
     '$locationProvider', 'jwtInterceptorProvider',
-    function myAppConfig($routeProvider, authProvider, $httpProvider,
+    function myAppConfig ($routeProvider, authProvider, $httpProvider,
       $locationProvider, jwtInterceptorProvider) {
       authProvider.init({
-          domain: 'synapticsynergy.auth0.com',
-          clientID: 'kg0sT6tTpDoBwb2A1WllySYiarHLz8HV',
-          loginState: 'landing'
-        })
-        //Called when login is successful
+        domain: 'synapticsynergy.auth0.com',
+        clientID: 'kg0sT6tTpDoBwb2A1WllySYiarHLz8HV',
+        loginState: 'landing'
+      });
+
+      // Called when login is successful
       authProvider.on('loginSuccess', ['$location', 'profilePromise',
         'idToken', 'store', '$http', 'homeFactory',
-        function($location, profilePromise, idToken, store, $http,
-          homeFactory) {
-          console.log("Login Success");
+        function ($location, profilePromise, idToken, store, $http, homeFactory) {
           profilePromise
-          //Sets the profile and token
-            .then(function(profile) {
-            store.set('profile', profile);
-            store.set('token', idToken);
-          }).then(function() {
-            //Gets the user's data from the database and stores it on the window
-            return homeFactory.getUserData();
-          });
-          //Sends the user here after login
+            // Sets the profile and token
+            .then(function (profile) {
+              store.set('profile', profile);
+              store.set('token', idToken);
+            }).then(function () {
+              // Gets the user's data from the database and stores it on the window
+              return homeFactory.getUserData();
+            });
+          // Sends the user here after login
           $location.path('/home');
         }
       ]);
-      //Called when login fails
-      authProvider.on('loginFailure', function() {
-        alert("Error");
+
+      // Called when login fails
+      authProvider.on('loginFailure', function () {
+        alert('Error');
       });
-      //Remove this when testing
-      //Angular HTTP Interceptor function
+
+      // Remove this when testing
+      // Angular HTTP Interceptor function
       jwtInterceptorProvider.tokenGetter = ['store',
-        function(store) {
+        function (store) {
           return store.get('token');
         }
       ];
-      //Push interceptor function to $httpProvider's interceptors
+
+      // Push interceptor function to $httpProvider's interceptors
       $httpProvider.interceptors.push('jwtInterceptor');
     }
   ]);
-  app.config(function config($stateProvider, $urlRouterProvider) {
+
+  app.config(function config ($stateProvider, $urlRouterProvider) {
     $stateProvider.state('landing', {
       url: '/',
       templateUrl: 'app/landing/landing.tmpl.html',
@@ -76,22 +81,24 @@
       controller: 'InsightsController',
       controllerAs: 'insights'
         // data: { requiresLogin: true }
-    })
+    });
+
     $urlRouterProvider.otherwise('/');
   }).run(['auth',
-    function(auth) {
+    function (auth) {
       // This hooks all auth events to check everything as soon as the app starts
       auth.hookEvents();
     }
   ]);
+
   app.run(['$rootScope', 'auth', 'store', 'jwtHelper', '$location',
-    function($rootScope, auth, store, jwtHelper, $location) {
-      $rootScope.$on('$locationChangeStart', function() {
+    function ($rootScope, auth, store, jwtHelper, $location) {
+      $rootScope.$on('$locationChangeStart', function () {
         var token = store.get('token');
         if (token) {
           if (!jwtHelper.isTokenExpired(token)) {
             if (!auth.isAuthenticated) {
-              //Re-authenticate user if token is valid
+              // Re-authenticate user if token is valid
               auth.authenticate(store.get('profile'), token);
             }
           } else {
