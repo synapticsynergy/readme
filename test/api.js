@@ -142,7 +142,6 @@ describe('RESTful API', function () {
         .expect(200)
         .end(function (err, data) {
           var parsedData = JSON.parse(data.text);
-          console.log(parsedData, 'looking for correlation');
           expect(parsedData).to.equal(0);
           done();
         });
