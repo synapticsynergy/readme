@@ -15,7 +15,7 @@
     <form ng-submit="entries.addItem(entries.searchTextAct, 'activity')" name="entries.activityForm">
       <md-autocomplete
                 ng-show='entries.userDate'
-                md-selected-item="entries.selectedItem"
+                md-selected-item="entries.selectedItemAct"
                 md-search-text="entries.searchTextAct" 
                 ng-disabled="entries.autoCompleteDisabled"
                 md-items="item in entries.userActivities | filter: entries.searchTextAct"
@@ -46,7 +46,7 @@
       <form ng-submit="entries.addItem(entries.searchTextMet, 'metrics')" name="entries.metricForm">
       <md-autocomplete
                 ng-show='entries.userDate'
-                md-selected-item="entries.selectedItem"
+                md-selected-item="entries.selectedItemMet"
                 md-search-text="entries.searchTextMet" 
                 ng-disabled="entries.autoCompleteDisabled"
                 md-items="metric in entries.userMetrics | filter: entries.searchTextMet"
