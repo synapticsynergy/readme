@@ -10,9 +10,9 @@ function driftSearch (user, target, maxDrift) {
   var drifts = [];
   for (var x = 0; x <= maxDrift; x++) {
     user.days = drift(user, x);
-    drifts.push(findCorrelations(user, target));
+    drifts.push(findBest(findCorrelations(user, target)));
   }
-  return findBest(drifts);
+  return drifts;
 }
 
 function drift (user, drift) {
