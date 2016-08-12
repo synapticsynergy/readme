@@ -1,10 +1,8 @@
 <div class='container'>
   Welcome to your entries 
-  
-  <p>Pick a date to add activities to:</p>
+
 
   <md-content>
-    <md-datepicker ng-model="entries.userDate" ng-change ='entries.changeAutoComplete()' md-placeholder="Enter date"></md-datepicker>
     
     <div ng-show='entries.userDate'>Choose the activities you did on {{entries.userDate | date: "EEEE, MMMM d"}}
 
