@@ -5,13 +5,22 @@
   ]).controller('HomeController', HomeController).factory('homeFactory',
     homeFactory);
 
-  function HomeController () {
+  function HomeController ($mdSidenav) {
     // jshint validthis: true
     var home = this;
+
+    home.openLeftMenu = function(){
+      $mdSidenav('left').toggle();
+    }
+
+    home.isSidenavOpen = false;
+
   }
 
-  function homeFactory ($http, store) {
+  function homeFactory ($http, store, $mdSidenav) {
+
     var services = {};
+
     services.getUserData = function () {
       var profile = store.get('profile');
       return $http({
