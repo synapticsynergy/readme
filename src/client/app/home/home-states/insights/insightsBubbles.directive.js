@@ -6,7 +6,7 @@ angular.module('app.home.insights').
    //in your HTML, this will be named as bars-chart
    directive('bubbleChart', bubbleChart);
 
-    function bubbleChart($parse) {
+    function bubbleChart($parse, store) {
      //explicitly creating a directive definition variable
      //this may look verbose but is good for clarification purposes
      //in real life you'd want to simply return the object {...}
@@ -21,7 +21,7 @@ angular.module('app.home.insights').
          replace: false,
          link: function (scope, element, attrs) {
            //converting all data passed thru into an array
-           var data = scope.data;
+           var data = store.get('currentCorrelationData');
            console.log(data,'d3');
            //in D3, any selection[0] contains the group
            //selection[0][0] is the DOM node
@@ -66,7 +66,7 @@ angular.module('app.home.insights').
             // use the force
             var force = d3.layout.force() //build the layout
                 .size([width, height]) //specified earlier
-                .nodes(d3.values(nodes)) //add nodes
+                .nodes(d3.values(data)) //add nodes
                 // .links(links) //add links
                 .on("tick", tick) //what to do
                 .linkDistance(300) //set for proper svg size
@@ -104,15 +104,7 @@ angular.module('app.home.insights').
 
 
 
-             // .selectAll("svg")
-             // .data(data).enter().append("circle")
-             // // .transition().duration(1000).ease("elastic")
-             // .style("width", function(d) { return d + "%"; })
-             // .style('background-color','blue')
-             // .text(function(d) { return d + "%"; });
-           //a little of magic: setting it's width based
-           //on the data value (d)
-           //and text all with a smooth transition
+
          },
          scope: { data: '=' }
       };
