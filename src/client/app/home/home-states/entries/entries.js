@@ -6,6 +6,20 @@
   function EntriesController($http, homeFactory, store) {
     var entries = this;
 
+    entries.activeField = "Activities";
+
+    entries.showActivities = true;
+
+    entries.changeField = function(){
+      if(entries.activeField === "Activities"){
+        entries.activeField = "Metrics"
+        entries.showActivities = false;
+      } else {
+        entries.activeField = "Activities";
+        entries.showActivities = true;
+      }
+    }
+
     entries.autoCompleteDisabled = false;
 
     entries.daysActivities = [];

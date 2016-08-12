@@ -2,15 +2,20 @@
 
   <md-content>
     
-    <div ng-show='home.userDate'>Choose the activities for the date above
+  <div ng-show='home.userDate'>
 
+    <span flex>{{entries.activeField}}</span>
+
+      <md-switch class="md-primary" md-no-ink aria-label="Switch No Ink" ng-change="entries.changeField()" ng-model="data.cb5">
+      Switch Me
+      </md-switch>
     <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-6" ng-show='entries.showActivities'>
             <!-- Activities-->
     <form ng-submit="entries.addItem(entries.searchTextAct, 'activity')" name="entries.activityForm">
       <md-autocomplete
-              
+                
                 md-selected-item="entries.selectedItemAct"
                 md-search-text="entries.searchTextAct" 
                 ng-disabled="entries.autoCompleteDisabled"
@@ -37,11 +42,11 @@
     <md-button class="md-raised" ng-click="entries.postData('activity')"> Submit Activities </md-button> 
   </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6" ng-hide='entries.showActivities'>
             <!-- Metrics-->
       <form ng-submit="entries.addItem(entries.searchTextMet, 'metrics')" name="entries.metricForm">
       <md-autocomplete
-               
+                
                 md-selected-item="entries.selectedItemMet"
                 md-search-text="entries.searchTextMet" 
                 ng-disabled="entries.autoCompleteDisabled"
