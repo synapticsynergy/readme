@@ -3,17 +3,21 @@
   angular.module('app.home.entries', []).controller('EntriesController',
     EntriesController);
 
-  function EntriesController($http, $scope, homeFactory, store) {
+  function EntriesController($http, $scope, homeFactory, store, $watch) {
     var entries = this;
 
-    entries.userDate;
+    entries.$watch('home.userDate', function(scope) {
+        entries.userDate = scope.data.home.userDate
+    });
+
+    entries.userDate = homeFactory.userDate;
 
     entries.autoCompleteDisabled = true;
 
-    entries.changeAutoComplete = function() {
-      entries.userDate ? entries.autoCompleteDisabled = false : entries.autoCompleteDisabled =
-        true;
-    }
+    // entries.changeAutoComplete = function() {
+    //   entries.userDate ? entries.autoCompleteDisabled = false : entries.autoCompleteDisabled =
+    //     true;
+    // }
 
     entries.daysActivities = [];
     entries.daysMetrics = [];

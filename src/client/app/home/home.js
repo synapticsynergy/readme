@@ -13,7 +13,7 @@
       $mdSidenav('left').toggle();
     }
 
-    home.isSidenavOpen = false;
+    home.userDate = new Date();
 
   }
 

@@ -12,12 +12,11 @@
             <h1 class="readme-h1">ReadMe</h1>
          </a>
       </div>
-      
-        <button class='sideMenuOptions md-button' ui-sref='home.entries' ui-sref-active='active'>Daily Entries</button>
-        <button class='sideMenuOptions md-button' ui-sref='home.journal' ui-sref-active='active'>Daily Journal</button>  
-        <button class='sideMenuOptions md-button' ui-sref='home.insights' ui-sref-active='active'>Your Insights</button>
-       
-      
+        <div md-ripple-container>
+            <div class='side-menu-options' ui-sref='home.entries' ui-sref-active='active'>Daily Entries</div>
+            <div class='side-menu-options' ui-sref='home.journal' ui-sref-active='active'>Daily Journal</div>  
+            <div class='side-menu-options' ui-sref='home.insights' ui-sref-active='active'>Your Insights</div>
+        </div>
    </md-sidenav>
 </div>
 
@@ -40,7 +39,7 @@
       </md-toolbar>
             <div layout='row' layout-xs='column'>
                 <div class='date-picker' flex='30'>Enter data for: 
-                    <md-datepicker ng-model="entries.userDate" ng-change ='entries.changeAutoComplete()' md-placeholder="Enter date"></md-datepicker>
+                    <md-datepicker ng-model="home.userDate" md-placeholder="Enter date"></md-datepicker>
                 </div>
                 
             </div>
