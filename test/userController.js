@@ -120,6 +120,19 @@ describe('userController', function () {
           return user.findCorrelations('headache');
         })
         .then(function (correlations) {
+          console.log(correlations);
+          assert.isArray(correlations);
+        });
+    });
+  });
+
+  describe('driftSearch', function () {
+    it('should driftsearch', function () {
+      return userController.findOrCreateUser(testEmail)
+        .then(function (user) {
+          return user.driftSearch('headache', 2);
+        })
+        .then(function (correlations) {
           assert.isArray(correlations);
         });
     });
