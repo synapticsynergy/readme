@@ -12,7 +12,7 @@ function driftSearch (user, target, maxDrift) {
     user.days = drift(user, x);
     drifts.push(findCorrelations(user, target));
   }
-  return drifts;
+  return findBest(drifts);
 }
 
 function drift (user, drift) {
@@ -26,6 +26,15 @@ function drift (user, drift) {
   return days.map(function (day, index) {
     day.activities = activities[index];
     return day;
+  });
+}
+
+function findBest (results) {
+  // filters results to only include ones above a
+  // correlative threshold
+  return results.filter(function (result) {
+    var val = result[Object.keys(result)[0]];
+    return val > 0.3 || val < -0.3;
   });
 }
 
