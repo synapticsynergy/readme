@@ -82,18 +82,22 @@ footer {
 
 .md-sidenav-left {
     width: 250px;
-    background: #106CC8 !important;
+    background: #432f21 !important;
     margin: 0 auto;
     height: 100vh;
 }
 
 .sideMenuOptions {
-    color: white;
+    color: #DFDED4 !important;
     padding: 8px;
     text-align: center;
     display: block;
     margin: 0 auto;
 
+}
+
+.date-picker {
+    margin: 5% auto auto 5%;
 }
 
 .template-view {
@@ -109,11 +113,15 @@ footer {
   z-index: 3;
 }
 
-.md-button {
+.top-nav {
     color: #2f2d2d !important;
 }
 a,a:hover {
     text-decoration: none;
+}
+
+body {
+    color: #2f2d2d;
 }
 
 @media only screen and (min-width:950px) { 

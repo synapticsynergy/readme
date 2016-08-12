@@ -24,21 +24,28 @@
    <md-content tabindex="-1" role='main' class='layout-column flex'>
       <md-toolbar class='site-content-toolbar _md' layout='row'>
           <md-button class='menuButton' ng-click="home.openLeftMenu()">
-                <img style='max-width: 15px;' src="http://www.getkumbu.com/wp-content/themes/kumbu-blog-theme/assets/img/mobile-menu.svg">
+                <img style='max-width: 20px;' src="http://www.getkumbu.com/wp-content/themes/kumbu-blog-theme/assets/img/mobile-menu.svg">
           </md-button>
          <div class="md-toolbar-tools">
             <span>Current Page</span>
             <!-- fill up the space between left and right area -->
             <span flex></span>
-            <md-button>
+            <md-button class='top-nav'>
                About
             </md-button>
-            <md-button  ng-click="logout()">
+            <md-button class='top-nav' ng-click="logout()">
                Log Out
             </md-button>
          </div>
       </md-toolbar>
-            <div class='template-view' ui-view>
+            <div layout='row' layout-xs='column'>
+                <div class='date-picker' flex='30'>Enter data for: 
+                    <md-datepicker ng-model="entries.userDate" ng-change ='entries.changeAutoComplete()' md-placeholder="Enter date"></md-datepicker>
+                </div>
+                
+            </div>
+            <div layout='column' layout-md='column' >
+                <div flex='66' class='template-view' ui-view></div>
             </div>
       </md-content>
    </md-content>
