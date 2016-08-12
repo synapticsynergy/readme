@@ -3,21 +3,10 @@
   angular.module('app.home.entries', []).controller('EntriesController',
     EntriesController);
 
-  function EntriesController($http, $scope, homeFactory, store, $watch) {
+  function EntriesController($http, homeFactory, store) {
     var entries = this;
 
-    entries.$watch('home.userDate', function(scope) {
-        entries.userDate = scope.data.home.userDate
-    });
-
-    entries.userDate = homeFactory.userDate;
-
-    entries.autoCompleteDisabled = true;
-
-    // entries.changeAutoComplete = function() {
-    //   entries.userDate ? entries.autoCompleteDisabled = false : entries.autoCompleteDisabled =
-    //     true;
-    // }
+    entries.autoCompleteDisabled = false;
 
     entries.daysActivities = [];
     entries.daysMetrics = [];
@@ -49,13 +38,16 @@
       var url = type === 'activity' ? '/user/activity' : '/user/metric';
       var datums = type === 'activity' ? entries.daysActivities : entries.daysMetrics;
       var profile = store.get('userData');
+      var currentlySelectedDate = homeFactory.date;
+      console.log('This is your date', currentlySelectedDate);
+
       $http({
         method: "POST",
         url: url,
         data: {
           email: profile.email,
           datums: datums,
-          date: entries.userDate
+          date: currentlySelectedDate
         }
       }).then(function success(resp) {
         console.log("Posted!", resp)

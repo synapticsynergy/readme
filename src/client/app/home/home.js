@@ -5,17 +5,23 @@
   ]).controller('HomeController', HomeController).factory('homeFactory',
     homeFactory);
 
-  function HomeController ($scope, $mdSidenav, $location) {
+  function HomeController ($scope, $mdSidenav, $window, $location, homeFactory) {
     // jshint validthis: true
     var home = this;
 
     home.openLeftMenu = function(){
       $mdSidenav('left').toggle();
     }
+    home.userDate = "Not a date yet!";
 
-    home.userDate = new Date();
+    home.dateLogger = function(value){
+      homeFactory.dateLogger(value);
+    }
 
   }
+
+
+
 
   function homeFactory ($http, store, $mdSidenav) {
 
@@ -45,6 +51,15 @@
         }
       }
     };
+
+    services.date = {};
+
+    services.dateLogger = function(value){
+      services.date = value;
+      console.log(services.date);
+    }
+
+
 
     return services;
   }

@@ -12,7 +12,7 @@
             <h1 class="readme-h1">ReadMe</h1>
          </a>
       </div>
-        <div md-ripple-container>
+        <div>
             <div class='side-menu-options' ui-sref='home.entries' ui-sref-active='active'>Daily Entries</div>
             <div class='side-menu-options' ui-sref='home.journal' ui-sref-active='active'>Daily Journal</div>  
             <div class='side-menu-options' ui-sref='home.insights' ui-sref-active='active'>Your Insights</div>
@@ -39,17 +39,13 @@
       </md-toolbar>
             <div layout='row' layout-xs='column'>
                 <div class='date-picker' flex='30'>Enter data for: 
-                    <md-datepicker ng-model="home.userDate" md-placeholder="Enter date"></md-datepicker>
+                    <md-datepicker ng-model="home.userDate" ng-change='home.dateLogger(home.userDate)' md-placeholder="Enter date"></md-datepicker>
                 </div>
                 
             </div>
-            <div layout='column' layout-md='column' >
-                <div flex='66' class='template-view' ui-view></div>
+            <div layout='column' layout-md='column' class='template-view'>
+                <div ui-view></div>
             </div>
-
-      </md-content>
-
-
    </md-content>
 
 </div>
@@ -59,6 +55,7 @@
         </div>
     </div>
 </div>
+
 
 
 

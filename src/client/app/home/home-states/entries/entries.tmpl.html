@@ -2,7 +2,7 @@
 
   <md-content>
     
-    <div >Choose the activities you did on {{entries.userDate | date: "EEEE, MMMM d"}}
+    <div ng-show='home.userDate'>Choose the activities for the date above
 
     <div class="container-fluid">
     <div class="row">
@@ -10,7 +10,7 @@
             <!-- Activities-->
     <form ng-submit="entries.addItem(entries.searchTextAct, 'activity')" name="entries.activityForm">
       <md-autocomplete
-                ng-show='entries.userDate'
+              
                 md-selected-item="entries.selectedItemAct"
                 md-search-text="entries.searchTextAct" 
                 ng-disabled="entries.autoCompleteDisabled"
@@ -41,7 +41,7 @@
             <!-- Metrics-->
       <form ng-submit="entries.addItem(entries.searchTextMet, 'metrics')" name="entries.metricForm">
       <md-autocomplete
-                ng-show='entries.userDate'
+               
                 md-selected-item="entries.selectedItemMet"
                 md-search-text="entries.searchTextMet" 
                 ng-disabled="entries.autoCompleteDisabled"
