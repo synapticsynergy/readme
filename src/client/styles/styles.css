@@ -62,9 +62,8 @@ footer {
     text-align: center;
     flex-direction: column;
     align-items: center;
-    padding: 0px 0px 16px 0px;
+    padding: 20px 0px 16px 0px;
     color: #ffffff;
-    z-index: 4;
 }
 
 .templateView {
@@ -82,8 +81,25 @@ footer {
 }
 
 .md-sidenav-left {
-    width: 200px;
+    width: 250px;
     background: #106CC8 !important;
+    margin: 0 auto;
+    height: 100vh;
+}
+
+.sideMenuOptions {
+    color: white;
+    padding: 8px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+
+}
+
+.template-view {
+    width: 50%;
+    height: 50%;
+    margin: 10% auto;
 }
 
 .site-content-toolbar {
@@ -96,7 +112,15 @@ footer {
 .md-button {
     color: #2f2d2d !important;
 }
+a,a:hover {
+    text-decoration: none;
+}
 
+@media only screen and (min-width:950px) { 
+    .menuButton {
+        display: none;
+    }
+}
 
 @media(max-width:768px) {
     section {

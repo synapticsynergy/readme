@@ -1,24 +1,25 @@
-<div id="sideNavContainer" layout="row" ng-cloak class='navBar'>
+<div id="sideNavContainer" ng-cloak class='navBar'>
+<div layout='vertical'>
    <md-sidenav 
         md-component-id="left" 
         hide-print class="md-sidenav-left" 
         md-is-locked-open="$mdMedia('gt-sm')" 
-        md-is-open='isSideNavOpen' tabindex="-1">
+        md-is-open='isSideNavOpen' tabindex="-1"
+        >
       <div>
          <a ng-href="/" class='readme-logo' href='/'>
             <img style='max-width: 150px;' src="https://s9.postimg.org/wampcpx5b/readme_logo.png">
             <h1 class="readme-h1">ReadMe</h1>
          </a>
       </div>
-      <md-content>
-         <ul style='background: #015249;' layout='column'>
-            <li class='sideMenuOptions' ui-sref='home.entries' ui-sref-active='active'>Daily Entries</li>
-            <li class='sideMenuOptions' ui-sref='home.journal' ui-sref-active='active'>Daily Journal</li>
-            <li class='sideMenuOptions' ui-sref='home.insights' ui-sref-active='active'>Your Insights</li>
-         </ul>
-      </md-content>
+      
+        <button class='sideMenuOptions md-button' ui-sref='home.entries' ui-sref-active='active'>Daily Entries</button>
+        <button class='sideMenuOptions md-button' ui-sref='home.journal' ui-sref-active='active'>Daily Journal</button>  
+        <button class='sideMenuOptions md-button' ui-sref='home.insights' ui-sref-active='active'>Your Insights</button>
+       
+      
    </md-sidenav>
-
+</div>
 
    <md-content tabindex="-1" role='main' class='layout-column flex'>
       <md-toolbar class='site-content-toolbar _md' layout='row'>
@@ -26,7 +27,7 @@
                 <img style='max-width: 15px;' src="http://www.getkumbu.com/wp-content/themes/kumbu-blog-theme/assets/img/mobile-menu.svg">
           </md-button>
          <div class="md-toolbar-tools">
-            <span>Active Page</span>
+            <span>Current Page</span>
             <!-- fill up the space between left and right area -->
             <span flex></span>
             <md-button>
@@ -37,12 +38,11 @@
             </md-button>
          </div>
       </md-toolbar>
+            <div class='template-view' ui-view>
+            </div>
       </md-content>
    </md-content>
-   <md-content>
-    <div ui-view>
-    </div>
-   </md-content>
+
 </div>
 
 

@@ -5,7 +5,7 @@
   ]).controller('HomeController', HomeController).factory('homeFactory',
     homeFactory);
 
-  function HomeController ($mdSidenav) {
+  function HomeController ($scope, $mdSidenav, $location) {
     // jshint validthis: true
     var home = this;
 
