@@ -8,7 +8,7 @@
     <form ng-submit="insights.submitSelection(insights.searchText)" name="insights.correlForm">
       <md-autocomplete
                 md-selected-item="insights.selectedItem"
-                md-search-text="insights.searchText" 
+                md-search-text="insights.searchText"
                 md-items="item in insights.userMetrics | filter: insights.searchText"
                 md-item-text="item"
                 md-min-length="1"
@@ -24,5 +24,11 @@
           </ul>
         </div>
   </md-content>
+          <bubble-chart chart-data="40,100,80,15,25,60,10" ></bubble-chart>
+
+        </div>
+    </div>
+    </div>
+   </div>
 </div>
 
