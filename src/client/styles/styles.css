@@ -136,6 +136,17 @@ a,a:hover {
     text-decoration: none;
 }
 
+.switch {
+}
+
+.repeated-datums {
+    background-color: #d6d3c4;
+    text-align: center;
+    padding: 5px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26);
+    margin: 2%;
+}
+
 body {
     color: #2f2d2d;
     background-color: #dfded4

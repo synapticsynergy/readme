@@ -4,10 +4,10 @@
     
   <div ng-show='home.userDate'>
 
-    <span flex>{{entries.activeField}}</span>
+    
 
-      <md-switch class="md-primary" md-no-ink aria-label="Switch No Ink" ng-change="entries.changeField()" ng-model="data.cb5">
-      Switch Me
+      <md-switch class="md-primary switch" md-no-ink aria-label="Switch No Ink" ng-change="entries.changeField()" ng-model="data.cb5">
+      <h4 flex>{{entries.activeField}}</h4>
       </md-switch>
     <div class="container-fluid">
     <div class="row">
@@ -30,14 +30,11 @@
     </form>
   </md-content>
 
-  <div>
-    <h4>Today's Activities</h4>
-    <ul>
-      <li ng-repeat="item in entries.daysActivities track by $index">
-        {{item}}
-        <span ng-click="entries.removeItem($index, 'activity')">x</span>
-      </li>
-    </ul>
+  <div layout='row' layout-wrap>
+      <div flex='25' class='repeated-datums' ng-repeat="item in entries.daysActivities track by $index" ng-click="entries.removeItem($index, 'activity')">
+        {{item}}     
+      </div>
+    </div>
 
     <md-button class="md-raised" ng-click="entries.postData('activity')"> Submit Activities </md-button> 
   </div>
@@ -46,7 +43,6 @@
             <!-- Metrics-->
       <form ng-submit="entries.addItem(entries.searchTextMet, 'metrics')" name="entries.metricForm">
       <md-autocomplete
-                
                 md-selected-item="entries.selectedItemMet"
                 md-search-text="entries.searchTextMet" 
                 ng-disabled="entries.autoCompleteDisabled"
@@ -62,13 +58,11 @@
   </md-content>
 
   <div>
-    <h4>Today's Metrics</h4>
-    <ul>
-      <li ng-repeat="item in entries.daysMetrics track by $index">
-        {{item}}
-        <span ng-click="entries.removeItem($index, 'metric')">x</span>
-      </li>
-    </ul>
+      <div layout='row' layout-wrap>
+      <div flex='25' class='repeated-datums' ng-repeat="item in entries.daysMetrics track by $index" ng-click="entries.removeItem($index, 'metric')">
+        {{item}}     
+      </div>
+    </div>
 
     <md-button class="md-raised" ng-click="entries.postData('metric')"> Submit Metrics </md-button> 
   </div>
