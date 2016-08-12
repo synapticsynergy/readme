@@ -93,6 +93,13 @@ User.prototype.findCorrelations = function (metric) {
   });
 };
 
+User.prototype.driftSearch = function (metric, maxDays) {
+  var user = this;
+  return new Promise(function (resolve) {
+    resolve(ml.driftSearch(user, metric, maxDays));
+  });
+};
+
 User.prototype.getDay = function (date) {
   for (var x = 0; x < this.days.length; x++) {
     var day = this.days[x];
