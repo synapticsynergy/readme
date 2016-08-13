@@ -20,7 +20,7 @@
             email: profile.email,
             datums: selection
           }
-        }).then(function success(resp){          
+        }).then(function success(resp){
           console.table(resp.data);
           return resp.data;
         }, function error(resp){
