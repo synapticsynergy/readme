@@ -8,10 +8,10 @@
   function Home($http, store, $mdSidenav) {
 
     var services = {
-      getUserData: getUserData,
-      getDay: getDay,
       date: date,
-      dateSetter: dateSetter
+      dateSetter: dateSetter,
+      getDay: getDay,
+      getUserData: getUserData
     };
     return services;
 

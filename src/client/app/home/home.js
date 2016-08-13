@@ -8,12 +8,7 @@
   function HomeController($scope, $mdSidenav, $window, $location, Home, Auth) {
     // jshint validthis: true
     var home = this;
-
-    //Opens and closes the sidenav menu
-    home.openLeftMenu = function() {
-      $mdSidenav('left')
-        .toggle();
-    }
+    
     //Sets the date in the Home factory
     home.dateSetter = function(value) {
       Home.dateSetter(value);
@@ -21,5 +16,11 @@
 
     //Logout functionality
     home.logout = Auth.logout;
+
+    //Opens and closes the sidenav menu
+    home.openLeftMenu = function() {
+      $mdSidenav('left')
+        .toggle();
+    }
   }
 })();

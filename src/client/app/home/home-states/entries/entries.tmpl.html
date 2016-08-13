@@ -1,81 +1,63 @@
 <div class='container'>
-
   <md-content>
-    
-  <div class='col-lg-6 main-container'>
-
+    <div class='col-lg-6 main-container'>
       <md-switch class="md-primary switch" md-no-ink aria-label="Switch No Ink" ng-change="entries.changeField()" ng-model="data.cb5">
-        <h4 flex>{{entries.activeField}}</h4>
+      <h4 flex>{{entries.activeField}}</h4>
       </md-switch>
-
-    <div class="container-fluid">
-    <div class="row">
-        <div class="datum-input-area" ng-show='entries.showActivities'>
-        
+      <div class="container-fluid">
+        <div class="row">
+          <div class="datum-input-area" ng-show='entries.showActivities'>
+            
             <!-- Activities-->
-    <form ng-submit="entries.addItem(entries.searchTextAct, 'activity')" name="entries.activityForm">
-      <md-autocomplete
-                
-                md-selected-item="entries.selectedItemAct"
-                md-search-text="entries.searchTextAct" 
-                ng-disabled="entries.autoCompleteDisabled"
-                md-items="item in entries.userActivities | filter: entries.searchTextAct"
-                md-item-text="item"
-                md-min-length="1"
-                placeholder="Enter an activity">
-          <md-item-template>
-            <span md-highlight-text="entries.searchTextAct" md-highlight-flags="^i">{{item}}</span>
-          </md-item-template>
-      </md-autocomplete>
-    </form>
-  </md-content>
+            <form ng-submit="entries.addItem(entries.searchTextAct, 'activity')" name="entries.activityForm">
+              <md-autocomplete
+              
+              md-selected-item="entries.selectedItemAct"
+              md-search-text="entries.searchTextAct"
+              ng-disabled="entries.autoCompleteDisabled"
+              md-items="item in entries.userActivities | filter: entries.searchTextAct"
+              md-item-text="item"
+              md-min-length="1"
+              placeholder="Enter an activity">
+              <md-item-template>
+              <span md-highlight-text="entries.searchTextAct" md-highlight-flags="^i">{{item}}</span>
+              </md-item-template>
+              </md-autocomplete>
+            </form>
 
-  <div layout='row' layout-wrap>
-      <div flex='25' class='repeated-datums' ng-repeat="item in entries.daysActivities track by $index" ng-click="entries.removeItem($index, 'activity')">
-        {{item}}     
-      </div>
-    </div>
-
-    <md-button class="md-raised submit-button" ng-click="entries.postData('activity')"> Submit Activities </md-button> 
-  </div>
+            <div layout='row' layout-wrap>
+              <div flex='25' class='repeated-datums' ng-repeat="item in entries.daysActivities track by $index" ng-click="entries.removeItem($index, 'activity')">
+                {{item}}
+              </div>
+            </div>
+            <md-button class="md-raised submit-button" ng-click="entries.postData('activity')"> Submit Activities </md-button>
+          </div>
         </div>
         <div class="datum-input-area" ng-hide='entries.showActivities'>
-            <!-- Metrics-->
-      <form ng-submit="entries.addItem(entries.searchTextMet, 'metrics')" name="entries.metricForm">
-      <md-autocomplete
-                md-selected-item="entries.selectedItemMet"
-                md-search-text="entries.searchTextMet" 
-                ng-disabled="entries.autoCompleteDisabled"
-                md-items="metric in entries.userMetrics | filter: entries.searchTextMet"
-                md-item-text="metric"
-                md-min-length="1"
-                placeholder="Enter a metric">
-          <md-item-template>
+
+          <!-- Metrics-->
+          <form ng-submit="entries.addItem(entries.searchTextMet, 'metrics')" name="entries.metricForm">
+            <md-autocomplete
+            md-selected-item="entries.selectedItemMet"
+            md-search-text="entries.searchTextMet"
+            ng-disabled="entries.autoCompleteDisabled"
+            md-items="metric in entries.userMetrics | filter: entries.searchTextMet"
+            md-item-text="metric"
+            md-min-length="1"
+            placeholder="Enter a metric">
+            <md-item-template>
             <span md-highlight-text="entries.searchTextMet" md-highlight-flags="^i">{{metric}}</span>
-          </md-item-template>
-      </md-autocomplete>
-    </form>
+            </md-item-template>
+            </md-autocomplete>
+          </form>
   </md-content>
 
-  <div>
-      <div layout='row' layout-wrap>
-      <div flex='25' class='repeated-datums' ng-repeat="item in entries.daysMetrics track by $index" ng-click="entries.removeItem($index, 'metric')">
-        {{item}}     
-      </div>
-    </div>
-
-    <md-button class="md-raised submit-button" ng-click="entries.postData('metric')"> Submit Metrics </md-button> 
-  </div>
-
-</div>
+        <div>
+          <div layout='row' layout-wrap>
+            <div flex='25' class='repeated-datums' ng-repeat="item in entries.daysMetrics track by $index" ng-click="entries.removeItem($index, 'metric')">
+              {{item}}
+            </div>
+          </div>
+          <md-button class="md-raised submit-button" ng-click="entries.postData('metric')"> Submit Metrics </md-button>
         </div>
-    </div>
-</div>
-
-
-
-  
-
-
-
-
+      </div>
