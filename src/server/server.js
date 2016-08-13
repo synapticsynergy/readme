@@ -148,6 +148,24 @@ app.route('/user/correlation')
       });
   });
 
+app.route('/user/correlation/driftsearch')
+  .post(function (req, res) {
+    var metric = req.body.datums;
+    var drift = parseInt(req.body.drift);
+
+    User.findOrCreateUser(req.body.email)
+      .then(function (user) {
+        return user.driftSearch(metric, drift);
+      })
+      .then(function (results) {
+        res.json(results);
+      })
+      .catch(function (err) {
+        console.error(err, 'Error during driftsearch');
+        res.status(500).send(err);
+      });
+  });
+
 var port = process.env.PORT || 3000;
 var databaseUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/readme';
 

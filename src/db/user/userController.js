@@ -1,5 +1,5 @@
 const User = require('./userModel');
-const findCorrelations = require('../../ml/correlations');
+const ml = require('../../ml/correlations');
 
 function findOrCreateUser (email, firstname, lastname) {
   // use just the email to find them in case this is
@@ -89,7 +89,14 @@ User.prototype.saveJournal = function (journal, day) {
 User.prototype.findCorrelations = function (metric) {
   var user = this;
   return new Promise(function (resolve) {
-    resolve(findCorrelations(user, metric));
+    resolve(ml.findCorrelations(user, metric));
+  });
+};
+
+User.prototype.driftSearch = function (metric, maxDays) {
+  var user = this;
+  return new Promise(function (resolve) {
+    resolve(ml.driftSearch(user, metric, maxDays));
   });
 };
 
