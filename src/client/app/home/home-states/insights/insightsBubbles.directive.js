@@ -35,7 +35,7 @@ angular.module('app.home.insights').
 
 
         var width = 1000;
-        var height = 1000;
+        var height = 800;
 
         //create svg container.
         var svg = svgContainer.append("svg").attr('width', width).attr('height', height);
@@ -115,12 +115,6 @@ angular.module('app.home.insights').
           };
         }
 
-
-        //semi works
-        //   .enter().append('circle')
-        //   .attr('class', 'node')
-        //   .attr('r', width * 0.03)//radius of circle
-        //   .attr('stroke','grey')
 
         function tick(e) {
 
