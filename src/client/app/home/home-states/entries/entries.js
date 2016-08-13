@@ -6,6 +6,7 @@
   EntriesController.$inject = ['$http', 'Home', 'store'];
 
   function EntriesController($http, Home, store) {
+    // jshint validthis: true
     var entries = this;
 
     entries.activeField = "Activities";

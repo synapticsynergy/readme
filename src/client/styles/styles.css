@@ -18,12 +18,12 @@
 }
 
 .image-bg-fluid-height {
-  background: url('../static/ocean.jpeg') no-repeat center center scroll;
+  background: url('../images/static/ocean.jpeg') no-repeat center center scroll;
     padding: 100px 0;
 }
 
 .image-bg-fixed-height {
-  background: url('../static/food.jpeg') no-repeat center center scroll;
+  background: url('../images/static/food.jpeg') no-repeat center center scroll;
     height: 450px;
 }
 
@@ -114,7 +114,6 @@ footer {
     border-bottom: 1px solid #ddd;
     position: fixed;
     bottom: 0;
-
 }
 
 .template-view {
@@ -205,4 +204,3 @@ body {
         font-size: 2em;
     }
 }
-

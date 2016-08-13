@@ -1,8 +1,9 @@
 (function () {
   'use strict';
   angular.module('app.home.journal', [])
-  .controller('JournalController', JournalController)
-  .factory('Journal', Journal);
+  .controller('JournalController', JournalController);
+
+  JournalController.$inject = ['$scope', 'Journal', 'Home'];
 
   function JournalController ($scope, Journal, Home) {
     // jshint validthis: true
@@ -37,27 +38,5 @@
     //   day = day.toString();
     //   Journal.saveJournal(journal.dailyMemo, day);
     // };
-  }
-
-  function Journal ($http, store, Home) {
-    var services = {};
-
-    services.saveJournal = function () {
-      var profile = store.get('userData');
-      var currentlySelectedDate = Home.date;
-      return $http({
-        method: 'POST',
-        url: '/user/journal',
-        data: {
-          entry: this.entry,
-          email: profile.email,
-          date: currentlySelectedDate
-        }
-      }).then(function(data){
-        console.log(data);
-      });
-    };
-
-    return services;
   }
 })();
