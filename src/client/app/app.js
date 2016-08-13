@@ -75,6 +75,12 @@
       controller: 'JournalController',
       controllerAs: 'journal'
         // data: { requiresLogin: true }
+    }).state('home.about', {
+      url: '/about',
+      templateUrl: 'app/home/home-states/about/about.tmpl.html',
+      controller: 'AboutController',
+      controllerAs: 'about'
+        // data: { requiresLogin: true }
     }).state('home.insights', {
       url: '/insights',
       templateUrl: 'app/home/home-states/insights/insights.tmpl.html',
@@ -109,4 +115,5 @@
       });
     }
   ]);
+
 })();

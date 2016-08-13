@@ -114,12 +114,13 @@ footer {
     border-bottom: 1px solid #ddd;
     position: fixed;
     bottom: 0;
+
 }
 
 .template-view {
     width: 50%;
     height: 50%;
-    margin: 10% auto;
+    margin: 5% auto;
 }
 
 .site-content-toolbar {
@@ -136,7 +137,13 @@ a,a:hover {
     text-decoration: none;
 }
 
+.datum-input-area {
+    text-align: center;
+}
+
 .switch {
+    display: inline-block;
+    margin-bottom: 10px;
 }
 
 .repeated-datums {
@@ -156,6 +163,25 @@ a,a:hover {
 .form-control.myform2-height > .ta-bind {
     min-height: 300px;
     padding: 6px 12px;
+}
+
+.profile-pics {
+    width: 25%;
+    height: 25%;
+    border-radius: 25px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26); 
+}
+
+.main-container {
+    text-align: center;
+}
+
+.submit-button {
+    margin-top: 25px;
+}
+
+#last-menu-item {
+    border-bottom: 1px solid #ddd;
 }
 
 body {
@@ -179,3 +205,4 @@ body {
         font-size: 2em;
     }
 }
+

@@ -5,7 +5,7 @@
   ]).controller('HomeController', HomeController).factory('homeFactory',
     homeFactory);
 
-  function HomeController ($scope, $mdSidenav, $window, $location, homeFactory) {
+  function HomeController ($scope, $mdSidenav, $window, $location, homeFactory, Auth) {
     // jshint validthis: true
     var home = this;
 
@@ -17,6 +17,8 @@
     home.dateLogger = function(value){
       homeFactory.dateLogger(value);
     }
+
+    home.logout = Auth.logout;
 
   }
 

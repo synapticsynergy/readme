@@ -15,7 +15,7 @@
         <div>
             <div class='side-menu-options' ui-sref='home.entries' ui-sref-active='active'>Daily Entries</div>
             <div class='side-menu-options' ui-sref='home.journal' ui-sref-active='active'>Daily Journal</div>  
-            <div class='side-menu-options' ui-sref='home.insights' ui-sref-active='active'>Your Insights</div>
+            <div class='side-menu-options' id='last-menu-item' ui-sref='home.insights' ui-sref-active='active'>Your Insights</div>
         </div>
    </md-sidenav>
 </div>
@@ -29,10 +29,10 @@
             <span>Current Page</span>
             <!-- fill up the space between left and right area -->
             <span flex></span>
-            <md-button class='top-nav'>
+            <md-button class='top-nav' ui-sref='home.about' ui-sref-active='active'>
                About
             </md-button>
-            <md-button class='top-nav' ng-click="logout()">
+            <md-button class='top-nav' ng-click="home.logout()">
                Log Out
             </md-button>
          </div>
@@ -52,7 +52,7 @@
 </div>
     <div class='footer-bar'>
         <div layout='row' layout-align='center-center' >
-            ©2016 Team SantaMonicaBoulevard
+            <div style="padding: 10px;">© 2016</div><a ui-sref='home.about' ui-sref-active='active'>Team SantaMonicaBoulevard</a>
         </div>
     </div>
 </div>

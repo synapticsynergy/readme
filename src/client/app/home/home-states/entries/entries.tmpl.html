@@ -2,16 +2,16 @@
 
   <md-content>
     
-  <div ng-show='home.userDate'>
-
-    
+  <div ng-show='home.userDate' class='col-lg-6 main-container'>
 
       <md-switch class="md-primary switch" md-no-ink aria-label="Switch No Ink" ng-change="entries.changeField()" ng-model="data.cb5">
-      <h4 flex>{{entries.activeField}}</h4>
+        <h4 flex>{{entries.activeField}}</h4>
       </md-switch>
+
     <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-6" ng-show='entries.showActivities'>
+        <div class="datum-input-area" ng-show='entries.showActivities'>
+        
             <!-- Activities-->
     <form ng-submit="entries.addItem(entries.searchTextAct, 'activity')" name="entries.activityForm">
       <md-autocomplete
@@ -36,10 +36,10 @@
       </div>
     </div>
 
-    <md-button class="md-raised" ng-click="entries.postData('activity')"> Submit Activities </md-button> 
+    <md-button class="md-raised submit-button" ng-click="entries.postData('activity')"> Submit Activities </md-button> 
   </div>
         </div>
-        <div class="col-lg-6" ng-hide='entries.showActivities'>
+        <div class="datum-input-area" ng-hide='entries.showActivities'>
             <!-- Metrics-->
       <form ng-submit="entries.addItem(entries.searchTextMet, 'metrics')" name="entries.metricForm">
       <md-autocomplete
@@ -64,7 +64,7 @@
       </div>
     </div>
 
-    <md-button class="md-raised" ng-click="entries.postData('metric')"> Submit Metrics </md-button> 
+    <md-button class="md-raised submit-button" ng-click="entries.postData('metric')"> Submit Metrics </md-button> 
   </div>
 
 </div>
