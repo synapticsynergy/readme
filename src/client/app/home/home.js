@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module('app.home', ['app.home.entries', 'app.home.insights', 'app.home.journal'])
-    .controller('HomeController', HomeController);
+  .controller('HomeController', HomeController);
 
   HomeController.$inject = ['$scope', '$mdSidenav', '$window', '$location', 'Home', 'Auth'];
 

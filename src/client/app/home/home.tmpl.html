@@ -1,60 +1,54 @@
 <div id="sideNavContainer" ng-cloak class='navBar'>
-<div layout='vertical'>
-   <md-sidenav 
-        md-component-id="left" 
-        hide-print class="md-sidenav-left" 
-        md-is-locked-open="$mdMedia('gt-sm')" 
-        md-is-open='isSideNavOpen' tabindex="-1"
-        >
+  <div layout='vertical'>
+    <md-sidenav md-component-id="left" hide-print class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-sm')" md-is-open='isSideNavOpen' tabindex="-1">
       <div>
-         <a ng-href="/" class='readme-logo' href='/'>
-            <img style='max-width: 150px;' src="https://s9.postimg.org/wampcpx5b/readme_logo.png">
-            <h1 class="readme-h1">ReadMe</h1>
-         </a>
+        <a ng-href="/" class='readme-logo' href='/'>
+          <img style='max-width: 150px;' src="https://s9.postimg.org/wampcpx5b/readme_logo.png">
+          <h1 class="readme-h1">ReadMe</h1>
+        </a>
       </div>
-        <div>
-            <div class='side-menu-options' ui-sref='home.entries' ui-sref-active='active'>Daily Entries</div>
-            <div class='side-menu-options' ui-sref='home.journal' ui-sref-active='active'>Daily Journal</div>  
-            <div class='side-menu-options' id='last-menu-item' ui-sref='home.insights' ui-sref-active='active'>Your Insights</div>
-        </div>
-   </md-sidenav>
-</div>
+      <div>
+        <div class='side-menu-options' ui-sref='home.entries' ui-sref-active='active'>Daily Entries</div>
+        <div class='side-menu-options' ui-sref='home.journal' ui-sref-active='active'>Daily Journal</div>
+        <div class='side-menu-options' id='last-menu-item' ui-sref='home.insights' ui-sref-active='active'>Your Insights</div>
+      </div>
+    </md-sidenav>
+  </div>
 
-   <md-content tabindex="-1" role='main' class='layout-column flex'>
-      <md-toolbar class='site-content-toolbar _md' layout='row'>
-          <md-button class='menuButton' ng-click="home.openLeftMenu()">
-                <img style='max-width: 20px;' src="http://www.getkumbu.com/wp-content/themes/kumbu-blog-theme/assets/img/mobile-menu.svg">
-          </md-button>
-         <div class="md-toolbar-tools">
-            <span>Current Page</span>
-            <!-- fill up the space between left and right area -->
-            <span flex></span>
-            <md-button class='top-nav' ui-sref='home.about' ui-sref-active='active'>
-               About
-            </md-button>
-            <md-button class='top-nav' ng-click="home.logout()">
-               Log Out
-            </md-button>
-         </div>
-      </md-toolbar>
-            <div layout='row' layout-xs='column'>
-                <div class='date-picker' flex='30'>Enter data for: 
-                    <md-datepicker ng-model="userDate" ng-change='home.dateSetter(userDate)' md-placeholder="Enter date"></md-datepicker>
-                </div>
-                
-            </div>
-            <div layout='column' layout-md='column' class='template-view'>
-            
-                <div ui-view></div>
-            </div>
-   </md-content>
+  <md-content tabindex="-1" role='main' class='layout-column flex'>
+    <md-toolbar class='site-content-toolbar _md' layout='row'>
+      <md-button class='menuButton' ng-click="home.openLeftMenu()">
+        <img style='max-width: 20px;' src="http://www.getkumbu.com/wp-content/themes/kumbu-blog-theme/assets/img/mobile-menu.svg">
+      </md-button>
+      <div class="md-toolbar-tools">
+        <span>Current Page</span>
+        <!-- fill up the space between left and right area -->
+        <span flex></span>
+        <md-button class='top-nav' ui-sref='home.about' ui-sref-active='active'>
+          About
+        </md-button>
+        <md-button class='top-nav' ng-click="home.logout()">
+          Log Out
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div layout='row' layout-xs='column'>
+      <div class='date-picker' flex='30'>Enter data for:
+        <md-datepicker ng-model="userDate" ng-change='home.dateSetter(userDate)' md-placeholder="Enter date"></md-datepicker>
+      </div>
 
-</div>
-    <div class='footer-bar'>
-        <div layout='row' layout-align='center-center' >
-            <div style="padding: 10px;">© 2016</div><a ui-sref='home.about' ui-sref-active='active'>Team SantaMonicaBoulevard</a>
-        </div>
     </div>
+    <div layout='column' layout-md='column' class='template-view'>
+
+      <div ui-view></div>
+    </div>
+  </md-content>
+
+</div>
+<div class='footer-bar'>
+  <div layout='row' layout-align='center-center'>
+    <div style="padding: 10px;">© 2016</div><a ui-sref='home.about' ui-sref-active='active'>Team SantaMonicaBoulevard</a>
+  </div>
 </div>
 
 

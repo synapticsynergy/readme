@@ -1,11 +1,11 @@
-(function () {
+(function() {
   'use strict';
   angular.module('app.home')
-    .factory('Home', Home)
+    .factory('Home', Home);
 
-    Home.$inject = ['$http', 'store', '$mdSidenav'];
+  Home.$inject = ['$http', 'store', '$mdSidenav'];
 
-  function Home ($http, store, $mdSidenav) {
+  function Home($http, store, $mdSidenav) {
 
     var services = {
       getUserData: getUserData,
@@ -18,16 +18,17 @@
     function getUserData() {
       var profile = store.get('profile');
       return $http({
-        method: 'POST',
-        url: '/user',
-        data: {
-          email: profile.email,
-          firstname: profile.given_name,
-          lastname: profile.family_name
-        }
-      }).then(function (returnedData) {
-        store.set('userData', returnedData.data);
-      });
+          method: 'POST',
+          url: '/user',
+          data: {
+            email: profile.email,
+            firstname: profile.given_name,
+            lastname: profile.family_name
+          }
+        })
+        .then(function(returnedData) {
+          store.set('userData', returnedData.data);
+        });
     };
 
     function getDay(date) {
@@ -42,9 +43,8 @@
 
     var date = {};
 
-     function dateSetter(value) {
+    function dateSetter(value) {
       services.date = value;
-      console.log(services.date)
     }
     
   }
