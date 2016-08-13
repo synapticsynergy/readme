@@ -53,7 +53,6 @@
       var datums = type === 'activity' ? entries.daysActivities : entries.daysMetrics;
       var profile = store.get('userData');
       var currentlySelectedDate = homeFactory.date;
-      console.log('This is your date', currentlySelectedDate);
 
       $http({
         method: "POST",

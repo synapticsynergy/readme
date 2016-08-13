@@ -148,7 +148,6 @@ a,a:hover {
 }
 
 .ta-editor.form-control.myform2-height, .ta-scroll-window.form-control.myform2-height  {
-    height: 300px;
     min-height: 300px;
     overflow: auto;
     font-family: inherit;
