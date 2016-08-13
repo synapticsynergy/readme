@@ -24,7 +24,7 @@ angular.module('app.home.insights').
         data = data.map(function(obj) {
           var result = {};
           result.label = Object.keys(obj)[0];
-          result.r = obj[result.label] * 100 + 1;
+          result.r = obj[result.label] * 100;
           return result;
         });
         console.log(data[0],'d3');
@@ -48,7 +48,8 @@ angular.module('app.home.insights').
         var nodes = d3.values(data);
 
         // layout for gravitational effect.
-        var force = d3.layout.force() //build the layout
+        var force = d3.layout.force()
+          .charge(-1200) //build the layout
           .size([width, height]) //specified earlier
           .nodes(nodes) //add nodes
           .on("tick", tick) //what to do
@@ -66,16 +67,14 @@ angular.module('app.home.insights').
         /*Create the circle for each block */
         var circle = elemEnter.append("circle")
           .attr('class', 'node')
-          .attr("r", function(d){return d.r} )
-          .attr("stroke","black")
-          .attr("fill", "white");
+          .attr("r", function(d){return d.r > 0 ? d.r / 2 : 20} )
+          .attr("stroke","grey")
+          .attr("fill", "lightblue");
 
         /* Create the text for each block */
         elemEnter.append("text")
-          .attr("dr", function(d){return -20})
-          .text(function(d){return d.label});
-
-
+          .attr("dr", function(d){return -10})
+          .text(function(d){return d.label + " | " + d.r + "%" + " | "});
 
 
         force.on("tick", function(e) {
@@ -98,11 +97,12 @@ angular.module('app.home.insights').
               ny1 = node.y - r,
               ny2 = node.y + r;
           return function(quad, x1, y1, x2, y2) {
+            console.log(quad.point);
             if (quad.point && (quad.point !== node)) {
               var x = node.x - quad.point.x,
                   y = node.y - quad.point.y,
                   l = Math.sqrt(x * x + y * y),
-                  r = node.radius + quad.point.radius;
+                  r = node.r + quad.point.radius;
               if (l < r) {
                 l = (l - r) / l * .5;
                 node.x -= x *= l;
@@ -120,7 +120,6 @@ angular.module('app.home.insights').
         //   .enter().append('circle')
         //   .attr('class', 'node')
         //   .attr('r', width * 0.03)//radius of circle
-        //   .style('fill','lightblue')
         //   .attr('stroke','grey')
 
         function tick(e) {
