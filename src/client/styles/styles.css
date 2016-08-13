@@ -57,6 +57,144 @@ footer {
     margin: 50px 0;
 }
 
+.readme-logo {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0px 16px 0px;
+    color: #ffffff;
+}
+
+.templateView {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.navBar {
+    display: flex;
+}
+
+.md-toolbar-tools {
+    color: #2f2d2d;
+}
+
+.md-sidenav-left {
+    width: 250px;
+    background: #432f21 !important;
+    margin: 0 auto;
+    height: 100vh;
+    box-shadow: rgb(136, 136, 136) 5px 0px 10px;
+}
+
+.side-menu-options {
+    color: #DFDED4 !important;
+    padding: 15px;
+    text-align: center;
+    display: block;
+    border-top: 1px solid #ddd;
+    width: 100%;
+    font-size: medium;
+}
+
+.sideMenuOptions.active {
+    background-color: #68584d !important;
+} 
+
+.date-picker {
+    margin: 5% auto auto 5%;
+}
+
+.footer-bar {
+    font-size: small;
+    padding: 16px 32px;
+    width: 100%;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    bottom: 0;
+
+}
+
+.template-view {
+    width: 50%;
+    height: 50%;
+    margin: 5% auto;
+}
+
+.site-content-toolbar {
+  box-shadow: 10px 0px 5px;
+  background: #f6f6f6 !important;
+  color: #2f2d2d !important;
+  z-index: 3;
+}
+
+.top-nav {
+    color: #2f2d2d !important;
+}
+a,a:hover {
+    text-decoration: none;
+}
+
+.datum-input-area {
+    text-align: center;
+}
+
+.switch {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.repeated-datums {
+    background-color: #d6d3c4;
+    text-align: center;
+    padding: 5px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26);
+    margin: 2%;
+}
+
+.ta-editor.form-control.myform2-height, .ta-scroll-window.form-control.myform2-height  {
+    min-height: 300px;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+}
+.form-control.myform2-height > .ta-bind {
+    min-height: 300px;
+    padding: 6px 12px;
+}
+
+.profile-pics {
+    width: 25%;
+    height: 25%;
+    border-radius: 25px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26); 
+}
+
+.main-container {
+    text-align: center;
+}
+
+.submit-button {
+    margin-top: 25px;
+}
+
+#last-menu-item {
+    border-bottom: 1px solid #ddd;
+}
+
+body {
+    color: #2f2d2d;
+    background-color: #dfded4
+}
+
+@media only screen and (min-width:950px) { 
+    .menuButton {
+        display: none;
+    }
+}
+
 @media(max-width:768px) {
     section {
         padding-top: 25px;
@@ -67,3 +205,4 @@ footer {
         font-size: 2em;
     }
 }
+

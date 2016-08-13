@@ -17,9 +17,10 @@
   "dependencies": {
     "angular-route": "^1.5.8",
     "angular": "^1.5.8",
-    "angular-ui-router": "^0.3.1",
+    "angular-ui-router": "ui-router#^0.3.1",
     "bootstrap": "^3.3.7",
     "textAngular": "^1.5.3",
-    "angular-material": "^1.0.9"
+    "angular-material": "^1.0.9",
+    "angular-sanitize": "^1.5.8"
   }
 }

@@ -1,18 +1,27 @@
 (function () {
   'use strict';
   angular.module('app.landing', []).controller('LandingController',
-    LandingController);
+    LandingController).factory('Auth', Auth);
 
   function LandingController ($location, auth) {
     // jshint validthis: true
     var landing = this;
     landing.auth = auth;
+  }
 
-    landing.logout = function () {
+  function Auth (auth, $location) {
+    var services = {};
+
+    services.logout = function () {
       auth.signout();
       window.localStorage.removeItem('profile');
       window.localStorage.removeItem('token');
-      $location.path('/landing.tmpl.html');
+      console.log("Log out successful")
+      $location.path('#');
     };
+
+    return services;
   }
+
+
 })();

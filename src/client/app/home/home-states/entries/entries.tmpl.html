@@ -1,20 +1,21 @@
 <div class='container'>
-  Welcome to your entries 
-  
-  <p>Pick a date to add activities to:</p>
 
   <md-content>
-    <md-datepicker ng-model="entries.userDate" ng-change ='entries.changeAutoComplete()' md-placeholder="Enter date"></md-datepicker>
     
-    <div ng-show='entries.userDate'>Choose the activities you did on {{entries.userDate | date: "EEEE, MMMM d"}}
+  <div ng-show='home.userDate' class='col-lg-6 main-container'>
+
+      <md-switch class="md-primary switch" md-no-ink aria-label="Switch No Ink" ng-change="entries.changeField()" ng-model="data.cb5">
+        <h4 flex>{{entries.activeField}}</h4>
+      </md-switch>
 
     <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="datum-input-area" ng-show='entries.showActivities'>
+        
             <!-- Activities-->
     <form ng-submit="entries.addItem(entries.searchTextAct, 'activity')" name="entries.activityForm">
       <md-autocomplete
-                ng-show='entries.userDate'
+                
                 md-selected-item="entries.selectedItemAct"
                 md-search-text="entries.searchTextAct" 
                 ng-disabled="entries.autoCompleteDisabled"
@@ -29,23 +30,19 @@
     </form>
   </md-content>
 
-  <div>
-    <h4>Today's Activities</h4>
-    <ul>
-      <li ng-repeat="item in entries.daysActivities track by $index">
-        {{item}}
-        <span ng-click="entries.removeItem($index, 'activity')">x</span>
-      </li>
-    </ul>
+  <div layout='row' layout-wrap>
+      <div flex='25' class='repeated-datums' ng-repeat="item in entries.daysActivities track by $index" ng-click="entries.removeItem($index, 'activity')">
+        {{item}}     
+      </div>
+    </div>
 
-    <md-button class="md-raised" ng-click="entries.postData('activity')"> Submit Activities </md-button> 
+    <md-button class="md-raised submit-button" ng-click="entries.postData('activity')"> Submit Activities </md-button> 
   </div>
         </div>
-        <div class="col-lg-6">
+        <div class="datum-input-area" ng-hide='entries.showActivities'>
             <!-- Metrics-->
       <form ng-submit="entries.addItem(entries.searchTextMet, 'metrics')" name="entries.metricForm">
       <md-autocomplete
-                ng-show='entries.userDate'
                 md-selected-item="entries.selectedItemMet"
                 md-search-text="entries.searchTextMet" 
                 ng-disabled="entries.autoCompleteDisabled"
@@ -61,15 +58,13 @@
   </md-content>
 
   <div>
-    <h4>Today's Metrics</h4>
-    <ul>
-      <li ng-repeat="item in entries.daysMetrics track by $index">
-        {{item}}
-        <span ng-click="entries.removeItem($index, 'metric')">x</span>
-      </li>
-    </ul>
+      <div layout='row' layout-wrap>
+      <div flex='25' class='repeated-datums' ng-repeat="item in entries.daysMetrics track by $index" ng-click="entries.removeItem($index, 'metric')">
+        {{item}}     
+      </div>
+    </div>
 
-    <md-button class="md-raised" ng-click="entries.postData('metric')"> Submit Metrics </md-button> 
+    <md-button class="md-raised submit-button" ng-click="entries.postData('metric')"> Submit Metrics </md-button> 
   </div>
 
 </div>

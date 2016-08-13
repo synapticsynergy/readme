@@ -5,13 +5,30 @@
   ]).controller('HomeController', HomeController).factory('homeFactory',
     homeFactory);
 
-  function HomeController () {
+  function HomeController ($scope, $mdSidenav, $window, $location, homeFactory, Auth) {
     // jshint validthis: true
     var home = this;
+
+    home.openLeftMenu = function(){
+      $mdSidenav('left').toggle();
+    }
+    home.userDate = "Not a date yet!";
+
+    home.dateLogger = function(value){
+      homeFactory.dateLogger(value);
+    }
+
+    home.logout = Auth.logout;
+
   }
 
-  function homeFactory ($http, store) {
+
+
+
+  function homeFactory ($http, store, $mdSidenav) {
+
     var services = {};
+
     services.getUserData = function () {
       var profile = store.get('profile');
       return $http({
@@ -36,6 +53,16 @@
         }
       }
     };
+
+    services.date = {};
+
+    services.dateLogger = function(value){
+      services.date = value;
+      console.log(services.date);
+    }
+
+
+
     return services;
   }
 })();
