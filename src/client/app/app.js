@@ -2,7 +2,7 @@
   'use strict';
 
   var app = angular.module('app', ['app.landing', 'app.home', 'ui.router',
-    'auth0', 'angular-storage', 'angular-jwt', 'ngRoute', 'ngMaterial'
+    'auth0', 'angular-storage', 'angular-jwt', 'ngRoute', 'ngMaterial', 'textAngular'
   ]);
 
   app.config(['$routeProvider', 'authProvider', '$httpProvider',

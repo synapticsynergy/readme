@@ -1,6 +1,12 @@
-<div>
+<!-- <div>
   <textarea ng-change="journal.onChange()" type="text" ng-model="journal.dailyMemo" placeholder="Write down today's thoughts..." class="description form-control"></textarea>
-</div>
+</div> -->
+
+  <div text-angular="text-angular" name="htmlcontent2" ng-model="journal.ta.htmlcontent2" 
+        ta-text-editor-class="form-control myform2-height" ta-html-editor-class="form-control myform2-height">
+  </div>
+  <p>End</p>
+
 <div class="form-group">
   <div class="col-sm-5 col-sm-offset-4-right">
     <button type="button" class="btn btn-primary">Submit</button>
