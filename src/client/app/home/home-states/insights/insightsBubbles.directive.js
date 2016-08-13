@@ -34,7 +34,7 @@ angular.module('app.home.insights').
 
 
 
-        var width = 1000;
+        var width = 600;
         var height = 800;
 
         //create svg container.
@@ -43,13 +43,11 @@ angular.module('app.home.insights').
         svg.attr("class", "svgContainer");
 
 
-        //text data
-
         var nodes = d3.values(data);
 
         // layout for gravitational effect.
-        var force = d3.layout.force()
-          .charge(-1200) //build the layout
+        var force = d3.layout.force()//build the layout
+          .charge(-1200) // node distance from eachother.
           .size([width, height]) //specified earlier
           .nodes(nodes) //add nodes
           .on("tick", tick) //what to do
@@ -77,53 +75,10 @@ angular.module('app.home.insights').
           .text(function(d){return d.label + " | " + ~~d.r + "%" + " | "});
 
 
-        force.on("tick", function(e) {
-          var q = d3.geom.quadtree(nodes),
-              i = 0,
-              n = nodes.length;
-
-          while (++i < n) q.visit(collide(nodes[i]));
-
-          svg.selectAll("g")
-              .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-              .call(force.drag)
-        });
-
-
-        function collide(node) {
-          var r = node.r + 16,
-              nx1 = node.x - r,
-              nx2 = node.x + r,
-              ny1 = node.y - r,
-              ny2 = node.y + r;
-          return function(quad, x1, y1, x2, y2) {
-            console.log(quad.point);
-            if (quad.point && (quad.point !== node)) {
-              var x = node.x - quad.point.x,
-                  y = node.y - quad.point.y,
-                  l = Math.sqrt(x * x + y * y),
-                  r = node.r + quad.point.radius;
-              if (l < r) {
-                l = (l - r) / l * .5;
-                node.x -= x *= l;
-                node.y -= y *= l;
-                quad.point.x += x;
-                quad.point.y += y;
-              }
-            }
-            return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-          };
-        }
-
-
         function tick(e) {
-
           node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
             .call(force.drag);
-
-
         }
-
 
 
 
