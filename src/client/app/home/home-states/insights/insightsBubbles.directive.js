@@ -34,8 +34,8 @@ angular.module('app.home.insights').
 
 
 
-        var width = 640;
-        var height = 480;
+        var width = 1000;
+        var height = 1000;
 
         //create svg container.
         var svg = svgContainer.append("svg").attr('width', width).attr('height', height);
@@ -74,7 +74,7 @@ angular.module('app.home.insights').
         /* Create the text for each block */
         elemEnter.append("text")
           .attr("dr", function(d){return -10})
-          .text(function(d){return d.label + " | " + d.r + "%" + " | "});
+          .text(function(d){return d.label + " | " + ~~d.r + "%" + " | "});
 
 
         force.on("tick", function(e) {
