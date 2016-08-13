@@ -4,7 +4,7 @@
   .controller('JournalController', JournalController)
   .factory('Journal', Journal);
 
-  function JournalController ($scope, Journal, homeFactory) {
+  function JournalController ($scope, Journal, Home) {
     // jshint validthis: true
     var journal = this;
 
@@ -16,7 +16,7 @@
 
 
     // journal.date = (new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())).toString();
-    // journal.day = homeFactory.getDay(journal.date);
+    // journal.day = Home.getDay(journal.date);
     // if (journal.day !== undefined) {
     //   journal.dailyMemo = journal.day.journalEntry;
     // }
@@ -39,12 +39,12 @@
     // };
   }
 
-  function Journal ($http, store, homeFactory) {
+  function Journal ($http, store, Home) {
     var services = {};
 
     services.saveJournal = function () {
       var profile = store.get('userData');
-      var currentlySelectedDate = homeFactory.date;
+      var currentlySelectedDate = Home.date;
       return $http({
         method: 'POST',
         url: '/user/journal',

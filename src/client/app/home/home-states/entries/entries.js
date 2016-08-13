@@ -3,7 +3,7 @@
   angular.module('app.home.entries', []).controller('EntriesController',
     EntriesController);
 
-  function EntriesController($http, homeFactory, store) {
+  function EntriesController($http, Home, store) {
     var entries = this;
 
     entries.activeField = "Activities";
@@ -52,7 +52,7 @@
       var url = type === 'activity' ? '/user/activity' : '/user/metric';
       var datums = type === 'activity' ? entries.daysActivities : entries.daysMetrics;
       var profile = store.get('userData');
-      var currentlySelectedDate = homeFactory.date;
+      var currentlySelectedDate = Home.date;
 
       $http({
         method: "POST",
@@ -65,7 +65,7 @@
       }).then(function success(resp) {
         console.log("Posted!", resp)
         type === 'activity' ? entries.daysActivities = [] : entries.daysMetrics = [];
-        homeFactory.getUserData();
+        Home.getUserData();
       }).catch(function(err){
         console.log('There was an error adding your datums', err)
       })

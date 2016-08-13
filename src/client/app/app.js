@@ -17,8 +17,8 @@
 
       // Called when login is successful
       authProvider.on('loginSuccess', ['$location', 'profilePromise',
-        'idToken', 'store', '$http', 'homeFactory',
-        function ($location, profilePromise, idToken, store, $http, homeFactory) {
+        'idToken', 'store', '$http', 'Home',
+        function ($location, profilePromise, idToken, store, $http, Home) {
           profilePromise
             // Sets the profile and token
             .then(function (profile) {
@@ -26,7 +26,7 @@
               store.set('token', idToken);
             }).then(function () {
               // Gets the user's data from the database and stores it on the window
-              return homeFactory.getUserData();
+              return Home.getUserData();
             });
           // Sends the user here after login
           $location.path('/home');

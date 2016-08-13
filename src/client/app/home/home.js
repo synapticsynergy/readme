@@ -2,10 +2,10 @@
   'use strict';
   angular.module('app.home', ['app.home.entries', 'app.home.insights',
     'app.home.journal'
-  ]).controller('HomeController', HomeController).factory('homeFactory',
-    homeFactory);
+  ]).controller('HomeController', HomeController).factory('Home',
+    Home);
 
-  function HomeController ($scope, $mdSidenav, $window, $location, homeFactory, Auth) {
+  function HomeController ($scope, $mdSidenav, $window, $location, Home, Auth) {
     // jshint validthis: true
     var home = this;
 
@@ -15,7 +15,7 @@
     home.userDate = "Not a date yet!";
 
     home.dateLogger = function(value){
-      homeFactory.dateLogger(value);
+      Home.dateLogger(value);
     }
 
     home.logout = Auth.logout;
@@ -25,7 +25,7 @@
 
 
 
-  function homeFactory ($http, store, $mdSidenav) {
+  function Home ($http, store, $mdSidenav) {
 
     var services = {};
 

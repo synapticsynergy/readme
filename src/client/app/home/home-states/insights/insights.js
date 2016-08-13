@@ -3,7 +3,7 @@
   angular.module('app.home.insights', []).controller('InsightsController',
     InsightsController);
 
-  function InsightsController($scope, homeFactory, $http, store) {
+  function InsightsController($scope, Home, $http, store) {
     /*jshint validthis: true */
     var insights = this;
 
