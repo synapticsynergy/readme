@@ -19,6 +19,7 @@
       Home.dateSetter(value);
     }
 
+    //Logout functionality
     home.logout = Auth.logout;
   }
 })();
