@@ -18,12 +18,12 @@
 }
 
 .image-bg-fluid-height {
-  background: url('../static/ocean.jpeg') no-repeat center center scroll;
+  background: url('../images/static/ocean.jpeg') no-repeat center center scroll;
     padding: 100px 0;
 }
 
 .image-bg-fixed-height {
-  background: url('../static/food.jpeg') no-repeat center center scroll;
+  background: url('../images/static/food.jpeg') no-repeat center center scroll;
     height: 450px;
 }
 
@@ -82,24 +82,26 @@ footer {
 
 .md-sidenav-left {
     width: 250px;
-    background: #432f21 !important;
+    background: #73c5e1 !important;
     margin: 0 auto;
     height: 100vh;
     box-shadow: rgb(136, 136, 136) 5px 0px 10px;
 }
 
 .side-menu-options {
-    color: #DFDED4 !important;
+    color: #FFFFFF !important;
     padding: 15px;
     text-align: center;
     display: block;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #FFFFFF;
     width: 100%;
     font-size: medium;
+
 }
 
-.sideMenuOptions.active {
-    background-color: #68584d !important;
+.active {
+    background-color: #247abd;
+    font-weight: bold;
 } 
 
 .date-picker {
@@ -114,7 +116,6 @@ footer {
     border-bottom: 1px solid #ddd;
     position: fixed;
     bottom: 0;
-
 }
 
 .template-view {
@@ -147,11 +148,12 @@ a,a:hover {
 }
 
 .repeated-datums {
-    background-color: #d6d3c4;
+    background-color: #eb65a0;
     text-align: center;
     padding: 5px;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26);
     margin: 2%;
+    border-radius: 2px;
 }
 
 .ta-editor.form-control.myform2-height, .ta-scroll-window.form-control.myform2-height  {
@@ -205,4 +207,3 @@ body {
         font-size: 2em;
     }
 }
-

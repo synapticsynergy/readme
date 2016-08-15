@@ -1,17 +1,29 @@
 (function() {
   'use strict';
-  angular.module('app.home.entries', []).controller('EntriesController',
-    EntriesController);
+  angular.module('app.home.entries', [])
+    .controller('EntriesController', EntriesController);
 
-  function EntriesController($http, homeFactory, store) {
+  EntriesController.$inject = ['$http', 'Home', 'store'];
+
+  function EntriesController($http, Home, store) {
+    // jshint validthis: true
     var entries = this;
 
     entries.activeField = "Activities";
 
+    entries.autoCompleteDisabled = false;
+
+    entries.daysActivities = [];
+    entries.daysMetrics = [];
+
     entries.showActivities = true;
 
-    entries.changeField = function(){
-      if(entries.activeField === "Activities"){
+    entries.userActivities = store.get('userData').userActivities;
+    entries.userMetrics = store.get('userData').userMetrics;
+
+
+    entries.changeField = function() {
+      if (entries.activeField === "Activities") {
         entries.activeField = "Metrics"
         entries.showActivities = false;
       } else {
@@ -20,16 +32,8 @@
       }
     }
 
-    entries.autoCompleteDisabled = false;
-
-    entries.daysActivities = [];
-    entries.daysMetrics = [];
-
-    entries.userActivities = store.get('userData').userActivities;
-    entries.userMetrics = store.get('userData').userMetrics;
-
     entries.addItem = function(selection, type) {
-      if (type === 'activity') {
+      if (entries.activeField === 'Activities') {
         entries.daysActivities.push(selection);
         entries.searchTextAct = null;
         entries.activityForm.$setPristine();
@@ -41,7 +45,7 @@
     }
 
     entries.removeItem = function(index, type) {
-      if (type === 'activity') {
+      if (entries.activeField === 'Activities') {
         entries.daysActivities.splice(index, 1);
       } else {
         entries.daysMetrics.splice(index, 1);
@@ -49,10 +53,10 @@
     }
 
     entries.postData = function(type) {
-      var url = type === 'activity' ? '/user/activity' : '/user/metric';
-      var datums = type === 'activity' ? entries.daysActivities : entries.daysMetrics;
+      var url = entries.activeField === 'Activities' ? '/user/activity' : '/user/metric';
+      var datums = entries.activeField === 'Activities' ? entries.daysActivities : entries.daysMetrics;
       var profile = store.get('userData');
-      var currentlySelectedDate = homeFactory.date;
+      var currentlySelectedDate = Home.date;
 
       $http({
         method: "POST",
@@ -62,14 +66,15 @@
           datums: datums,
           date: currentlySelectedDate
         }
-      }).then(function success(resp) {
-        console.log("Posted!", resp)
-        type === 'activity' ? entries.daysActivities = [] : entries.daysMetrics = [];
-        homeFactory.getUserData();
-      }).catch(function(err){
+      })
+      .then(function(resp) {
+        console.log("Post Success! " + entries.activeField, resp)
+        entries.activeField === 'Activities' ? entries.daysActivities = [] : entries.daysMetrics = [];
+        Home.getUserData();
+      })
+      .catch(function(err) {
         console.log('There was an error adding your datums', err)
       })
     }
-
   }
 })();
