@@ -6,7 +6,7 @@ angular.module('app.home.insights').
   //in your HTML, this will be named as bubble-chart
   directive('bubbleChart', bubbleChart);
 
-    function bubbleChart($parse, store) {
+    function bubbleChart($parse, store, Insights) {
 
     var directiveDefinitionObject = {
       //We restrict its use to an element
@@ -17,10 +17,17 @@ angular.module('app.home.insights').
       //we don't want to overwrite our directive declaration
       //in the HTML mark-up
       replace: false,
+
+      scope: { data: '=' },
+
       link: function (scope, element, attrs) {
 
         //converting all data passed thru into an array of objects.
-        var data = store.get('currentCorrelationData');
+
+        // var data = Insights.dataRefresh();
+        function renderIt(data) {
+        // var data = store.get('currentCorrelationData');
+
         data = data.map(function(obj) {
           var result = {};
           result.label = Object.keys(obj)[0];
@@ -39,6 +46,7 @@ angular.module('app.home.insights').
 
         //create svg container.
         var svg = svgContainer.append("svg").attr('width', width).attr('height', height);
+        // d3.selectAll("svg > *").remove();
 
         svg.attr("class", "svgContainer");
 
@@ -79,11 +87,16 @@ angular.module('app.home.insights').
           node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
             .call(force.drag);
         }
+      }
 
+        scope.$on('newData',function(event, data){
+          d3.selectAll('svg').remove();
+          renderIt(data.data);
+          console.log('watch is working');
+        });
 
+      }
 
-      },
-      scope: { data: '=' }
 
     };
       return directiveDefinitionObject;
