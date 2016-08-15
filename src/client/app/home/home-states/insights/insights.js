@@ -3,13 +3,15 @@
   angular.module('app.home.insights', []).controller('InsightsController',
     InsightsController);
 
-  function InsightsController($scope, Home, $http, store) {
+  function InsightsController($scope, Home, $http, store, Insights, $rootScope) {
     /*jshint validthis: true */
     var insights = this;
 
     insights.userMetrics = store.get('userData').userMetrics;
 
     insights.currentCorrelationData = [{'Null': 'null'}];
+    // insights.$watch( ,Insights)
+    insights.latestCorrData = store.get('currentCorrelationData')
 
     insights.getCorrelations = function(selection) {
       var profile = store.get('userData');
@@ -35,6 +37,7 @@
         console.log('This is the correl data', dataArr)
           store.set('currentCorrelationData', dataArr);
           insights.currentCorrelationData = dataArr;
+          $rootScope.$broadcast('newData', { data:dataArr });
       })
       .catch(function(err){
         console.log('There was an error getting your correlations', err);

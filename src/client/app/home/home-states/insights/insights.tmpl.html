@@ -18,14 +18,15 @@
           </md-item-template>
       </md-autocomplete>
     </form>
-    <div ng-repeat="item in insights.currentCorrelationData" class='col-sm-12'>
+
+  </md-content>
+          <bubble-chart data="[40,100,80,15,25,60,10]" ></bubble-chart>
+
+        <div ng-repeat="item in insights.currentCorrelationData" class='col-sm-12'>
           <ul>
             <li ng-repeat="(key, value) in item">{{key}}: {{value}}</li>
           </ul>
         </div>
-
-  </md-content>
-          <bubble-chart data="[40,100,80,15,25,60,10]" ></bubble-chart>
 
         </div>
     </div>
