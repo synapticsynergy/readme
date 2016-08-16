@@ -14,12 +14,8 @@
 }
 
 .background-image {
-background: url("../images/BackGroundImage2.png") no-repeat center;
+background: url("../images/BackGroundImage3.png") no-repeat center;
 height: 489px;
-}
-
-.navbar {
-    background-color: #FFF!important
 }
 
 .image-bg-fluid-height,
@@ -196,12 +192,24 @@ a,a:hover {
     margin-top: 25px;
 }
 
+.black-box {
+    background-color: black; 
+    width: 70%; 
+    height: 250px; 
+    color: #fff; 
+    padding: 8%;
+}
+
 #last-menu-item {
     border-bottom: 1px solid #ddd;
 }
 
 body {
     color: #2f2d2d;
+}
+
+.landing-nav-custom {
+   background-color: #000000; 
 }
 
 @media only screen and (min-width:950px) { 
