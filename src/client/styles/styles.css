@@ -4,8 +4,17 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
+html *{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 100%;
+}
+
 .index {
     margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.navbar {
+    background-color: #000!important
 }
 
 .image-bg-fluid-height,
@@ -188,7 +197,6 @@ a,a:hover {
 
 body {
     color: #2f2d2d;
-    background-color: #dfded4
 }
 
 @media only screen and (min-width:950px) { 
