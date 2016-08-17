@@ -4,8 +4,18 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
+/*html *{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 100%;
+}*/
+
 .index {
     margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.background-image {
+background: url("../images/BackGroundImage3.png") no-repeat center;
+height: 489px;
 }
 
 .image-bg-fluid-height,
@@ -182,13 +192,24 @@ a,a:hover {
     margin-top: 25px;
 }
 
+.black-box {
+    background-color: black; 
+    width: 70%; 
+    height: 250px; 
+    color: #fff; 
+    padding: 8%;
+}
+
 #last-menu-item {
     border-bottom: 1px solid #ddd;
 }
 
 body {
     color: #2f2d2d;
-    background-color: #dfded4
+}
+
+.landing-nav-custom {
+   background-color: #000000; 
 }
 
 @media only screen and (min-width:950px) { 
@@ -207,3 +228,5 @@ body {
         font-size: 2em;
     }
 }
+
+
