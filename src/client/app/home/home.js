@@ -9,6 +9,11 @@
     // jshint validthis: true (prevents linting from throwing a warning)
     var home = this;
 
+    //Sets the date in the Home factory
+    home.dateSetter = function(value) {
+      Home.dateSetter(value);
+    }
+
     //Logout functionality
     home.logout = Auth.logout;
 

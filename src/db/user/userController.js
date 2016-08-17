@@ -124,6 +124,10 @@ User.prototype.getDay = function (date) {
     });
 };
 
+User.prototype.getWeather = function (date) {
+  console.log(date)
+}
+
 module.exports = {
   findOrCreateUser: findOrCreateUser,
   removeUser: removeUser,
