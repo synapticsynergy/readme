@@ -3,9 +3,9 @@
   angular.module('app.home.entries', [])
     .controller('EntriesController', EntriesController);
 
-  EntriesController.$inject = ['$http', 'Home', 'store'];
+  EntriesController.$inject = ['$http', 'Home', 'store', 'Entries'];
 
-  function EntriesController($http, Home, store) {
+  function EntriesController($http, Home, store, Entries) {
     // jshint validthis: true
     var entries = this;
 
@@ -33,6 +33,7 @@
     }
 
     entries.addItem = function(selection, type) {
+      Entries.getWeather();
       if (entries.activeField === 'Activities') {
         entries.daysActivities.push(selection);
         entries.searchTextAct = null;
