@@ -43,8 +43,14 @@
 
     var date = {};
 
+    var userLocation = {};
+
     function dateSetter(value) {
       services.date = value;
+    }
+
+    function locSetter(value) {
+      services.userLocation = value;
     }
     
   }
