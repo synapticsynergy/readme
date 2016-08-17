@@ -1,5 +1,6 @@
 const User = require('./userModel');
 const ml = require('../../ml/correlations');
+const wunderground = require('node-wunderground')('921c08ecbdcbf50c')
 
 function findOrCreateUser (email, firstname, lastname) {
   // use just the email to find them in case this is
@@ -31,6 +32,11 @@ User.prototype.addActivity = function (activities, day) {
   var user = this;
   return user.getDay(day)
     .then(function (foundDay) {
+      if (!foundDay.getWeather){
+        var dateParamForWeather = foundDay.date.split('T')[0].split('-').join('');
+        user.getWeather(dateParamForWeather);
+      }
+
       activities.forEach(function (activity) {
         if (user.userActivities.indexOf(activity) === -1) {
           user.userActivities.push(activity);
@@ -125,7 +131,9 @@ User.prototype.getDay = function (date) {
 };
 
 User.prototype.getWeather = function (date) {
-  console.log(date)
+  return new Promise(function (resolve) {
+    resolve()
+  })
 }
 
 module.exports = {

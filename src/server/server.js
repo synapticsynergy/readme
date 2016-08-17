@@ -37,7 +37,6 @@ app.route('/user')
 // Activity routes.
 app.route('/user/activity')
   .post(function (req, res) {
-    console.log(req)
     var activities = req.body.datums;
     var date = req.body.date;
 
@@ -46,7 +45,6 @@ app.route('/user/activity')
         return user.addActivity(activities, date);
       })
       .then(function (user) {
-        console.log(user, "unicorns")
         var userString = JSON.stringify(user);
         res.send(userString);
       })
