@@ -33,7 +33,6 @@
     }
 
     entries.addItem = function(selection, type) {
-      Entries.getWeather();
       if (entries.activeField === 'Activities') {
         entries.daysActivities.push(selection);
         entries.searchTextAct = null;

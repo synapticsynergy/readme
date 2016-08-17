@@ -44,11 +44,6 @@
       }
     };
 
-    var date = {};
-
-    function dateSetter(value) {
-      services.date = value;
-    }
 
     var userLocation = {};
 
@@ -59,7 +54,10 @@
       }
     };
 
+    var date = {};
 
-    
+    function dateSetter(value) {
+      services.date = value;
+    }
   }
 })();
