@@ -55,7 +55,8 @@ angular.module('app.home.insights').
 
         // layout for gravitational effect.
         var force = d3.layout.force()//build the layout
-          .charge(-1200) // node distance from eachother.
+          .charge(-70) // node distance from eachother.
+          .gravity(.01)
           .size([width, height]) //specified earlier
           .nodes(nodes) //add nodes
           .on("tick", tick) //what to do
@@ -73,14 +74,22 @@ angular.module('app.home.insights').
         /*Create the circle for each block */
         var circle = elemEnter.append("circle")
           .attr('class', 'node')
-          .attr("r", function(d){return d.r > 0 ? d.r / 2 : 20} )
+          .attr("r", function(d){return d.r > 0 ? d.r / 1.2 : 40} )
           .attr("stroke","grey")
           .attr("fill", "lightblue");
 
         /* Create the text for each block */
         elemEnter.append("text")
-          .attr("dr", function(d){return -10})
-          .text(function(d){return d.label + " | " + ~~d.r + "%" + " | "});
+          .attr("text-anchor", "middle")
+          .text(function(d){return d.label})
+          .attr('dy','0em');
+
+
+        elemEnter.append("text")
+          .attr("text-anchor", "middle")
+          .text(function(d){return ~~d.r + "%"})
+          .attr('dy','1.5em');
+
 
 
         function tick(e) {
