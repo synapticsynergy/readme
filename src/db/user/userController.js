@@ -41,22 +41,19 @@ User.prototype.addActivity = function (activities, day, location) {
         //sets the getWeather variable to true to indicate that weather data has been obtained for the given day
         foundDay.getWeather = true;
 
-        user.getWeather(dateWeather, location)
-
+        user.getWeather(dateWeather, location, function(weatherData){
         //after the resolve of the getWeather function, add the additional paramaters into the activities array
-        .then(function(weatherData){
-          console.log(weatherData, "hello from addActivity")
-          activities.concat(weatherData);
-        });
-      }
-
+          activities = activities.concat(weatherData)
       activities.forEach(function (activity) {
+        console.log(activity)
         if (user.userActivities.indexOf(activity) === -1) {
           user.userActivities.push(activity);
         }
       });
       foundDay.activities = foundDay.activities.concat(activities);
       return user.save();
+        })
+      }
     });
 };
 
@@ -143,7 +140,7 @@ User.prototype.getDay = function (date) {
     });
 };
 
-User.prototype.getWeather = function (date, location) {
+User.prototype.getWeather = function (date, location, callback) {
   var newWeatherParams = [];
   console.log(date, location)
 
@@ -155,7 +152,7 @@ User.prototype.getWeather = function (date, location) {
 
   wunderground.history(query, function(err, weatherData){
     if (!err){
-      var dailySum = weatherData.history.dailysummary;
+      var dailySum = weatherData.history.dailysummary[0];
       var dailyCond = weatherData.history.observations;
       //Grabs the following data and puts it into the newWeatherParams for return
       if (dailySum.fog === '1'){
@@ -182,24 +179,21 @@ User.prototype.getWeather = function (date, location) {
         newWeatherParams.push('windy')
         console.log('windy updated')
       }
-      if (dailySum.maxtempi){
-        newWeatherParams.push('highs in the ' + dailySum.maxtempi[0] + '0s')
-        console.log('maxTemp updated')
-      }
-      if (dailySum.mintempi){
-        newWeatherParams.push('lows in the ' + dailySum.mintempi[0] + '0s')
-        console.log('minTemp updated')
-      }
+      
+      newWeatherParams.push('highs in the ' + dailySum.maxtempi[0] + '0s')
+      console.log('maxTemp updated')
+    
+    
+      newWeatherParams.push('lows in the ' + dailySum.mintempi[0] + '0s')
+      console.log('minTemp updated')
+      
       //Grabs a condition halfway through the daily weather observations
-      newWeatherParams.push(dailyCond[Math.floor(dailyCond.length/2)].conds)
+      newWeatherParams.push("Conditions: " + dailyCond[Math.floor(dailyCond.length/2)].conds)
       console.log('conds updated')
     } else {
       console.log(err, "There was an error getting your weather shit")
     }
-  })
-  console.log(newWeatherParams,'hello from newWeatherParams')
-  return new Promise(function (resolve) {
-    resolve(newWeatherParams);
+     callback(newWeatherParams);
   })
 }
 
