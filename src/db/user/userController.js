@@ -34,7 +34,7 @@ User.prototype.addActivity = function (activities, day, location) {
     .then(function (foundDay) {
 
       //checks to see if weather data has been obtained for the given day 
-      if (foundDay.getWeather === false){
+      if (foundDay.gotWeather === false){
 
         //puts the date into a format the getWeather function can use
         var dateWeather = foundDay.date.split('T')[0].split('-').join('');
@@ -50,9 +50,11 @@ User.prototype.addActivity = function (activities, day, location) {
           });
       foundDay.activities = foundDay.activities.concat(activities);
       //sets the getWeather variable to true to indicate that weather data has been obtained for the given day
-      foundDay.getWeather = true;
+      foundDay.gotWeather = true;
       return user.save();
         })
+      } else {
+        console.log("Weather data already obtained for this day")
       }
     });
 };
