@@ -1,5 +1,5 @@
-const Alchemy = require('./vendor/alchemyapi');
-const api = new Alchemy();
+var Alchemy = require('./vendor/alchemyapi');
+var api = new Alchemy();
 
 exports.getSentiment = function (text) {
   return new Promise(function (resolve) {
