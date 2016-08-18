@@ -1,17 +1,16 @@
 const User = require('./userModel');
 const ml = require('../../ml/correlations');
-// const http = require('http');
-const http = require('request');
-const wunderground = require('wunderground')('921c08ecbdcbf50c');
+const http = require('request-promise');
+// const wunderground = require('wunderground')('921c08ecbdcbf50c');
 
-function findOrCreateUser (email, firstname, lastname) {
+function findOrCreateUser(email, firstname, lastname) {
   // use just the email to find them in case this is
   // coming from a place we assume the user has already
   // been created
   return User.findOne({
-    email: email
-  })
-    .then(function (user) {
+      email: email
+    })
+    .then(function(user) {
       if (!user) {
         return User.create({
           email: email,
@@ -24,43 +23,51 @@ function findOrCreateUser (email, firstname, lastname) {
     });
 }
 
-function removeUser (email) {
+function removeUser(email) {
   return User.remove({
     email: email
   });
 }
 
-User.prototype.addActivity = function (activities, day, location) {
+User.prototype.addActivity = function(activities, day, location) {
   var user = this;
   return user.getDay(day)
-    .then(function (foundDay) {
-      //checks to see if weather data has been obtained for the given day 
-      if (foundDay.gotWeather === false){
-        //puts the date into a format the getWeather function can use
-        var dateWeather = foundDay.date.split('T')[0].split('-').join('');
-        user.getWeather(dateWeather, location, function(weatherData){
-        //after the resolve of the getWeather function, add the additional paramaters into the activities array
-          activities = activities.concat(weatherData);
+    .then(function(foundDay) {
+
+    if (foundDay.gotWeather === false) {
+      var dateForWeather = foundDay.date.split('T')[0].split('-').join('');
+       return user.getWeather(dateForWeather, location)
+        .then(function(newWeatherParams) {
+          console.log('addAc newWeatherParams: ', newWeatherParams)
+          activities = activities.concat(newWeatherParams);
+          console.log('addAc activities: ', activities)
+          activities.forEach(function(activity) {
+            if (user.userActivities.indexOf(activity) === -1) {
+              user.userActivities.push(activity);
+            }
+          });
+          foundDay.activities = foundDay.activities.concat(activities);
+          foundDay.gotWeather = true;
+          return user.save();
         })
-      } else {
-        console.log("Weather data already obtained for this day")
-      }
-      activities.forEach(function (activity) {
+        
+    } else {
+      activities.forEach(function(activity) {
         if (user.userActivities.indexOf(activity) === -1) {
           user.userActivities.push(activity);
         }
       });
       console.log('activities', activities)
       foundDay.activities = foundDay.activities.concat(activities);
-      foundDay.gotWeather = true;
       return user.save();
-    });
+    }
+  })
 };
 
-User.prototype.deleteActivity = function (activity, day) {
+User.prototype.deleteActivity = function(activity, day) {
   var user = this;
   return user.getDay(day)
-    .then(function (foundDay) {
+    .then(function(foundDay) {
       foundDay.activities.splice(
         foundDay.activities.indexOf(activity), 1
       );
@@ -68,11 +75,11 @@ User.prototype.deleteActivity = function (activity, day) {
     });
 };
 
-User.prototype.addMetric = function (metrics, day) {
+User.prototype.addMetric = function(metrics, day) {
   var user = this;
   return user.getDay(day)
-    .then(function (foundDay) {
-      metrics.forEach(function (metric) {
+    .then(function(foundDay) {
+      metrics.forEach(function(metric) {
         if (user.userMetrics.indexOf(metric) === -1) {
           user.userMetrics.push(metric);
         }
@@ -82,10 +89,10 @@ User.prototype.addMetric = function (metrics, day) {
     });
 };
 
-User.prototype.deleteMetric = function (metric, day) {
+User.prototype.deleteMetric = function(metric, day) {
   var user = this;
   return user.getDay(day)
-    .then(function (foundDay) {
+    .then(function(foundDay) {
       foundDay.metrics.splice(
         foundDay.metrics.indexOf(metric), 1
       );
@@ -93,34 +100,34 @@ User.prototype.deleteMetric = function (metric, day) {
     });
 };
 
-User.prototype.saveJournal = function (journal, day) {
+User.prototype.saveJournal = function(journal, day) {
   var user = this;
   return user.getDay(day)
-    .then(function (foundDay) {
+    .then(function(foundDay) {
       foundDay.journalEntry = journal;
       return user.save();
     });
 };
 
-User.prototype.findCorrelations = function (metric) {
+User.prototype.findCorrelations = function(metric) {
   var user = this;
-  return new Promise(function (resolve) {
+  return new Promise(function(resolve) {
     resolve(ml.findCorrelations(user, metric));
   });
 };
 
-User.prototype.driftSearch = function (metric, maxDays) {
+User.prototype.driftSearch = function(metric, maxDays) {
   var user = this;
-  return new Promise(function (resolve) {
+  return new Promise(function(resolve) {
     resolve(ml.driftSearch(user, metric, maxDays));
   });
 };
 
-User.prototype.getDay = function (date) {
+User.prototype.getDay = function(date) {
   for (var x = 0; x < this.days.length; x++) {
     var day = this.days[x];
     if (day.date === date) {
-      return new Promise(function (resolve) {
+      return new Promise(function(resolve) {
         resolve(day);
       });
     }
@@ -135,13 +142,13 @@ User.prototype.getDay = function (date) {
     sentiment: ''
   });
   return this.save()
-    .then(function (user) {
+    .then(function(user) {
       return user.days[user.days.length - 1];
     });
 };
 
 //calls the wunderground API for weather data and pulls pertinent info out of the response
-User.prototype.getWeather = function (date, location, callback) {
+User.prototype.getWeather = function(date, location) {
   var newWeatherParams = [];
 
   var urlFirst = 'http://api.wunderground.com/api';
@@ -149,57 +156,58 @@ User.prototype.getWeather = function (date, location, callback) {
   var urlDate = '/history_' + date;
   var urlLocation = '/q/' + location.lat + ',' + location.lng + '.json'
 
-  var queryUrl = urlFirst+urlAPIKey+urlDate+urlLocation;
+  var queryUrl = urlFirst + urlAPIKey + urlDate + urlLocation;
 
-  http.get(queryUrl, function(err, resp){
-    var weatherData = JSON.parse(resp.body);
+  var options = {
+    uri: queryUrl,
+    headers: {
+      'User-Agent': 'Request-Promise'
+    },
+    json: true
+  };
 
-    if (!err){
-      var dailySum = weatherData.history.dailysummary[0];
-      var dailyCond = weatherData.history.observations;
-      //Grabs the following data and puts it into the newWeatherParams for return
-      if (dailySum.fog === '1'){
-        newWeatherParams.push('fog');
-        console.log('fog updated')
-      }
-      if (dailySum.rain === '1'){
-        newWeatherParams.push('rain')
-        console.log('rain updated')
-      }
-      if (dailySum.snow === '1'){
-        newWeatherParams.push('snow')
-        console.log('snow updated')
-      }
-      if (dailySum.hail === '1'){
-        newWeatherParams.push('hail')
-        console.log('hail updated')
-      }
-      if (dailySum.maxhumidity !== '' && parseInt(dailySum.maxhumidity) > 70){
-        newWeatherParams.push('humid')
-        console.log('humid updated')
-      }
-      if (parseInt(dailySum.meanwindspdi) > 15){
-        newWeatherParams.push('windy')
-        console.log('windy updated')
-      }
-      
-      newWeatherParams.push('highs in the ' + dailySum.maxtempi.slice(0, -1) + '0s')
-      console.log('maxTemp updated')
-    
-      newWeatherParams.push('lows in the ' + dailySum.mintempi.slice(0, -1) +  '0s')
-      console.log('minTemp updated')
-      
-      //Grabs a condition halfway through the daily weather observations
-      newWeatherParams.push("Conditions: " + dailyCond[Math.floor(dailyCond.length/2)].conds)
-      console.log('conds updated')
-    } else {
-      console.log(err, "There was an error getting your weather shit")
-    }
-    console.log('newWeatherParams', newWeatherParams)
-     callback(newWeatherParams);
+  return http(options)
+    .then(function(weatherData) {
+        var dailySum = weatherData.history.dailysummary[0];
+        var dailyCond = weatherData.history.observations;
 
-  })
+        if (dailySum.fog === '1') {
+          newWeatherParams.push('fog');
+          console.log('fog updated')
+        }
+        if (dailySum.rain === '1') {
+          newWeatherParams.push('rain')
+          console.log('rain updated')
+        }
+        if (dailySum.snow === '1') {
+          newWeatherParams.push('snow')
+          console.log('snow updated')
+        }
+        if (dailySum.hail === '1') {
+          newWeatherParams.push('hail')
+          console.log('hail updated')
+        }
+        if (dailySum.maxhumidity !== '' && parseInt(dailySum.maxhumidity) > 70) {
+          newWeatherParams.push('humid')
+          console.log('humid updated')
+        }
+        if (parseInt(dailySum.meanwindspdi) > 15) {
+          newWeatherParams.push('windy')
+          console.log('windy updated')
+        }
 
+        newWeatherParams.push('highs in the ' + dailySum.maxtempi.slice(0, -1) + '0s')
+        console.log('maxTemp updated')
+
+        newWeatherParams.push('lows in the ' + dailySum.mintempi.slice(0, -1) + '0s')
+        console.log('minTemp updated')
+
+        //Grabs a weather condition halfway through the daily weather observations
+        newWeatherParams.push("Conditions: " + dailyCond[Math.floor(dailyCond.length / 2)].conds)
+        console.log('conds updated');
+
+        return newWeatherParams;
+    })
 }
 
 module.exports = {
