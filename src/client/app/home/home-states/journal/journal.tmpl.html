@@ -4,7 +4,8 @@
 
 <div class="form-group">
   <div>
-    <md-button class="md-raised" ng-click="journal.saveJournal()"> Submit </md-button>
+    <md-button class="md-raised" ng-click="journal.saveJournal(); journal.getSentiment(journal.entry)"> Submit </md-button>
   </div>
-  {{ journal.message }}
+  {{ journal.message }} <br />
+  {{ journal.sentiment }}
 </div>

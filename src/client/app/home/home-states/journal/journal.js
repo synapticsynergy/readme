@@ -8,13 +8,18 @@
   function JournalController ($scope, Journal, Home) {
     // jshint validthis: true
     var journal = this;
-
     journal.message = '';
-
+    journal.sentiment = '';
     journal.entry = "Enter your thoughts for today...";
 
     journal.saveJournal = Journal.saveJournal;
 
+    journal.getSentiment = function (text) {
+      Journal.getSentiment(text)
+        .then(function (res) {
+          journal.sentiment = res.data.docSentiment.type;
+        });
+    };
 
     // journal.date = (new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())).toString();
     // journal.day = Home.getDay(journal.date);
