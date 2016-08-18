@@ -38,9 +38,7 @@ User.prototype.addActivity = function(activities, day, location) {
       var dateForWeather = foundDay.date.split('T')[0].split('-').join('');
        return user.getWeather(dateForWeather, location)
         .then(function(newWeatherParams) {
-          console.log('addAc newWeatherParams: ', newWeatherParams)
           activities = activities.concat(newWeatherParams);
-          console.log('addAc activities: ', activities)
           activities.forEach(function(activity) {
             if (user.userActivities.indexOf(activity) === -1) {
               user.userActivities.push(activity);
@@ -50,14 +48,13 @@ User.prototype.addActivity = function(activities, day, location) {
           foundDay.gotWeather = true;
           return user.save();
         })
-        
+
     } else {
       activities.forEach(function(activity) {
         if (user.userActivities.indexOf(activity) === -1) {
           user.userActivities.push(activity);
         }
       });
-      console.log('activities', activities)
       foundDay.activities = foundDay.activities.concat(activities);
       return user.save();
     }
@@ -173,38 +170,30 @@ User.prototype.getWeather = function(date, location) {
 
         if (dailySum.fog === '1') {
           newWeatherParams.push('fog');
-          console.log('fog updated')
+
         }
         if (dailySum.rain === '1') {
           newWeatherParams.push('rain')
-          console.log('rain updated')
         }
         if (dailySum.snow === '1') {
           newWeatherParams.push('snow')
-          console.log('snow updated')
         }
         if (dailySum.hail === '1') {
           newWeatherParams.push('hail')
-          console.log('hail updated')
         }
         if (dailySum.maxhumidity !== '' && parseInt(dailySum.maxhumidity) > 70) {
           newWeatherParams.push('humid')
-          console.log('humid updated')
         }
         if (parseInt(dailySum.meanwindspdi) > 15) {
           newWeatherParams.push('windy')
-          console.log('windy updated')
         }
 
         newWeatherParams.push('highs in the ' + dailySum.maxtempi.slice(0, -1) + '0s')
-        console.log('maxTemp updated')
 
         newWeatherParams.push('lows in the ' + dailySum.mintempi.slice(0, -1) + '0s')
-        console.log('minTemp updated')
 
         //Grabs a weather condition halfway through the daily weather observations
-        newWeatherParams.push("Conditions: " + dailyCond[Math.floor(dailyCond.length / 2)].conds)
-        console.log('conds updated');
+        newWeatherParams.push("Conditions: " + dailyCond[Math.floor(dailyCond.length / 2)].conds);
 
         return newWeatherParams;
     })
