@@ -1,5 +1,7 @@
 const User = require('./userModel');
 const ml = require('../../ml/correlations');
+// const http = require('http');
+const http = require('request');
 const wunderground = require('wunderground')('921c08ecbdcbf50c');
 
 function findOrCreateUser (email, firstname, lastname) {
@@ -32,31 +34,26 @@ User.prototype.addActivity = function (activities, day, location) {
   var user = this;
   return user.getDay(day)
     .then(function (foundDay) {
-
       //checks to see if weather data has been obtained for the given day 
       if (foundDay.gotWeather === false){
-
         //puts the date into a format the getWeather function can use
         var dateWeather = foundDay.date.split('T')[0].split('-').join('');
-
         user.getWeather(dateWeather, location, function(weatherData){
-        
         //after the resolve of the getWeather function, add the additional paramaters into the activities array
           activities = activities.concat(weatherData);
-
-          activities.forEach(function (activity) {
-            if (user.userActivities.indexOf(activity) === -1) {
-              user.userActivities.push(activity);
-            }
-          });
-      foundDay.activities = foundDay.activities.concat(activities);
-      //sets the getWeather variable to true to indicate that weather data has been obtained for the given day
-      foundDay.gotWeather = true;
-      return user.save();
         })
       } else {
         console.log("Weather data already obtained for this day")
       }
+      activities.forEach(function (activity) {
+        if (user.userActivities.indexOf(activity) === -1) {
+          user.userActivities.push(activity);
+        }
+      });
+      console.log('activities', activities)
+      foundDay.activities = foundDay.activities.concat(activities);
+      foundDay.gotWeather = true;
+      return user.save();
     });
 };
 
@@ -147,13 +144,15 @@ User.prototype.getDay = function (date) {
 User.prototype.getWeather = function (date, location, callback) {
   var newWeatherParams = [];
 
-  var query = {
-    date: date,
-    lat: location.lat,
-    lng: location.lng
-  }
+  var urlFirst = 'http://api.wunderground.com/api';
+  var urlAPIKey = '/921c08ecbdcbf50c';
+  var urlDate = '/history_' + date;
+  var urlLocation = '/q/' + location.lat + ',' + location.lng + '.json'
 
-  wunderground.history(query, function(err, weatherData){
+  var queryUrl = urlFirst+urlAPIKey+urlDate+urlLocation;
+
+  http.get(queryUrl, function(err, resp){
+    var weatherData = JSON.parse(resp.body);
 
     if (!err){
       var dailySum = weatherData.history.dailysummary[0];
@@ -175,7 +174,7 @@ User.prototype.getWeather = function (date, location, callback) {
         newWeatherParams.push('hail')
         console.log('hail updated')
       }
-      if (parseInt(dailySum.maxhumidity) > 60){
+      if (dailySum.maxhumidity !== '' && parseInt(dailySum.maxhumidity) > 70){
         newWeatherParams.push('humid')
         console.log('humid updated')
       }
@@ -184,10 +183,10 @@ User.prototype.getWeather = function (date, location, callback) {
         console.log('windy updated')
       }
       
-      newWeatherParams.push('highs in the ' + dailySum.maxtempi)
+      newWeatherParams.push('highs in the ' + dailySum.maxtempi.slice(0, -1) + '0s')
       console.log('maxTemp updated')
     
-      newWeatherParams.push('lows in the ' + dailySum.mintempi)
+      newWeatherParams.push('lows in the ' + dailySum.mintempi.slice(0, -1) +  '0s')
       console.log('minTemp updated')
       
       //Grabs a condition halfway through the daily weather observations
@@ -198,7 +197,9 @@ User.prototype.getWeather = function (date, location, callback) {
     }
     console.log('newWeatherParams', newWeatherParams)
      callback(newWeatherParams);
+
   })
+
 }
 
 module.exports = {
