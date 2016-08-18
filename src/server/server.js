@@ -43,6 +43,7 @@ app.route('/user/activity')
 
     User.findOrCreateUser(req.body.email, req.body.firstname, req.body.lastname)
       .then(function (user) {
+        console.log(activities, date, location)
         return user.addActivity(activities, date, location);
       })
       .then(function (user) {
