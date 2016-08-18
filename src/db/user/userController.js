@@ -32,25 +32,25 @@ User.prototype.addActivity = function (activities, day, location) {
   var user = this;
   return user.getDay(day)
     .then(function (foundDay) {
+
       //checks to see if weather data has been obtained for the given day 
-      if (!foundDay.getWeather){
+      if (foundDay.getWeather === false){
 
         //puts the date into a format the getWeather function can use
         var dateWeather = foundDay.date.split('T')[0].split('-').join('');
 
-        //sets the getWeather variable to true to indicate that weather data has been obtained for the given day
-        foundDay.getWeather = true;
-
         user.getWeather(dateWeather, location, function(weatherData){
         //after the resolve of the getWeather function, add the additional paramaters into the activities array
-          activities = activities.concat(weatherData)
-      activities.forEach(function (activity) {
-        console.log(activity)
-        if (user.userActivities.indexOf(activity) === -1) {
-          user.userActivities.push(activity);
-        }
-      });
+          activities = activities.concat(weatherData);
+
+          activities.forEach(function (activity) {
+            if (user.userActivities.indexOf(activity) === -1) {
+              user.userActivities.push(activity);
+            }
+          });
       foundDay.activities = foundDay.activities.concat(activities);
+      //sets the getWeather variable to true to indicate that weather data has been obtained for the given day
+      foundDay.getWeather = true;
       return user.save();
         })
       }
@@ -142,7 +142,6 @@ User.prototype.getDay = function (date) {
 
 User.prototype.getWeather = function (date, location, callback) {
   var newWeatherParams = [];
-  console.log(date, location)
 
   var query = {
     date: date,
