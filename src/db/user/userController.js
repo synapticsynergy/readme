@@ -1,6 +1,6 @@
 const User = require('./userModel');
 const ml = require('../../ml/correlations');
-const wunderground = require('node-wunderground')('921c08ecbdcbf50c')
+const wunderground = require('wunderground')('921c08ecbdcbf50c');
 
 function findOrCreateUser (email, firstname, lastname) {
   // use just the email to find them in case this is
@@ -28,13 +28,18 @@ function removeUser (email) {
   });
 }
 
-User.prototype.addActivity = function (activities, day) {
+User.prototype.addActivity = function (activities, day, location) {
   var user = this;
   return user.getDay(day)
     .then(function (foundDay) {
+
       if (!foundDay.getWeather){
-        var dateParamForWeather = foundDay.date.split('T')[0].split('-').join('');
-        user.getWeather(dateParamForWeather);
+        var dateWeather = foundDay.date.split('T')[0].split('-').join('');
+        var locWeather = location['lat'].toString() + ',' + location['lng'].toString();
+        user.getWeather(dateWeather, locWeather)
+        .then(function(weatherData){
+          activities.concat(weatherData);
+        });
       }
 
       activities.forEach(function (activity) {
@@ -130,9 +135,48 @@ User.prototype.getDay = function (date) {
     });
 };
 
-User.prototype.getWeather = function (date) {
+User.prototype.getWeather = function (date, location) {
+  var newWeatherParams = [];
+
+  var query = {
+    date: date,
+    location: location
+  }
+
+  wunderground.history(query, function(err, weatherData){
+    if (!err){
+      var dailySum = weatherData.history.dailysummary;
+      var dailyCond = weatherData.history.observations;
+      if (dailySum.fog === '1'){
+        newWeatherParams.push('fog');
+      }
+      if (dailySum.rain === '1'){
+        newWeatherParams.push('rain')
+      }
+      if (dailySum.snow === '1'){
+        newWeatherParams.push('snow')
+      }
+      if (dailySum.hail === '1'){
+        newWeatherParams.push('hail')
+      }
+      if (parseInt(dailySum.maxhumidity) > 60){
+        newWeatherParams.push('humid')
+      }
+      if (parseInt(dailySum.meanwindspdi) > 15){
+        newWeatherParams.push('windy')
+      }
+      if (dailySum.maxtempi){
+        newWeatherParams.push('highs in the ' + dailySum.maxtempi[0] + '0s')
+      }
+      if (dailySum.mintempi){
+        newWeatherParams.push('lows in the ' + dailySum.mintempi[0] + '0s')
+      }
+      newWeatherParams.push(dailyCond[Math.floor(dailyCond.length/2)].conds)
+    }
+  })
+
   return new Promise(function (resolve) {
-    resolve()
+    resolve(newWeatherParams);
   })
 }
 

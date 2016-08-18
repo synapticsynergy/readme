@@ -39,10 +39,11 @@ app.route('/user/activity')
   .post(function (req, res) {
     var activities = req.body.datums;
     var date = req.body.date;
+    var location = req.body.location;
 
     User.findOrCreateUser(req.body.email, req.body.firstname, req.body.lastname)
       .then(function (user) {
-        return user.addActivity(activities, date);
+        return user.addActivity(activities, date, location);
       })
       .then(function (user) {
         var userString = JSON.stringify(user);
