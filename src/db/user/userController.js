@@ -40,6 +40,7 @@ User.prototype.addActivity = function (activities, day, location) {
         var dateWeather = foundDay.date.split('T')[0].split('-').join('');
 
         user.getWeather(dateWeather, location, function(weatherData){
+        
         //after the resolve of the getWeather function, add the additional paramaters into the activities array
           activities = activities.concat(weatherData);
 
@@ -142,6 +143,7 @@ User.prototype.getDay = function (date) {
     });
 };
 
+//calls the wunderground API for weather data and pulls pertinent info out of the response
 User.prototype.getWeather = function (date, location, callback) {
   var newWeatherParams = [];
 
@@ -152,6 +154,7 @@ User.prototype.getWeather = function (date, location, callback) {
   }
 
   wunderground.history(query, function(err, weatherData){
+
     if (!err){
       var dailySum = weatherData.history.dailysummary[0];
       var dailyCond = weatherData.history.observations;
@@ -181,11 +184,10 @@ User.prototype.getWeather = function (date, location, callback) {
         console.log('windy updated')
       }
       
-      newWeatherParams.push('highs in the ' + dailySum.maxtempi[0] + '0s')
+      newWeatherParams.push('highs in the ' + dailySum.maxtempi)
       console.log('maxTemp updated')
     
-    
-      newWeatherParams.push('lows in the ' + dailySum.mintempi[0] + '0s')
+      newWeatherParams.push('lows in the ' + dailySum.mintempi)
       console.log('minTemp updated')
       
       //Grabs a condition halfway through the daily weather observations
@@ -194,6 +196,7 @@ User.prototype.getWeather = function (date, location, callback) {
     } else {
       console.log(err, "There was an error getting your weather shit")
     }
+    console.log('newWeatherParams', newWeatherParams)
      callback(newWeatherParams);
   })
 }
