@@ -50,6 +50,14 @@ angular.module('app.home.insights').
 
         svg.attr("class", "svgContainer");
 
+        //for custom colors
+        // var colorScale = d3.scale.linear().domain([-100, 0, 100]).range(['red', '#ddd', 'lightblue']);
+
+        //positive numbers
+        var posColorScale = d3.scale.category20c();
+
+        //negative colors
+        var negColorScale = d3.scale.category20b();
 
         var nodes = d3.values(data);
 
@@ -76,7 +84,13 @@ angular.module('app.home.insights').
           .attr('class', 'node')
           .attr("r", function(d){return d.r > 0 ? d.r / 1.2 : 40} )
           .attr("stroke","grey")
-          .attr("fill", "lightblue");
+          .attr('fill',function(d) {
+            if (d.r < 0) {
+              return negColorScale(d.r);
+            }
+            return posColorScale(d.r);
+          })
+          // .attr("fill", "lightblue");
 
         /* Create the text for each block */
         elemEnter.append("text")
