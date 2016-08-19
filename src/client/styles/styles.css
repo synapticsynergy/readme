@@ -106,6 +106,7 @@ footer {
     border-top: 1px solid #FFFFFF;
     width: 100%;
     font-size: medium;
+    cursor: pointer;
 
 }
 
@@ -115,7 +116,7 @@ footer {
 } 
 
 .date-picker {
-    margin: 5% auto auto 5%;
+    margin: 5% auto auto 7%;
 }
 
 .footer-bar {
@@ -131,7 +132,7 @@ footer {
 .template-view {
     width: 50%;
     height: 50%;
-    margin: 5% auto;
+    margin-left: 7%;
 }
 
 .site-content-toolbar {
