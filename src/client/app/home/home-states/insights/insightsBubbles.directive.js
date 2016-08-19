@@ -103,8 +103,6 @@ angular.module('app.home.insights').
               return negColorScale(d.r);
             }
             var colorScl = d.r/100;
-
-            console.log(colorScl,d3.interpolateYlGn(.6),'color function');
             return posColorScale(colorScl);
           })
           // .attr("fill", "lightblue");
