@@ -3,9 +3,9 @@
   angular.module('app.home.entries', [])
     .controller('EntriesController', EntriesController);
 
-  EntriesController.$inject = ['$http', 'Home', 'store'];
+  EntriesController.$inject = ['$http', 'Home', 'store', 'Entries'];
 
-  function EntriesController($http, Home, store) {
+  function EntriesController($http, Home, store, Entries) {
     // jshint validthis: true
     var entries = this;
 
@@ -57,6 +57,7 @@
       var datums = entries.activeField === 'Activities' ? entries.daysActivities : entries.daysMetrics;
       var profile = store.get('userData');
       var currentlySelectedDate = Home.date;
+      var userLocation = Home.userLocation;
 
       $http({
         method: "POST",
@@ -64,7 +65,8 @@
         data: {
           email: profile.email,
           datums: datums,
-          date: currentlySelectedDate
+          date: currentlySelectedDate,
+          location: userLocation
         }
       })
       .then(function(resp) {

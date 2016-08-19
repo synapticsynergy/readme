@@ -10,8 +10,11 @@
     var services = {
       date: date,
       dateSetter: dateSetter,
+      locSetter: locSetter,
       getDay: getDay,
-      getUserData: getUserData
+      getUserData: getUserData,
+      userLocation: userLocation
+      
     };
     return services;
 
@@ -41,11 +44,20 @@
       }
     };
 
+
+    var userLocation = {};
+
+    function locSetter(position) {
+      services.userLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      }
+    };
+
     var date = {};
 
     function dateSetter(value) {
       services.date = value;
     }
-    
   }
 })();

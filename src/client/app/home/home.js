@@ -6,9 +6,9 @@
   HomeController.$inject = ['$scope', '$mdSidenav', '$window', '$location', 'Home', 'Auth'];
 
   function HomeController($scope, $mdSidenav, $window, $location, Home, Auth) {
-    // jshint validthis: true
+    // jshint validthis: true (prevents linting from throwing a warning)
     var home = this;
-    
+
     //Sets the date in the Home factory
     home.dateSetter = function(value) {
       Home.dateSetter(value);
@@ -22,5 +22,11 @@
       $mdSidenav('left')
         .toggle();
     }
+
+    //Sets the user's current location in the Home factory; runs on page load
+    navigator.geolocation.getCurrentPosition(function(position) {
+      Home.locSetter(position);
+    });
+
   }
 })();
