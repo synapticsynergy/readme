@@ -21,6 +21,16 @@
     entries.userActivities = store.get('userData').userActivities;
     entries.userMetrics = store.get('userData').userMetrics;
 
+    entries.data = [{text: "Lorem", weight: 50, link: "https://google.com"}, 
+          {text: "Ipsum", weight: 18},
+          {text: "Dolor", weight: 16},
+          {text: "Sit", weight: 14},
+          {text: "Amet", weight: 12},
+          {text: "Amet", weight: 10},
+          {text: "Amet", weight: 8},
+          {text: "Amet", weight: 4},
+          {text: "Amet", weight: 2}]
+
 
     entries.changeField = function() {
       if (entries.activeField === "Activities") {

@@ -1,4 +1,4 @@
-<div class='container'>
+<!-- <div class='container'>
   <md-content>
     <div class='col-lg-6 main-container'>
       <md-switch class="md-primary switch" md-no-ink aria-label="Switch No Ink" ng-change="entries.changeField()" ng-model="data.cb5">
@@ -8,7 +8,7 @@
         <div class="row">
           <div class="datum-input-area" ng-show='entries.showActivities'>
             
-            <!-- Activities-->
+            
             <form ng-submit="entries.addItem(entries.searchTextAct, 'activity')" name="entries.activityForm">
               <md-autocomplete
               
@@ -35,7 +35,7 @@
         </div>
         <div class="datum-input-area" ng-hide='entries.showActivities'>
 
-          <!-- Metrics-->
+         
           <form ng-submit="entries.addItem(entries.searchTextMet, 'metrics')" name="entries.metricForm">
             <md-autocomplete
             md-selected-item="entries.selectedItemMet"
@@ -60,4 +60,56 @@
           </div>
           <md-button class="md-raised submit-button" ng-click="entries.postData('metric')"> Submit Metrics </md-button>
         </div>
+      </div> -->
+
+<div layout='row' layout-xs='column'>
+  <div flex style="background-color:lightblue">
+      <h2>Add Your Data</h2>
+      <br/>
+      <p>Enter the activities and experiences you did today.<br/> 
+          You can enter one a time or many, separated by a comma. <br/> 
+      </p>
+      <div>
+        <div class="datum-input-area" ng-show='entries.showActivities'>
+          <form id='submission' ng-submit="entries.addItem(entries.searchTextAct, 'activity')" name="entries.activityForm">
+            <md-autocomplete
+            md-selected-item="entries.selectedItemAct"
+            md-search-text="entries.searchTextAct"
+            ng-disabled="entries.autoCompleteDisabled"
+            md-items="item in entries.userActivities | filter: entries.searchTextAct"
+            md-item-text="item"
+            md-min-length="1"
+            placeholder="Enter an activity">
+            <md-item-template>
+            <span md-highlight-text="entries.searchTextAct" md-highlight-flags="^i">{{item}}</span>
+            </md-item-template>
+            </md-autocomplete>
+          </form>
+
+          <div layout='row' layout-wrap>
+            <div flex='25' class='repeated-datums' ng-repeat="item in entries.daysActivities track by $index" ng-click="entries.removeItem($index, 'activity')">
+              {{item}}
+            </div>
+          </div>
       </div>
+    </div>
+  </div>
+  <div flex style="background-color:#FFFFFF">
+    <ng-tag-cloud cloud-width="250" cloud-height="250" cloud-data="entries.data"></ng-tag-cloud>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

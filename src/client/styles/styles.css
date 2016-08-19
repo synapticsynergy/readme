@@ -119,6 +119,10 @@ footer {
     margin: 5% auto auto 7%;
 }
 
+#submission {
+    width: 50%;
+}
+
 .footer-bar {
     font-size: small;
     padding: 16px 32px;
@@ -130,8 +134,6 @@ footer {
 }
 
 .template-view {
-    width: 50%;
-    height: 50%;
     margin-left: 7%;
 }
 
