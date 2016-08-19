@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var path = require('path');
 var User = require('../db/user/userController.js');
+var sentiment = require('../ml/sentiment');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -165,6 +166,14 @@ app.route('/user/correlation/driftsearch')
       .catch(function (err) {
         console.error(err, 'Error during driftsearch');
         res.status(500).send(err);
+      });
+  });
+
+app.route('/sentiment/')
+  .post(function (req, res) {
+    sentiment.getSentiment(req.body.text)
+      .then(function (sentimentRes) {
+        res.json(sentimentRes);
       });
   });
 
