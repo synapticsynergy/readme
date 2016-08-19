@@ -41,7 +41,7 @@ angular.module('app.home.insights').
 
 
 
-        var width = 600;
+        var width = 600; //600
         var height = 800;
 
         //create svg container.
@@ -54,10 +54,24 @@ angular.module('app.home.insights').
         // var colorScale = d3.scale.linear().domain([-100, 0, 100]).range(['red', '#ddd', 'lightblue']);
 
         //positive numbers
-        var posColorScale = d3.scale.category20c();
+        // var posColorScale = d3.scale.category20c();
+        // var posColorScale = d3.scale.linear().domain([-100,100]).range(['#BCCFO2', '#5BB12F']);
+        // var posColorScale = d3.interpolateYlGn;
+       var posColorScale = d3.scale.linear().domain([1,length])
+      .interpolate(d3.interpolateHcl)
+      .range([d3.rgb("#007AFF"), d3.rgb('#FFF500')]);
+
+
+
+
 
         //negative colors
-        var negColorScale = d3.scale.category20b();
+        // var negColorScale = d3.scale.category20b();
+        // var negColorScale = d3.scale.linear().domain([0, -100]).range(['#ddd', '#EB65A0']);
+        var negColorScale = d3.scale.linear().domain([1,length])
+          .interpolate(d3.interpolateHcl)
+          .range([d3.rgb("#BCCFO2"), d3.rgb('#00FFFF')]);
+
 
         var nodes = d3.values(data);
 
@@ -88,7 +102,10 @@ angular.module('app.home.insights').
             if (d.r < 0) {
               return negColorScale(d.r);
             }
-            return posColorScale(d.r);
+            var colorScl = d.r/100;
+
+            console.log(colorScl,d3.interpolateYlGn(.6),'color function');
+            return posColorScale(colorScl);
           })
           // .attr("fill", "lightblue");
 
