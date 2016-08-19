@@ -177,13 +177,6 @@ a,a:hover {
     padding: 6px 12px;
 }
 
-.profile-pics {
-    width: 25%;
-    height: 25%;
-    border-radius: 25px;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26); 
-}
-
 .main-container {
     text-align: center;
 }
@@ -210,6 +203,23 @@ body {
 
 .landing-nav-custom {
    background-color: #000000; 
+}
+
+.avatar {
+    position: relative;
+    width: 128px;
+    height: 128px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    display: inline-block;
+    overflow: hidden;
+    margin: auto;
+    vertical-align: middle;
+    zoom: 1;
+    transform: translateZ(0);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26);  
 }
 
 @media only screen and (min-width:950px) { 
