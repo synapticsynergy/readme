@@ -25,6 +25,15 @@
     entries.userActivities = store.get('userData').userActivities;
     entries.userMetrics = store.get('userData').userMetrics;
 
+    entries.postBoth = function(){
+      entries.postData('/user/activity', entries.daysActivities)
+        .then(function(){
+          entries.postData('/user/metric', entries.daysMetrics);
+        });
+      
+      console.log('All your shit has posted');
+    }
+
 
     entries.changeField = function() {
       if (entries.activeField === "Activities") {
@@ -49,21 +58,21 @@
     }
 
     entries.removeItem = function(index, type) {
-      if (entries.activeField === 'Activities') {
+      if (type === 'activity') {
         entries.daysActivities.splice(index, 1);
       } else {
         entries.daysMetrics.splice(index, 1);
       }
     }
 
-    entries.postData = function(type) {
-      var url = entries.activeField === 'Activities' ? '/user/activity' : '/user/metric';
-      var datums = entries.activeField === 'Activities' ? entries.daysActivities : entries.daysMetrics;
+    entries.postData = function(url, datums) {
+      var url = url;
+      var datums = datums;
       var profile = store.get('userData');
       var currentlySelectedDate = Home.date;
       var userLocation = Home.userLocation;
 
-      $http({
+      return $http({
         method: "POST",
         url: url,
         data: {

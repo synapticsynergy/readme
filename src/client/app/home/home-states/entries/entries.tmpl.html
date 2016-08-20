@@ -80,7 +80,7 @@
               md-items="item in entries.userActivities | filter: entries.searchTextAct"
               md-item-text="item"
               md-min-length="1"
-              placeholder="Enter activities comma separated...">
+              placeholder="Enter activities...">
               <md-item-template>
               <span md-highlight-text="entries.searchTextAct" md-highlight-flags="^i">{{item}}</span>
               </md-item-template>
@@ -104,7 +104,7 @@
             md-items="metric in entries.userMetrics | filter: entries.searchTextMet"
             md-item-text="metric"
             md-min-length="1"
-            placeholder="Enter metrics comma separated...">
+            placeholder="Enter metrics...">
             <md-item-template>
             <span md-highlight-text="entries.searchTextMet" md-highlight-flags="^i">{{metric}}</span>
             </md-item-template>
