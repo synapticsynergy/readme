@@ -120,11 +120,25 @@
     </div>
     <div>
       <div style="margin-left: 21%;">
-        <md-button class="md-raised md-primary submit-button" ng-disabled='entries.showActivities() !== true' ng-click="entries.postBoth()"> Submit</md-button>
+        <md-button class="md-raised md-primary submit-button" ng-disabled='entries.showActivities() !== true' ng-click="entries.postBoth()">Submit</md-button>
       </div>
     </div>
   </div>
-  <div flex style="background: lightblue;">2</div>
+  <div flex >
+    <div layout='column' ng-hide='showme'>
+      <div flex class='reuse-items'>
+      <span style="float: left;"></span>
+      <span class='cancel-button' ng-click='showme=false'><i class='material-icons'>cancel</i></span>
+        <h4>Recent</h4>
+        <span class='act-repeated-datums side-options' ng-repeat='recent in entries.recentAct' ng-click='entries.addItemSideOptions($index, "activity")'>{{recent}}</span> 
+      </div>
+      
+      <div flex class='reuse-items'>
+        <h4>Popular</h4>
+        <div class='met-repeated-datums side-options' ng-repeat='popular in entries.recentMet' ng-click='entries.addItemSideOptions($index, "metric")'>{{popular}}</div> 
+      </div>
+    </div>
+  </div>
   <div flex style="background: green;">3</div>
   <div flex style="background: lightgreen;">4</div>
 </div>
