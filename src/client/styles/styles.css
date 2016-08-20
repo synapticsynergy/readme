@@ -316,7 +316,7 @@ body {
     position: fixed;
     top: 25%;
     left: 40%;
-    -webkit-animation: rotation 2s infinite linear;
+    -webkit-animation: rotation 0.4s infinite linear;
     -webkit-backface-visibility: hidden;
 }
 
