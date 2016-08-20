@@ -16,20 +16,14 @@
     entries.daysActivities = [];
     entries.daysMetrics = [];
 
-    entries.showActivities = true;
+    entries.showActivities = function(){
+      if (entries.daysActivities.length > 0){
+        return true;
+      }
+    };
 
     entries.userActivities = store.get('userData').userActivities;
     entries.userMetrics = store.get('userData').userMetrics;
-
-    entries.data = [{text: "Lorem", weight: 50, link: "https://google.com"}, 
-          {text: "Ipsum", weight: 18},
-          {text: "Dolor", weight: 16},
-          {text: "Sit", weight: 14},
-          {text: "Amet", weight: 12},
-          {text: "Amet", weight: 10},
-          {text: "Amet", weight: 8},
-          {text: "Amet", weight: 4},
-          {text: "Amet", weight: 2}]
 
 
     entries.changeField = function() {
@@ -40,6 +34,10 @@
         entries.activeField = "Activities";
         entries.showActivities = true;
       }
+    }
+
+    entries.addCloudAct = function(){
+      console.log('It is working!')
     }
 
     entries.addItem = function(selection, type) {

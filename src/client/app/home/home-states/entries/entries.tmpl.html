@@ -63,14 +63,15 @@
       </div> -->
 
 <div layout='row' layout-xs='column'>
-  <div flex style="background-color:lightblue">
+  <div flex class="datum-input-area">
       <h2>Add Your Data</h2>
-      <br/>
-      <p>Enter the activities and experiences you did today.<br/> 
-          You can enter one a time or many, separated by a comma. <br/> 
+      <br>
+      <p>Enter the activities and experiences you did today.<br> 
+          You can enter one a time or many, separated by a comma. <br> 
       </p>
-      <div>
-        <div class="datum-input-area" ng-show='entries.showActivities'>
+      <br>
+      <!-- Activities -->
+        <div class='datum-input-area'>
           <form id='submission' ng-submit="entries.addItem(entries.searchTextAct, 'activity')" name="entries.activityForm">
             <md-autocomplete
             md-selected-item="entries.selectedItemAct"
@@ -92,11 +93,35 @@
             </div>
           </div>
       </div>
+
+      <!-- Metrics -->
+      <div class="metric-input-area" ng-hide='entries.showActivities() !== true'>
+        <form ng-submit="entries.addItem(entries.searchTextMet, 'metrics')" name="entries.metricForm">
+          <md-autocomplete
+          md-selected-item="entries.selectedItemMet"
+          md-search-text="entries.searchTextMet"
+          ng-disabled="entries.autoCompleteDisabled"
+          md-items="metric in entries.userMetrics | filter: entries.searchTextMet"
+          md-item-text="metric"
+          md-min-length="1"
+          placeholder="Enter a metric">
+          <md-item-template>
+          <span md-highlight-text="entries.searchTextMet" md-highlight-flags="^i">{{metric}}</span>
+          </md-item-template>
+          </md-autocomplete>
+        </form>
+      <div>
+
+  </div>
+
+  <div flex class="tag-cloud" layout='column' style="background-color:#FFF;">
+    <div>
+      <span>Recent Activities</span>
     </div>
   </div>
-  <div flex style="background-color:#FFFFFF">
-    <ng-tag-cloud cloud-width="250" cloud-height="250" cloud-data="entries.data"></ng-tag-cloud>
-  </div>
+
+  <div flex></div>
+
 </div>
 
 

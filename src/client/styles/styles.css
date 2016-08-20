@@ -152,7 +152,20 @@ a,a:hover {
 }
 
 .datum-input-area {
-    text-align: center;
+    margin-top: 2%;
+    
+}
+
+.metric-input-area {
+    opacity: 1;
+}
+
+.metric-input-area.ng-hide-add, .metric-input-area.ng-hide-remove {
+  transition: all linear 1s;
+}
+
+.metric-input-area.ng-hide {
+  opacity: 0;
 }
 
 .switch {
@@ -223,6 +236,10 @@ body {
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26);  
+}
+
+.tag-cloud {
+    margin-top: 5%;
 }
 
 @media only screen and (min-width:950px) { 
