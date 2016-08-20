@@ -106,7 +106,13 @@ footer {
     border-top: 1px solid #FFFFFF;
     width: 100%;
     font-size: medium;
+    cursor: pointer;
+    overflow: hidden;
+}
 
+.side-button-container {
+    background-color: transparent;
+    overflow: hidden;
 }
 
 .active {
@@ -115,7 +121,11 @@ footer {
 } 
 
 .date-picker {
-    margin: 5% auto auto 5%;
+    margin: 5% auto auto 7%;
+}
+
+.submission {
+    width: 80%;
 }
 
 .footer-bar {
@@ -129,9 +139,7 @@ footer {
 }
 
 .template-view {
-    width: 50%;
-    height: 50%;
-    margin: 5% auto;
+    margin-left: 7%;
 }
 
 .site-content-toolbar {
@@ -149,7 +157,21 @@ a,a:hover {
 }
 
 .datum-input-area {
-    text-align: center;
+    margin-top: 2%;
+    
+}
+
+.metric-input-area {
+    opacity: 1;
+    margin-top: 3%;
+}
+
+.metric-input-area.ng-hide-add, .metric-input-area.ng-hide-remove {
+  transition: all linear 1s;
+}
+
+.metric-input-area.ng-hide {
+  opacity: 0;
 }
 
 .switch {
@@ -157,8 +179,17 @@ a,a:hover {
     margin-bottom: 10px;
 }
 
-.repeated-datums {
+.act-repeated-datums {
     background-color: #eb65a0;
+    text-align: center;
+    padding: 5px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26);
+    margin: 2%;
+    border-radius: 2px;
+}
+
+.met-repeated-datums {
+    background-color: #bccf02;
     text-align: center;
     padding: 5px;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26);
@@ -177,19 +208,14 @@ a,a:hover {
     padding: 6px 12px;
 }
 
-.profile-pics {
-    width: 25%;
-    height: 25%;
-    border-radius: 25px;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26); 
-}
-
 .main-container {
     text-align: center;
 }
 
 .submit-button {
     margin-top: 25px;
+    background-color: #9b539c !important;
+    width: 45%;
 }
 
 .black-box {
@@ -210,6 +236,27 @@ body {
 
 .landing-nav-custom {
    background-color: #000000; 
+}
+
+.avatar {
+    position: relative;
+    width: 128px;
+    height: 128px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    display: inline-block;
+    overflow: hidden;
+    margin: auto;
+    vertical-align: middle;
+    zoom: 1;
+    transform: translateZ(0);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26);  
+}
+
+.tag-cloud {
+    margin-top: 5%;
 }
 
 @media only screen and (min-width:950px) { 

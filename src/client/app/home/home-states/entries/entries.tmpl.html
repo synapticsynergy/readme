@@ -1,4 +1,4 @@
-<div class='container'>
+<!-- <div class='container'>
   <md-content>
     <div class='col-lg-6 main-container'>
       <md-switch class="md-primary switch" md-no-ink aria-label="Switch No Ink" ng-change="entries.changeField()" ng-model="data.cb5">
@@ -8,7 +8,7 @@
         <div class="row">
           <div class="datum-input-area" ng-show='entries.showActivities'>
             
-            <!-- Activities-->
+            
             <form ng-submit="entries.addItem(entries.searchTextAct, 'activity')" name="entries.activityForm">
               <md-autocomplete
               
@@ -35,7 +35,7 @@
         </div>
         <div class="datum-input-area" ng-hide='entries.showActivities'>
 
-          <!-- Metrics-->
+         
           <form ng-submit="entries.addItem(entries.searchTextMet, 'metrics')" name="entries.metricForm">
             <md-autocomplete
             md-selected-item="entries.selectedItemMet"
@@ -60,4 +60,86 @@
           </div>
           <md-button class="md-raised submit-button" ng-click="entries.postData('metric')"> Submit Metrics </md-button>
         </div>
+      </div> -->
+
+<div layout='row' layout-xs='column'>
+    <div flex='35'>
+        <h2>Add Your Data</h2>
+        <br>
+        <p>Enter the activities and experiences you did today.<br> 
+            You can enter one a time or many, separated by a comma. <br> 
+        </p>
+        <br>
+        <!-- Activities -->
+          <div class='datum-input-area'>
+            <form class='submission' ng-submit="entries.addItem(entries.searchTextAct, 'activity')" name="entries.activityForm">
+              <md-autocomplete
+              md-selected-item="entries.selectedItemAct"
+              md-search-text="entries.searchTextAct"
+              ng-disabled="entries.autoCompleteDisabled"
+              md-items="item in entries.userActivities | filter: entries.searchTextAct"
+              md-item-text="item"
+              md-min-length="1"
+              placeholder="Enter activities...">
+              <md-item-template>
+              <span md-highlight-text="entries.searchTextAct" md-highlight-flags="^i">{{item}}</span>
+              </md-item-template>
+              </md-autocomplete>
+            </form>
+
+            <div layout='row' layout-wrap>
+              <span flex='25' class='act-repeated-datums' ng-repeat="item in entries.daysActivities track by $index" ng-click="entries.removeItem($index, 'activity')">
+                {{item}}
+              </span>
+            </div>
+        </div>
+
+        <!-- Metrics -->
+        <div class="metric-input-area" ng-hide='entries.showActivities() !== true'>
+          <form class='submission' ng-submit="entries.addItem(entries.searchTextMet, 'metrics')" name="entries.metricForm">
+            <md-autocomplete
+            md-selected-item="entries.selectedItemMet"
+            md-search-text="entries.searchTextMet"
+            ng-disabled="entries.autoCompleteDisabled"
+            md-items="metric in entries.userMetrics | filter: entries.searchTextMet"
+            md-item-text="metric"
+            md-min-length="1"
+            placeholder="Enter metrics...">
+            <md-item-template>
+            <span md-highlight-text="entries.searchTextMet" md-highlight-flags="^i">{{metric}}</span>
+            </md-item-template>
+            </md-autocomplete>
+          </form>
+          <div layout='row' layout-wrap>
+            <div flex='25' class='met-repeated-datums' ng-repeat="met in entries.daysMetrics track by $index" ng-click="entries.removeItem($index, 'metric')">
+              {{met}}
+            </div>
+          </div>
+        <div>
       </div>
+    </div>
+    <div>
+      <div style="margin-left: 21%;">
+        <md-button class="md-raised md-primary submit-button" ng-disabled='entries.showActivities() !== true' ng-click="entries.postBoth()"> Submit</md-button>
+      </div>
+    </div>
+  </div>
+  <div flex style="background: lightblue;">2</div>
+  <div flex style="background: green;">3</div>
+  <div flex style="background: lightgreen;">4</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
