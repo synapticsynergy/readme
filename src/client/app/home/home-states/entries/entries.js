@@ -9,7 +9,7 @@
     // jshint validthis: true
     var entries = this;
 
-    entries.activeField = "Activities";
+    entries.activeField = "Activities"; //prune
 
     entries.autoCompleteDisabled = false;
 

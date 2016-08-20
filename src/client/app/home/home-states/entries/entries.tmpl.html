@@ -88,7 +88,7 @@
             </form>
 
             <div layout='row' layout-wrap>
-              <span flex='25' class='repeated-datums' ng-repeat="item in entries.daysActivities track by $index" ng-click="entries.removeItem($index, 'activity')">
+              <span flex='25' class='act-repeated-datums' ng-repeat="item in entries.daysActivities track by $index" ng-click="entries.removeItem($index, 'activity')">
                 {{item}}
               </span>
             </div>
@@ -111,7 +111,7 @@
             </md-autocomplete>
           </form>
           <div layout='row' layout-wrap>
-            <div flex='25' class='repeated-datums' ng-repeat="met in entries.daysMetrics track by $index" ng-click="entries.removeItem($index, 'metric')">
+            <div flex='25' class='met-repeated-datums' ng-repeat="met in entries.daysMetrics track by $index" ng-click="entries.removeItem($index, 'metric')">
               {{met}}
             </div>
           </div>
@@ -119,7 +119,9 @@
       </div>
     </div>
     <div>
-      SUBMIT
+      <div style="margin-left: 21%;">
+        <md-button class="md-raised md-primary submit-button" ng-click="entries.postBoth()"> Submit</md-button>
+      </div>
     </div>
   </div>
   <div flex style="background: lightblue;">2</div>

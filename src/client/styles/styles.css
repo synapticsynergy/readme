@@ -119,7 +119,7 @@ footer {
     margin: 5% auto auto 7%;
 }
 
-#submission {
+.submission {
     width: 80%;
 }
 
@@ -174,14 +174,22 @@ a,a:hover {
     margin-bottom: 10px;
 }
 
-.repeated-datums {
+.act-repeated-datums {
     background-color: #eb65a0;
     text-align: center;
     padding: 5px;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26);
     margin: 2%;
     border-radius: 2px;
+}
 
+.met-repeated-datums {
+    background-color: #bccf02;
+    text-align: center;
+    padding: 5px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26);
+    margin: 2%;
+    border-radius: 2px;
 }
 
 .ta-editor.form-control.myform2-height, .ta-scroll-window.form-control.myform2-height  {
@@ -201,6 +209,8 @@ a,a:hover {
 
 .submit-button {
     margin-top: 25px;
+    background-color: #9b539c !important;
+    width: 45%;
 }
 
 .black-box {
