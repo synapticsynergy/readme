@@ -125,17 +125,17 @@
     </div>
   </div>
   <div flex >
-    <div layout='column' ng-hide='showme'>
+    <div layout='column' ng-hide='showme' class='reuse-items-container'>
       <div flex class='reuse-items'>
       <span style="float: left;"></span>
-      <span class='cancel-button' ng-click='showme=false'><i class='material-icons'>cancel</i></span>
+      <span class='cancel-button' ng-click='showme=true'><i class='material-icons'>cancel</i></span>
         <h4>Recent</h4>
-        <span class='act-repeated-datums side-options' ng-repeat='recent in entries.recentAct' ng-click='entries.addItemSideOptions($index, "activity")'>{{recent}}</span> 
+        <span class='act-repeated-datums side-options hvr-grow-shadow' ng-repeat='recent in entries.recentAct' ng-click='entries.addItemSideOptions($index, "activity")'>{{recent}}</span> 
       </div>
       
       <div flex class='reuse-items'>
         <h4>Popular</h4>
-        <div class='met-repeated-datums side-options' ng-repeat='popular in entries.recentMet' ng-click='entries.addItemSideOptions($index, "metric")'>{{popular}}</div> 
+        <div class='met-repeated-datums side-options hvr-grow-shadow' ng-repeat='popular in entries.recentMet' ng-click='entries.addItemSideOptions($index, "metric")'>{{popular}}</div> 
       </div>
     </div>
   </div>
