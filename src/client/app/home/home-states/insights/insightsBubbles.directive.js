@@ -35,15 +35,16 @@ angular.module('app.home.insights').
           return result;
         });
 
-        // if (data.length > 20) {
-        //   var cache = data.slice();
-        //   console.log(cache,'cache');
-        //   cache.sort(function(obj) {
-        //     if ()
-        //   })
-        //   cache.splice(9,cache.length - 20);
-        //   data =
-        // }
+        if (data.length > 18) {
+          var cache = data.slice();
+          console.log(cache,'cache');
+          cache.sort(function(a,b) {
+            return a.r - b.r;
+          });
+          cache.splice(9,cache.length - 18);
+          data = cache;
+          console.log(cache.length,'cache new length');
+        }
 
         console.log(data[0],'d3');
         //in D3, any selection[0] contains the group
