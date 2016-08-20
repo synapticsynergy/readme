@@ -36,12 +36,8 @@
       }
     }
 
-    entries.addCloudAct = function(){
-      console.log('It is working!')
-    }
-
     entries.addItem = function(selection, type) {
-      if (entries.activeField === 'Activities') {
+      if (type === 'activity') {
         entries.daysActivities.push(selection);
         entries.searchTextAct = null;
         entries.activityForm.$setPristine();
