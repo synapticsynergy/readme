@@ -34,6 +34,18 @@ angular.module('app.home.insights').
           result.r = obj[result.label] * 100;
           return result;
         });
+
+        if (data.length > 18) {
+          var cache = data.slice();
+          console.log(cache,'cache');
+          cache.sort(function(a,b) {
+            return a.r - b.r;
+          });
+          cache.splice(9,cache.length - 18);
+          data = cache;
+          console.log(cache.length,'cache new length');
+        }
+
         console.log(data[0],'d3');
         //in D3, any selection[0] contains the group
 
@@ -57,9 +69,9 @@ angular.module('app.home.insights').
         // var posColorScale = d3.scale.category20c();
         // var posColorScale = d3.scale.linear().domain([-100,100]).range(['#BCCFO2', '#5BB12F']);
         // var posColorScale = d3.interpolateYlGn;
-       var posColorScale = d3.scale.linear().domain([1,length])
-      .interpolate(d3.interpolateHcl)
-      .range([d3.rgb("#007AFF"), d3.rgb('#FFF500')]);
+       var posColorScale = d3.scale.linear().domain([0,1])
+        .interpolate(d3.interpolateHcl)
+        .range(["white", d3.rgb('#FFF500')]);
 
 
 
@@ -68,9 +80,9 @@ angular.module('app.home.insights').
         //negative colors
         // var negColorScale = d3.scale.category20b();
         // var negColorScale = d3.scale.linear().domain([0, -100]).range(['#ddd', '#EB65A0']);
-        var negColorScale = d3.scale.linear().domain([1,length])
+        var negColorScale = d3.scale.linear().domain([0,1])
           .interpolate(d3.interpolateHcl)
-          .range([d3.rgb("#BCCFO2"), d3.rgb('#00FFFF')]);
+          .range(['white', d3.rgb('#00FFFF')]);
 
 
         var nodes = d3.values(data);
@@ -100,7 +112,7 @@ angular.module('app.home.insights').
           .attr("stroke","grey")
           .attr('fill',function(d) {
             if (d.r < 0) {
-              return negColorScale(d.r);
+              return negColorScale(d.r * -1);
             }
             var colorScl = d.r/100;
             return posColorScale(colorScl);
