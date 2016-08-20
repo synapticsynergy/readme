@@ -312,6 +312,20 @@ body {
   transform: scale(1.1);
 }
 
+.rotating-image {
+    position: fixed;
+    top: 25%;
+    left: 40%;
+    -webkit-animation: rotation 2s infinite linear;
+    -webkit-backface-visibility: hidden;
+}
+
+@-webkit-keyframes rotation {
+    from {-webkit-transform: rotate(0deg);}
+    to   {-webkit-transform: rotate(359deg);}
+}
+
+
 @media only screen and (min-width:950px) { 
     .menuButton {
         display: none;
