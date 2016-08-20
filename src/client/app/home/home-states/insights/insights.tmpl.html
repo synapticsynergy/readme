@@ -20,11 +20,12 @@
     </form>
 
   </md-content>
-          <bubble-chart data="[40,100,80,15,25,60,10]" ></bubble-chart>
+          <bubble-chart></bubble-chart>
 
-        <div ng-repeat="item in insights.currentCorrelationData" class='col-sm-12'>
+        <h3>Correlations With <u>{{insights.metricDisplay}}</u>:</h3>
+        <div ng-repeat="item in insights.displayData" class='col-sm-12'>
           <ul>
-            <li ng-repeat="(key, value) in item">{{key}}: {{value}}</li>
+            <li ng-repeat="(key, value) in item">{{key}}: {{value}}%</li>
           </ul>
         </div>
 
