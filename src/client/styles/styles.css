@@ -107,7 +107,12 @@ footer {
     width: 100%;
     font-size: medium;
     cursor: pointer;
+    overflow: hidden;
+}
 
+.side-button-container {
+    background-color: transparent;
+    overflow: hidden;
 }
 
 .active {

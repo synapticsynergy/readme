@@ -120,7 +120,7 @@
     </div>
     <div>
       <div style="margin-left: 21%;">
-        <md-button class="md-raised md-primary submit-button" ng-click="entries.postBoth()"> Submit</md-button>
+        <md-button class="md-raised md-primary submit-button" ng-disabled='entries.showActivities() !== true' ng-click="entries.postBoth()"> Submit</md-button>
       </div>
     </div>
   </div>
