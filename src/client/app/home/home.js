@@ -12,6 +12,7 @@
     //Sets the date in the Home factory
     home.dateSetter = function(value) {
       Home.dateSetter(value);
+      $location.path('home/entries');
     }
 
     //Logout functionality

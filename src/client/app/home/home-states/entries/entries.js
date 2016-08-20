@@ -30,8 +30,6 @@
         .then(function(){
           entries.postData('/user/metric', entries.daysMetrics);
         });
-      
-      console.log('All your shit has posted');
     }
 
 
