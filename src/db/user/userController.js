@@ -43,6 +43,7 @@ User.prototype.addActivity = function(activities, day, location) {
             if (user.userActivities.indexOf(activity) === -1) {
               user.userActivities.push(activity);
             }
+            console.log('gnomes', user.popularItems.act);
           });
           foundDay.activities = foundDay.activities.concat(activities);
           foundDay.gotWeather = true;
@@ -143,6 +144,28 @@ User.prototype.getDay = function(date) {
       return user.days[user.days.length - 1];
     });
 };
+
+User.prototype.addPopular = function(type, datums){
+  datums.forEach(function(datum){
+    if (type === 'activities') {
+      if (user.popularItems.act[datum] === undefined) {
+        user.popularItems.act[datum] = 1;
+      } else if (user.popularItems.act[datum] !== undefined) {
+        user.popularItems.act[datum] += 1;
+      }
+    } else {
+      if (user.popularItems.met[datum] === undefined) {
+        user.popularItems.met[datum] = 1;
+      } else if (user.popularItems.met[datum] !== undefined) {
+        user.popularItems.met[datum] += 1;
+      }
+    }
+  }
+
+  return new Promise(function(resolve){
+    resolve();
+  });
+}
 
 //calls the wunderground API for weather data and pulls pertinent info out of the response
 User.prototype.getWeather = function(date, location) {
