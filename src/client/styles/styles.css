@@ -241,6 +241,10 @@ a,a:hover {
     width: 45%;
 }
 
+.journal-submit {
+    text-align: center;
+}
+
 .black-box {
     background-color: black; 
     width: 70%; 
