@@ -1,67 +1,3 @@
-<!-- <div class='container'>
-  <md-content>
-    <div class='col-lg-6 main-container'>
-      <md-switch class="md-primary switch" md-no-ink aria-label="Switch No Ink" ng-change="entries.changeField()" ng-model="data.cb5">
-      <h4 flex>{{entries.activeField}}</h4>
-      </md-switch>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="datum-input-area" ng-show='entries.showActivities'>
-            
-            
-            <form ng-submit="entries.addItem(entries.searchTextAct, 'activity')" name="entries.activityForm">
-              <md-autocomplete
-              
-              md-selected-item="entries.selectedItemAct"
-              md-search-text="entries.searchTextAct"
-              ng-disabled="entries.autoCompleteDisabled"
-              md-items="item in entries.userActivities | filter: entries.searchTextAct"
-              md-item-text="item"
-              md-min-length="1"
-              placeholder="Enter an activity">
-              <md-item-template>
-              <span md-highlight-text="entries.searchTextAct" md-highlight-flags="^i">{{item}}</span>
-              </md-item-template>
-              </md-autocomplete>
-            </form>
-
-            <div layout='row' layout-wrap>
-              <div flex='25' class='repeated-datums' ng-repeat="item in entries.daysActivities track by $index" ng-click="entries.removeItem($index, 'activity')">
-                {{item}}
-              </div>
-            </div>
-            <md-button class="md-raised submit-button" ng-click="entries.postData('activity')"> Submit Activities </md-button>
-          </div>
-        </div>
-        <div class="datum-input-area" ng-hide='entries.showActivities'>
-
-         
-          <form ng-submit="entries.addItem(entries.searchTextMet, 'metrics')" name="entries.metricForm">
-            <md-autocomplete
-            md-selected-item="entries.selectedItemMet"
-            md-search-text="entries.searchTextMet"
-            ng-disabled="entries.autoCompleteDisabled"
-            md-items="metric in entries.userMetrics | filter: entries.searchTextMet"
-            md-item-text="metric"
-            md-min-length="1"
-            placeholder="Enter a metric">
-            <md-item-template>
-            <span md-highlight-text="entries.searchTextMet" md-highlight-flags="^i">{{metric}}</span>
-            </md-item-template>
-            </md-autocomplete>
-          </form>
-  </md-content>
-
-        <div>
-          <div layout='row' layout-wrap>
-            <div flex='25' class='repeated-datums' ng-repeat="item in entries.daysMetrics track by $index" ng-click="entries.removeItem($index, 'metric')">
-              {{item}}
-            </div>
-          </div>
-          <md-button class="md-raised submit-button" ng-click="entries.postData('metric')"> Submit Metrics </md-button>
-        </div>
-      </div> -->
-
 <div layout='row' layout-xs='column'>
     <div flex='35'>
         <h2>Add Your Data</h2>
@@ -111,22 +47,36 @@
             </md-autocomplete>
           </form>
           <div layout='row' layout-wrap>
-            <div flex='25' class='met-repeated-datums' ng-repeat="met in entries.daysMetrics track by $index" ng-click="entries.removeItem($index, 'metric')">
+            <span flex='25' class='met-repeated-datums' ng-repeat="met in entries.daysMetrics track by $index" ng-click="entries.removeItem($index, 'metric')">
               {{met}}
-            </div>
+            </span>
           </div>
         <div>
       </div>
     </div>
     <div>
       <div style="margin-left: 21%;">
-        <md-button class="md-raised md-primary submit-button" ng-disabled='entries.showActivities() !== true' ng-click="entries.postBoth()"> Submit</md-button>
+        <md-button class="md-raised md-primary submit-button" ng-disabled='entries.showActivities() !== true' ng-click="entries.postBoth()">Submit</md-button>
       </div>
     </div>
   </div>
-  <div flex style="background: lightblue;">2</div>
-  <div flex style="background: green;">3</div>
-  <div flex style="background: lightgreen;">4</div>
+  <div flex >
+    <div layout='column' ng-hide='showme' class='reuse-items-container'>
+      <div flex class='reuse-items'>
+      <span style="float: left;"></span>
+      <span class='cancel-button' ng-click='showme=true'><img src="../../images/ic_cancel_black_24px.svg"></span>
+        <h4>Popular Activities</h4>
+        <span class='act-repeated-datums side-options hvr-grow-shadow' ng-repeat='recent in entries.popularAct' ng-click='entries.addItemSideOptions($index, "activity")'>{{recent}}</span> 
+      </div>
+      
+      <div flex class='reuse-items'>
+        <h4>Popular Metrics</h4>
+        <div class='met-repeated-datums side-options hvr-grow-shadow' ng-repeat='popular in entries.popularMet' ng-click='entries.addItemSideOptions($index, "metric")'>{{popular}}</div> 
+      </div>
+    </div>
+  </div>
+  <div flex style="background: transparent;"></div>
+  <div flex style="background: transparent;"></div>
 </div>
 
 

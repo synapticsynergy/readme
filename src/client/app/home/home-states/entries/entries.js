@@ -16,8 +16,11 @@
     entries.daysActivities = [];
     entries.daysMetrics = [];
 
+    entries.popularAct = ['hops', 'skips', 'jumps', 'google', 'computer', 'play music', 'read book','flip', 'roger', 'go for a walk', 'dog walk', 'wirte with pen', 'play bass', 'read novel'];
+    entries.popularMet = ['happy', 'sad', 'headache', 'car crash', 'creative', 'artisitic', 'sick']; 
+
     entries.showActivities = function(){
-      if (entries.daysActivities.length > 0){
+      if (entries.daysActivities.length > 0 || entries.daysMetrics.length > 0){
         return true;
       }
     };
@@ -29,6 +32,8 @@
       entries.postData('/user/activity', entries.daysActivities)
         .then(function(){
           entries.postData('/user/metric', entries.daysMetrics);
+        }).then(function(){
+          console.log('Posteddddddd')
         });
     }
 
@@ -63,6 +68,16 @@
       }
     }
 
+    entries.addItemSideOptions = function(index, type) {
+      if (type === 'activity') {
+        var item = entries.popularAct.splice(index, 1);
+        entries.daysActivities.push(item[0]);
+      } else {
+        var item = entries.popularMet.splice(index, 1);
+        entries.daysMetrics.push(item[0]);
+      }
+    }
+
     entries.postData = function(url, datums) {
       var url = url;
       var datums = datums;
@@ -82,7 +97,8 @@
       })
       .then(function(resp) {
         console.log("Post Success! " + entries.activeField, resp)
-        entries.activeField === 'Activities' ? entries.daysActivities = [] : entries.daysMetrics = [];
+        entries.daysActivities = [];
+        entries.daysMetrics = [];
         Home.getUserData();
       })
       .catch(function(err) {

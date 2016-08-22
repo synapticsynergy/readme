@@ -3,9 +3,9 @@
   angular.module('app.home')
     .factory('Home', Home);
 
-  Home.$inject = ['$http', 'store', '$mdSidenav'];
+  Home.$inject = ['$http', 'store', '$mdSidenav', '$rootScope', '$state', '$stateParams'];
 
-  function Home($http, store, $mdSidenav) {
+  function Home($http, store, $mdSidenav, $rootScope, $state, $stateParams) {
 
     var services = {
       date: date,
@@ -59,5 +59,6 @@
     function dateSetter(value) {
       services.date = value;
     }
+
   }
 })();

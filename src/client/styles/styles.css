@@ -115,13 +115,18 @@ footer {
     overflow: hidden;
 }
 
-.active {
+.side-menu-options.active {
     background-color: #247abd;
     font-weight: bold;
 } 
 
 .date-picker {
     margin: 5% auto auto 7%;
+}
+
+.date-picker.hidden {
+    margin: 5% auto auto 7%;
+    visibility: hidden;
 }
 
 .submission {
@@ -174,6 +179,18 @@ a,a:hover {
   opacity: 0;
 }
 
+.reuse-items-container {
+  opacity: 1;
+}
+
+.reuse-items-container.ng-hide-add, .reuse-items-container.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.reuse-items-container.ng-hide {
+  opacity: 0;
+}
+
 .switch {
     display: inline-block;
     margin-bottom: 10px;
@@ -183,9 +200,10 @@ a,a:hover {
     background-color: #eb65a0;
     text-align: center;
     padding: 5px;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26);
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.26);
     margin: 2%;
     border-radius: 2px;
+    max-width: 100%;
 }
 
 .met-repeated-datums {
@@ -195,6 +213,11 @@ a,a:hover {
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26);
     margin: 2%;
     border-radius: 2px;
+    max-width: 100%;
+}
+
+.side-options {
+    display: inline-flex !important;
 }
 
 .ta-editor.form-control.myform2-height, .ta-scroll-window.form-control.myform2-height  {
@@ -227,7 +250,7 @@ a,a:hover {
 }
 
 #last-menu-item {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #FFF;
 }
 
 body {
@@ -258,6 +281,60 @@ body {
 .tag-cloud {
     margin-top: 5%;
 }
+
+.vertical-divider {
+  border-top-width: 0;
+  border-right-width: 1px;
+  border-right-style: solid;
+  height: 100%;
+}
+
+.reuse-items {
+    text-align: center;
+}
+
+.cancel-button {
+    float: right;
+    cursor: pointer;
+}
+
+.hvr-grow-shadow {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+}
+
+.hvr-grow-shadow:focus{
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.rotating-image {
+    position: fixed;
+    top: 25%;
+    left: 45%;
+    -webkit-animation: rotation 0.4s infinite linear;
+    -webkit-backface-visibility: hidden;
+}
+
+.about-text {
+    padding-left: 10px;
+    padding-right: 10%;
+}
+
+@-webkit-keyframes rotation {
+    from {-webkit-transform: rotate(0deg);}
+    to   {-webkit-transform: rotate(359deg);}
+}
+
 
 @media only screen and (min-width:950px) { 
     .menuButton {

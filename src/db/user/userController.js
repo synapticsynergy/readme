@@ -31,34 +31,38 @@ function removeUser(email) {
 
 User.prototype.addActivity = function(activities, day, location) {
   var user = this;
-  return user.getDay(day)
-    .then(function(foundDay) {
+  return user.addPopular('activities', activities)
+  .then(function(){
+    return user.getDay(day)
+      .then(function(foundDay) {
+      if (foundDay.gotWeather === false) {
+        var dateForWeather = foundDay.date.split('T')[0].split('-').join('');
+         return user.getWeather(dateForWeather, location)
+          .then(function(newWeatherParams) {
+            activities = activities.concat(newWeatherParams);
+            activities.forEach(function(activity) {
+              if (user.userActivities.indexOf(activity) === -1) {
+                user.userActivities.push(activity);
+              }
+            });
+            foundDay.activities = foundDay.activities.concat(activities);
+            foundDay.gotWeather = true;
+            return user.save();
+          })
 
-    if (foundDay.gotWeather === false) {
-      var dateForWeather = foundDay.date.split('T')[0].split('-').join('');
-       return user.getWeather(dateForWeather, location)
-        .then(function(newWeatherParams) {
-          activities = activities.concat(newWeatherParams);
-          activities.forEach(function(activity) {
-            if (user.userActivities.indexOf(activity) === -1) {
-              user.userActivities.push(activity);
-            }
-          });
-          foundDay.activities = foundDay.activities.concat(activities);
-          foundDay.gotWeather = true;
-          return user.save();
-        })
-
-    } else {
-      activities.forEach(function(activity) {
-        if (user.userActivities.indexOf(activity) === -1) {
-          user.userActivities.push(activity);
-        }
-      });
-      foundDay.activities = foundDay.activities.concat(activities);
-      return user.save();
-    }
-  })
+      } else {
+        activities.forEach(function(activity) {
+          if (user.userActivities.indexOf(activity) === -1) {
+            user.userActivities.push(activity);
+          }
+        });
+        foundDay.activities = foundDay.activities.concat(activities);
+        return user.save();
+      }
+    })
+  }).catch(function(err){
+    console.log("Error from addActivity", err)
+  })    
 };
 
 User.prototype.deleteActivity = function(activity, day) {
@@ -143,6 +147,29 @@ User.prototype.getDay = function(date) {
       return user.days[user.days.length - 1];
     });
 };
+
+User.prototype.addPopular = function(type, datums){
+  var user = this;
+
+  datums.forEach(function(datum){
+    if (type === 'activities') {
+      if (user.popularItems.act[datum] === undefined) {
+        user.popularItems.act[datum] = 1;
+      } else {
+        user.popularItems.act[datum]++;
+      }
+    } else {
+      if (user.popularItems.met[datum] === undefined) {
+        user.popularItems.met[datum] = 1;
+      } else if (user.popularItems.met[datum] !== undefined) {
+        user.popularItems.met[datum]++;
+      }
+    }
+    console.log('popularItemAct', user.popularItems.act)
+  });
+
+  return user.save();
+}
 
 //calls the wunderground API for weather data and pulls pertinent info out of the response
 User.prototype.getWeather = function(date, location) {

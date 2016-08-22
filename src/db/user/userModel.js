@@ -23,7 +23,16 @@ var userSchema = mongoose.Schema({
   userActivities: [String],
   // metrics the user has already nominated
   // same, autocomplete or something
-  userMetrics: [String]
-});
+  userMetrics: [String],
+
+  popularItems: {
+    type: Object, 
+    default: {
+      act:{}, 
+      met:{}
+    }
+  }
+
+}, {minimize: false});
 
 module.exports = mongoose.model('User', userSchema);
