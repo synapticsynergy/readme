@@ -247,6 +247,11 @@ a,a:hover {
 
 .svg-container {
     margin-top: 2%;
+    border: 1px solid #ddd;
+}
+
+.insights-switch {
+    display: inline;
 }
 
 .black-box {
@@ -261,8 +266,25 @@ a,a:hover {
     border-bottom: 1px solid #FFF;
 }
 
+md-switch.md-checked .md-thumb {
+  background-color: rgb(91,177,47);
+}
+
+md-switch.md-checked .md-bar {
+  background-color: rgba(91,177,47,0.5);
+}
+
+md-switch.md-checked .md-ink-ripple {
+  color: rgb(91,177,47);
+}
+
+switch:not(.md-dragging) .md-thumb {
+  transition: all 0.2s linear;
+}
+
 body {
     color: #2f2d2d;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .landing-nav-custom {

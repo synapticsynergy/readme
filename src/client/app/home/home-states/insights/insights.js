@@ -7,6 +7,8 @@
     /*jshint validthis: true */
     var insights = this;
 
+    insights.switch = false;
+
     insights.userMetrics = store.get('userData').userMetrics;
 
     insights.currentCorrelationData = [{'Null': 'null'}];

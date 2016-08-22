@@ -87,6 +87,7 @@ angular.module('app.home.insights').
 
         var nodes = d3.values(data);
 
+        
         // layout for gravitational effect.
         var force = d3.layout.force()//build the layout
           .charge(-300) // node distance from eachother.
@@ -95,7 +96,7 @@ angular.module('app.home.insights').
           .nodes(nodes) //add nodes
           .on("tick", tick) //what to do
           .start();
-
+        
 
         // add the nodes
         var node = svg.selectAll('.node')
