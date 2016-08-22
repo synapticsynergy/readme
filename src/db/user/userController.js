@@ -32,7 +32,7 @@ function removeUser(email) {
 User.prototype.addActivity = function(activities, day, location) {
   var user = this;
   return user.addPopular('activities', activities)
-  .then(function(user){
+  .then(function(){
     return user.getDay(day)
       .then(function(foundDay) {
       if (foundDay.gotWeather === false) {

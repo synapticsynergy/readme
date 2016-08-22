@@ -16,8 +16,8 @@
     entries.daysActivities = [];
     entries.daysMetrics = [];
 
-    entries.recentAct = ['hops', 'skips', 'jumps', 'google', 'computer', 'play music', 'read book','flip', 'roger', 'go for a walk', 'dog walk', 'wirte with pen', 'play bass', 'read novel'];
-    entries.recentMet = ['happy', 'sad', 'headache', 'car crash', 'creative', 'artisitic', 'sick'];
+    entries.popularAct = ['hops', 'skips', 'jumps', 'google', 'computer', 'play music', 'read book','flip', 'roger', 'go for a walk', 'dog walk', 'wirte with pen', 'play bass', 'read novel'];
+    entries.popularMet = ['happy', 'sad', 'headache', 'car crash', 'creative', 'artisitic', 'sick']; 
 
     entries.showActivities = function(){
       if (entries.daysActivities.length > 0 || entries.daysMetrics.length > 0){
@@ -70,10 +70,10 @@
 
     entries.addItemSideOptions = function(index, type) {
       if (type === 'activity') {
-        var item = entries.recentAct.splice(index, 1);
+        var item = entries.popularAct.splice(index, 1);
         entries.daysActivities.push(item[0]);
       } else {
-        var item = entries.recentMet.splice(index, 1);
+        var item = entries.popularMet.splice(index, 1);
         entries.daysMetrics.push(item[0]);
       }
     }
