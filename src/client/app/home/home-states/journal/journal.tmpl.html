@@ -1,6 +1,6 @@
 
 <div layout='row' layout-xs='column'>
-  <div flex='60'>
+  <div flex='50'>
       <h2>Add A Journal Entry</h2>
       <br>
       <p>Enter a journal entry for what happened today.<br> 
@@ -17,7 +17,10 @@
         <md-button class="md-raised md-primary submit-button" ng-click="journal.saveJournal(); journal.getSentiment(journal.entry)"> Submit </md-button>
       </div>
       {{ journal.message }} <br />
-      {{ journal.sentiment }}
+      
     </div>
+  </div>
+  <div flex style='background-color:transparent; !important;'>
+    The sentiment for today's entry seems: {{ journal.sentiment }}
   </div>
 </div>
