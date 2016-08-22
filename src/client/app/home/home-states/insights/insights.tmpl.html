@@ -69,7 +69,7 @@
           </md-autocomplete>
         </form> 
       </div>
-      <div flex class='svg-container'>
+      <div flex class='svg-container' ng-show='insights.showSVG'>
         <bubble-chart></bubble-chart>
         <ul>
           <li ng-repeat="(key, value) in item">{{key}}: {{value}}%</li>

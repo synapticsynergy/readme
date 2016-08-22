@@ -248,6 +248,15 @@ a,a:hover {
 .svg-container {
     margin-top: 2%;
     border: 1px solid #ddd;
+    opacity: 1;
+}
+
+.svg-container.ng-hide-add, .svg-container.ng-hide-remove {
+  transition: all linear 1s;
+}
+
+.svg-container.ng-hide {
+  opacity: 0;
 }
 
 .insights-switch {
@@ -278,9 +287,6 @@ md-switch.md-checked .md-ink-ripple {
   color: rgb(91,177,47);
 }
 
-switch:not(.md-dragging) .md-thumb {
-  transition: all 0.2s linear;
-}
 
 body {
     color: #2f2d2d;

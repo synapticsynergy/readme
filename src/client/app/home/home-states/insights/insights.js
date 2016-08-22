@@ -9,6 +9,8 @@
 
     insights.switch = false;
 
+    insights.showSVG = false;
+
     insights.userMetrics = store.get('userData').userMetrics;
 
     insights.currentCorrelationData = [{'Null': 'null'}];
@@ -56,6 +58,7 @@
       .catch(function(err){
         console.log('There was an error getting your correlations', err);
       })
+      insights.showSVG = true;
     }
 
   }
