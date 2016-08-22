@@ -115,13 +115,18 @@ footer {
     overflow: hidden;
 }
 
-.active {
+.side-menu-options.active {
     background-color: #247abd;
     font-weight: bold;
 } 
 
 .date-picker {
     margin: 5% auto auto 7%;
+}
+
+.date-picker.hidden {
+    margin: 5% auto auto 7%;
+    visibility: hidden;
 }
 
 .submission {
@@ -315,9 +320,14 @@ body {
 .rotating-image {
     position: fixed;
     top: 25%;
-    left: 40%;
+    left: 45%;
     -webkit-animation: rotation 0.4s infinite linear;
     -webkit-backface-visibility: hidden;
+}
+
+.about-text {
+    padding-left: 10px;
+    padding-right: 10%;
 }
 
 @-webkit-keyframes rotation {

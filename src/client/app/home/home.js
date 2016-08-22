@@ -3,11 +3,26 @@
   angular.module('app.home', ['app.home.entries', 'app.home.insights', 'app.home.journal', 'app.home.about'])
   .controller('HomeController', HomeController);
 
-  HomeController.$inject = ['$scope', '$mdSidenav', '$window', '$location', 'Home', 'Auth'];
+  HomeController.$inject = ['$scope', '$mdSidenav', '$window', '$location', 'Home', 'Auth', '$rootScope'];
 
-  function HomeController($scope, $mdSidenav, $window, $location, Home, Auth) {
+  function HomeController($scope, $mdSidenav, $window, $location, Home, Auth, $rootScope) {
     // jshint validthis: true (prevents linting from throwing a warning)
     var home = this;
+
+    home.currentState = {};
+
+    $rootScope.$on('$stateChangeSuccess', function(event, toState){
+      home.currentState = toState;
+    })
+
+    home.displayDatePicker = function(){
+
+      if (home.currentState.url === '/about' || home.currentState.url === '/insights'){
+        return false;
+      } else {
+        return true;
+      }
+    }
 
     //Sets the date in the Home factory
     home.dateSetter = function(value) {
