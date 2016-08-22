@@ -2,8 +2,8 @@
     <div flex='35'>
         <h2>Add Your Data</h2>
         <br>
-        <p>Enter the activities and experiences you did today.<br> 
-            You can enter one a time or many, separated by a comma. <br> 
+        <p>Enter the activities and experiences you did today.<br>
+            You can enter one a time or many, separated by a comma. <br>
         </p>
         <br>
         <!-- Activities -->
@@ -61,17 +61,17 @@
     </div>
   </div>
   <div flex >
-    <div layout='column' ng-hide='showme' class='reuse-items-container'>
+    <div layout='column' ng-hide='showme' class='reuse-items-container marginOnBottom'>
       <div flex class='reuse-items'>
       <span style="float: left;"></span>
       <span class='cancel-button' ng-click='showme=true'><img src="../../images/ic_cancel_black_24px.svg"></span>
         <h4>Popular Activities</h4>
-        <span class='act-repeated-datums side-options hvr-grow-shadow' ng-repeat='recent in entries.popularAct' ng-click='entries.addItemSideOptions($index, "activity")'>{{recent}}</span> 
+        <span class='act-repeated-datums side-options hvr-grow-shadow' ng-repeat='recent in entries.popularAct' ng-click='entries.addItemSideOptions($index, "activity")'>{{recent}}</span>
       </div>
-      
+
       <div flex class='reuse-items'>
         <h4>Popular Metrics</h4>
-        <div class='met-repeated-datums side-options hvr-grow-shadow' ng-repeat='popular in entries.popularMet' ng-click='entries.addItemSideOptions($index, "metric")'>{{popular}}</div> 
+        <div class='met-repeated-datums side-options hvr-grow-shadow' ng-repeat='popular in entries.popularMet' ng-click='entries.addItemSideOptions($index, "metric")'>{{popular}}</div>
       </div>
     </div>
   </div>
