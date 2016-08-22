@@ -1,9 +1,9 @@
-<div layout="column" layout-align="center center" ng-cloak>
+<!-- <div layout="column" layout-align="center center" ng-cloak>
 
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <!-- Activities-->
+            
     <h4>Enter an activity or metric to find correlations:</h4>
     <form ng-submit="insights.submitSelection(insights.searchText)" name="insights.correlForm">
       <md-autocomplete
@@ -33,5 +33,40 @@
     </div>
     </div>
    </div>
+</div> -->
+
+
+<div layout='column' layout-xs='column'>
+  <div layout='row'>
+    <div flex='60'>
+      <h2>Discover Insights</h2>
+      <br>
+      <p>Select a metric to find correlations between it and your activities.<br> 
+          You can also choose to "timeshift" the metric by a certain amount of days to see if there's a delayed connection.<br> 
+      </p>
+      <br>
+      <div>
+        <form ng-submit="insights.submitSelection(insights.searchText)" name="insights.correlForm">
+          <md-autocomplete
+                    md-selected-item="insights.selectedItem"
+                    md-search-text="insights.searchText"
+                    md-items="item in insights.userMetrics | filter: insights.searchText"
+                    md-item-text="item"
+                    md-min-length="1"
+                    placeholder="Search...">
+              <md-item-template>
+                <span md-highlight-text="insights.searchText" md-highlight-flags="^i">{{item}}</span>
+              </md-item-template>
+          </md-autocomplete>
+        </form>
+      </div>
+      <div flex class='svg-container md-whiteframe-1dp'>
+        <bubble-chart></bubble-chart>
+        <ul>
+          <li ng-repeat="(key, value) in item">{{key}}: {{value}}%</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 

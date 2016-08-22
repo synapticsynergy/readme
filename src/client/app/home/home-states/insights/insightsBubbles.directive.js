@@ -53,8 +53,8 @@ angular.module('app.home.insights').
 
 
 
-        var width = 600; //600
-        var height = 800;
+        var width = 800; //600
+        var height = 400;
 
         //create svg container.
         var svg = svgContainer.append("svg").attr('width', width).attr('height', height);

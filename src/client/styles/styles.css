@@ -245,6 +245,10 @@ a,a:hover {
     text-align: center;
 }
 
+.svg-container {
+    margin-top: 2%;
+}
+
 .black-box {
     background-color: black; 
     width: 70%; 
