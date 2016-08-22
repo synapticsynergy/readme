@@ -9,15 +9,16 @@
     // jshint validthis: true (prevents linting from throwing a warning)
     var home = this;
 
-    home.currentState = {};
+    home.currentState = 'Entries';
 
     $rootScope.$on('$stateChangeSuccess', function(event, toState){
-      home.currentState = toState;
+      var page = toState.url.slice(1)
+      page = page.charAt(0).toUpperCase() + page.slice(1);
+      home.currentState = page;
     })
 
     home.displayDatePicker = function(){
-
-      if (home.currentState.url === '/about' || home.currentState.url === '/insights'){
+      if (home.currentState === 'About' || home.currentState === 'Insights'){
         return false;
       } else {
         return true;
