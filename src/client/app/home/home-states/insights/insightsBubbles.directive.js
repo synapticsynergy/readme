@@ -75,7 +75,7 @@ angular.module('app.home.insights').
         // var posColorScale = d3.interpolateYlGn;
        var posColorScale = d3.scale.linear().domain([0,50, 100])
         .interpolate(d3.interpolateHcl)
-        .range(['yellow','green']);
+        .range(['#ffff66','green']);
 
 
 
@@ -86,7 +86,7 @@ angular.module('app.home.insights').
         // var negColorScale = d3.scale.linear().domain([0, -100]).range(['#ddd', '#EB65A0']);
         var negColorScale = d3.scale.linear().domain([0,50,100])
           .interpolate(d3.interpolateHcl)
-          .range(['pink', 'purple']);
+          .range(['#ff8080', '#5900b3']);
 
 
         var nodes = d3.values(data);
