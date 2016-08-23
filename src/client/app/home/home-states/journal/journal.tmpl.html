@@ -17,10 +17,12 @@
         <md-button class="md-raised md-primary submit-button" ng-click="journal.saveJournal(); journal.getSentiment(journal.entry)"> Submit </md-button>
       </div>
       {{ journal.message }} <br />
-
+      <div  style='background-color:lightgreen; !important;'>
+        The sentiment for today's entry appears: {{ journal.sentiment }}
+      </div>
     </div>
   </div>
-  <div flex style='background-color:transparent; !important;'>
-    The sentiment for today's entry seems: {{ journal.sentiment }}
+  <div flex style='background-color:lightblue; !important;'>
+    The sentiment for today's entry appears: {{ journal.sentiment }}
   </div>
 </div>

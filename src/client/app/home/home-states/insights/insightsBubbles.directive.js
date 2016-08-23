@@ -73,9 +73,9 @@ angular.module('app.home.insights').
         // var posColorScale = d3.scale.category20c();
         // var posColorScale = d3.scale.linear().domain([-100,100]).range(['#BCCFO2', '#5BB12F']);
         // var posColorScale = d3.interpolateYlGn;
-       var posColorScale = d3.scale.linear().domain([0,50, 100])
+       var posColorScale = d3.scale.linear().domain([0,75, 100])
         .interpolate(d3.interpolateHcl)
-        .range(['yellow','green']);
+        .range(['#ffff66','green']);
 
 
 
@@ -84,9 +84,9 @@ angular.module('app.home.insights').
         //negative colors
         // var negColorScale = d3.scale.category20b();
         // var negColorScale = d3.scale.linear().domain([0, -100]).range(['#ddd', '#EB65A0']);
-        var negColorScale = d3.scale.linear().domain([0,50,100])
+        var negColorScale = d3.scale.linear().domain([0,75,100])
           .interpolate(d3.interpolateHcl)
-          .range(['pink', 'purple']);
+          .range(['#ff8080', '#5900b3']);
 
 
         var nodes = d3.values(data);
@@ -113,7 +113,7 @@ angular.module('app.home.insights').
         /*Create the circle for each block */
         var circle = elemEnter.append("circle")
           .attr('class', 'node')
-          .attr("r", function(d){return d.r > 0 ? d.r / 0.5 : (d.r * -1) / 0.5} )
+          .attr("r", function(d){return d.r > 0 ? d.r / 1.2 : (d.r * -1) / 1.2} )
           .attr('fill',function(d) {
             if (d.r < 0) {
               console.log('negative', d.r * -1)
