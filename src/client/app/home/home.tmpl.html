@@ -1,6 +1,6 @@
 <div id="sideNavContainer" ng-cloak class='navBar'>
   <div layout='vertical'>
-    <md-sidenav md-component-id="left" hide-print class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-sm')" md-is-open='isSideNavOpen' tabindex="-1">
+    <md-sidenav md-component-id="left" layout-fill hide-print class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-sm')" md-is-open='isSideNavOpen' tabindex="-1">
       <div>
         <a ng-href="/" class='readme-logo' href='/'>
           <img style='max-width: 150px;' src="images/newLogo6.png">
@@ -8,11 +8,17 @@
         </a>
       </div>
       <div>
-        <md-content md-ink-ripple='#FFFFFF' class='side-button-container'>
-        <div  class='side-menu-options' ui-sref='home.entries' ui-sref-active='active'>Daily Entries</div>
-        <div  class='side-menu-options' ui-sref='home.journal' ui-sref-active='active'>Daily Journal</div>
-        <div  class='side-menu-options' id='last-menu-item' ui-sref='home.insights' ui-sref-active='active'>Your Insights</div>
-       </md-content>
+      <md-content md-ink-ripple='#FFFFFF' class='side-button-container'>
+              <div  class='side-menu-options' ui-sref='home.entries' ui-sref-active='active'>
+              <span class='sidenav-icons'><img src="../../images/ic_view_quilt_white_24dp_1x.png"></span>
+              Daily Entries</div>
+              <div  class='side-menu-options' ui-sref='home.journal' ui-sref-active='active'>
+              <span class='sidenav-icons'><img src="../../images/ic_event_note_white_24dp_1x.png"></span>
+              Daily Journal</div>
+              <div  class='side-menu-options' id='last-menu-item' ui-sref='home.insights' ui-sref-active='active'>
+              <span class='sidenav-icons'><img src="../../images/ic_all_out_white_24dp_1x.png"></span>
+              Your Insights</div>
+             </md-content>
       </div>
     </md-sidenav>
   </div>
