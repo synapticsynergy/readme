@@ -12,7 +12,9 @@ describe('RESTful API', function () {
   var newUser = {
     firstname: firstname,
     lastname: lastname,
-    email: testEmail
+    email: testEmail,
+    location: { lat: 33.671521999999996, lng: -117.84693320000001 },
+    date: testDate
   };
 
   var testDate = new Date(2016, 6, 6);
