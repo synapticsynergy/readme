@@ -11,6 +11,7 @@
     journal.message = '';
     journal.sentiment = '';
     journal.entry = "Enter your thoughts for today...";
+    journal.showSent = true;
 
     journal.saveJournal = Journal.saveJournal;
 
@@ -18,6 +19,7 @@
       Journal.getSentiment(text)
         .then(function (res) {
           journal.sentiment = res.data.docSentiment.type;
+          journal.showSent = false;
         })
         .catch(function(err){
           console.log('Error ', err)

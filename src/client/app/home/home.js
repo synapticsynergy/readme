@@ -3,13 +3,17 @@
   angular.module('app.home', ['app.home.entries', 'app.home.insights', 'app.home.journal', 'app.home.about'])
   .controller('HomeController', HomeController);
 
-  HomeController.$inject = ['$scope', '$mdSidenav', '$window', '$location', 'Home', 'Auth', '$rootScope'];
+  HomeController.$inject = ['$scope', '$mdSidenav', '$window', '$location', 'Home', 'Auth', '$rootScope', '$state'];
 
-  function HomeController($scope, $mdSidenav, $window, $location, Home, Auth, $rootScope) {
+  function HomeController($scope, $mdSidenav, $window, $location, Home, Auth, $rootScope, $state) {
     // jshint validthis: true (prevents linting from throwing a warning)
     var home = this;
 
-    home.currentState = 'Entries';
+    home.currentState = function(){
+      var page = $state.current.url.slice(1)
+      page = page.charAt(0).toUpperCase() + page.slice(1);
+      return page;
+    }();
 
     $rootScope.$on('$stateChangeSuccess', function(event, toState){
       var page = toState.url.slice(1)
