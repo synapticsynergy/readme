@@ -58,6 +58,7 @@ User.prototype.addActivity = function(activities, day, location) {
     }
   }).then(function(user) {
     console.log(user.popularItems,'complete last stop')
+    user.markModified('popularItems');
     return user.save();
   })
   .catch(function(err){
@@ -153,7 +154,8 @@ User.prototype.getDay = function(date) {
 User.prototype.addPopular = function(type, datums){
   var user = this;
 
-   console.log('before popularItemAct', user.popularItems.act)
+   console.log('before popularItemAct', user.popularItems.act);
+
 
   datums.forEach(function(datum){
     if (type === 'activities') {

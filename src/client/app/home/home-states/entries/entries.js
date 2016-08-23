@@ -17,7 +17,7 @@
     entries.daysMetrics = [];
 
     entries.popularAct = ['hops', 'skips', 'jumps', 'google', 'computer', 'play music', 'read book','flip', 'roger', 'go for a walk', 'dog walk', 'wirte with pen', 'play bass', 'read novel'];
-    entries.popularMet = ['happy', 'sad', 'headache', 'car crash', 'creative', 'artisitic', 'sick']; 
+    entries.popularMet = ['happy', 'sad', 'headache', 'car crash', 'creative', 'artisitic', 'sick'];
 
     entries.showActivities = function(){
       if (entries.daysActivities.length > 0 || entries.daysMetrics.length > 0){
