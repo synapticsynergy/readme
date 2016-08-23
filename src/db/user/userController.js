@@ -79,16 +79,22 @@ User.prototype.deleteActivity = function(activity, day) {
 User.prototype.addMetric = function(metrics, day) {
   console.log(metrics,'metrics data showing?');
   var user = this;
-  return user.getDay(day)
-    .then(function(foundDay) {
-      metrics.forEach(function(metric) {
-        if (user.userMetrics.indexOf(metric) === -1) {
-          user.userMetrics.push(metric);
-        }
-      });
-      foundDay.metrics = foundDay.metrics.concat(metrics);
-      return user.save();
+
+  user.addPopular('metrics', metrics)
+  .then(function(user){
+
+    return user.getDay(day);
+  })
+  .then(function(foundDay) {
+    metrics.forEach(function(metric) {
+      if (user.userMetrics.indexOf(metric) === -1) {
+        user.userMetrics.push(metric);
+      }
     });
+    foundDay.metrics = foundDay.metrics.concat(metrics);
+    user.markModified('popularItems');
+    return user.save();
+  });
 };
 
 User.prototype.deleteMetric = function(metric, day) {
@@ -169,9 +175,9 @@ User.prototype.addPopular = function(type, datums){
         user.popularItems.met[datum]++;
       }
     }
-    console.log('middle popularItemAct', user.popularItems.act)
+    console.log('middle popularItemAct', user.popularItems.met)
   });
-  console.log('after popularItemAct', user.popularItems.act)
+  console.log('after popularItemAct', user.popularItems.met)
   return user.save();
 }
 
