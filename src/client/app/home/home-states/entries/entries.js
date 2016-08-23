@@ -29,11 +29,15 @@
     entries.userMetrics = store.get('userData').userMetrics;
 
     entries.postBoth = function(){
+      console.log(entries.daysActivities)
       entries.postData('/user/activity', entries.daysActivities)
         .then(function(){
+          console.log(entries.daysMetrics)
           entries.postData('/user/metric', entries.daysMetrics);
         }).then(function(){
-          console.log('Posteddddddd')
+          console.log('Posteddddddd');
+          entries.daysActivities = [];
+          entries.daysMetrics = [];
         });
     }
 
@@ -97,8 +101,6 @@
       })
       .then(function(resp) {
         console.log("Post Success! " + entries.activeField, resp)
-        entries.daysActivities = [];
-        entries.daysMetrics = [];
         Home.getUserData();
       })
       .catch(function(err) {

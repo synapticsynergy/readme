@@ -18,6 +18,9 @@
       Journal.getSentiment(text)
         .then(function (res) {
           journal.sentiment = res.data.docSentiment.type;
+        })
+        .catch(function(err){
+          console.log('Error ', err)
         });
     };
 
