@@ -67,14 +67,18 @@
                 <span md-highlight-text="insights.searchText" md-highlight-flags="^i">{{item}}</span>
               </md-item-template>
           </md-autocomplete>
+
         </form> 
       </div>
-      <div flex class='svg-container' ng-show='insights.showSVG'>
-        <bubble-chart></bubble-chart>
-        <ul>
-          <li ng-repeat="(key, value) in item">{{key}}: {{value}}%</li>
-        </ul>
+      <div flex id='d3Div' class='svg-container' ng-show='insights.showSVG'> 
+      
+        <bubble-chart style='background-color: magenta;'></bubble-chart>
       </div>
+        <div ng-repeat="item in insights.displayData" class='col-sm-12'>
+          <ul>
+            <li ng-repeat="(key, value) in item">{{key}}: {{value}}%</li>
+          </ul>
+        </div>
     </div>
   </div>
 </div>

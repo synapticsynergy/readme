@@ -18,14 +18,18 @@ angular.module('app.home.insights').
       //in the HTML mark-up
       replace: false,
 
-      scope: { data: '=' },
+      scope: { 
+        data: '=', 
+        width: '=',
+        height: '='
+      },
 
       link: function (scope, element, attrs) {
 
         //converting all data passed thru into an array of objects.
 
         // var data = Insights.dataRefresh();
-        function renderIt(data) {
+        function renderIt(data, width, height) {
         // var data = store.get('currentCorrelationData');
 
         data = data.map(function(obj) {
@@ -53,8 +57,8 @@ angular.module('app.home.insights').
 
 
 
-        var width = 800; //600
-        var height = 400;
+        var width = width; //600
+        var height = height;
 
         //create svg container.
         var svg = svgContainer.append("svg").attr('width', width).attr('height', height);
@@ -142,8 +146,8 @@ angular.module('app.home.insights').
 
         scope.$on('newData',function(event, data){
           d3.selectAll('svg').remove();
-          renderIt(data.data);
-          console.log('watch is working');
+          renderIt(data.data, data.width, data.height);
+          // console.log('watch is working');
         });
 
       }

@@ -249,6 +249,8 @@ a,a:hover {
     margin-top: 2%;
     border: 1px solid #ddd;
     opacity: 1;
+    background-color: lightgreen;
+    text-align: center;
 }
 
 .svg-container.ng-hide-add, .svg-container.ng-hide-remove {
