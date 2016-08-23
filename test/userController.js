@@ -122,7 +122,6 @@ describe('userController', function () {
           return user.findCorrelations('headache');
         })
         .then(function (correlations) {
-          console.log(correlations);
           assert.isArray(correlations);
         });
     });
