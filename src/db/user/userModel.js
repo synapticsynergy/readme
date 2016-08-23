@@ -26,9 +26,9 @@ var userSchema = mongoose.Schema({
   userMetrics: [String],
 
   popularItems: {
-    type: Object, 
+    type: Object,
     default: {
-      act:{}, 
+      act:{},
       met:{}
     }
   }

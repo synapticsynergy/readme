@@ -33,8 +33,8 @@ User.prototype.addActivity = function(activities, day, location) {
   var user = this;
 
   return user.addPopular('activities', activities)
-  .then(function(){
-
+  .then(function(user){
+    console.log(user.popularItems, 'did this work??');
     return user.getDay(day)
 
   })
@@ -52,12 +52,13 @@ User.prototype.addActivity = function(activities, day, location) {
         }
       });
       foundDay.activities = foundDay.activities.concat(activities);
-
+      console.log(user.popularItems,'last check items');
       return user.save();
 
     }
   }).then(function(user) {
-    return user;
+    console.log(user.popularItems,'complete last stop')
+    return user.save();
   })
   .catch(function(err){
     console.log("Error from addActivity", err)
@@ -152,6 +153,8 @@ User.prototype.getDay = function(date) {
 User.prototype.addPopular = function(type, datums){
   var user = this;
 
+   console.log('before popularItemAct', user.popularItems.act)
+
   datums.forEach(function(datum){
     if (type === 'activities') {
       if (user.popularItems.act[datum] === undefined) {
@@ -166,9 +169,9 @@ User.prototype.addPopular = function(type, datums){
         user.popularItems.met[datum]++;
       }
     }
-    console.log('popularItemAct', user.popularItems.act)
+    console.log('middle popularItemAct', user.popularItems.act)
   });
-
+  console.log('after popularItemAct', user.popularItems.act)
   return user.save();
 }
 
