@@ -34,7 +34,6 @@ User.prototype.addActivity = function(activities, day, location) {
 
   return user.addPopular('activities', activities)
   .then(function(user){
-    console.log(user.popularItems, 'did this work??');
     return user.getDay(day)
 
   })
@@ -52,12 +51,10 @@ User.prototype.addActivity = function(activities, day, location) {
         }
       });
       foundDay.activities = foundDay.activities.concat(activities);
-      console.log(user.popularItems,'last check items');
       return user.save();
 
     }
   }).then(function(user) {
-    console.log(user.popularItems,'complete last stop')
     user.markModified('popularItems');
     return user.save();
   })
@@ -80,6 +77,7 @@ User.prototype.deleteActivity = function(activity, day) {
 };
 
 User.prototype.addMetric = function(metrics, day) {
+  console.log(metrics,'metrics data showing?');
   var user = this;
   return user.getDay(day)
     .then(function(foundDay) {
