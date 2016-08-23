@@ -8,7 +8,8 @@ describe('userController', function () {
   var testEmail = '1@asdfccc.com';
   var testFirstName = 'budleigh';
   var testLastName = 'salterton';
-  var testDate = new Date(2016, 6, 6);
+  // var testDate = new Date(2016, 6, 6);
+  var testDate = '2016-07-06T07:00:00.000Z';
   var testLocation = { lat: 33.671521999999996, lng: -117.84693320000001 };
   var databaseUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/readme';
 
@@ -42,10 +43,10 @@ describe('userController', function () {
     it('should add an activity', function () {
       return userController.findOrCreateUser(testEmail)
         .then(function (user) {
-          return user.addActivity(['bowling'], '2016-07-06T07:00:00.000Z', testLocation);
+          return user.addActivity(['bowling'], testDate, testLocation);
         })
         .then(function (user) {
-          return user.getDay('2016-07-06T07:00:00.000Z');
+          return user.getDay(testDate);
         })
         .then(function (day) {
           assert.include(day.activities, 'bowling');
@@ -72,7 +73,7 @@ describe('userController', function () {
     it('should add a metric', function () {
       return userController.findOrCreateUser(testEmail)
         .then(function (user) {
-          return user.addMetric('headache', testDate);
+          return user.addMetric(['headache'], testDate);
         })
         .then(function (user) {
           return user.getDay(testDate);

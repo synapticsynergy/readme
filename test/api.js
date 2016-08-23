@@ -144,7 +144,7 @@ describe('RESTful API', function () {
         .expect(200)
         .end(function (err, data) {
           var parsedData = JSON.parse(data.text);
-          expect(parsedData).to.equal(0);
+          expect(parsedData[0]['ate breakfast']).to.equal(0);
           done();
         });
     });

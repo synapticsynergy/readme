@@ -66,44 +66,6 @@ User.prototype.addActivity = function(activities, day, location) {
 
 
 
-
-// User.prototype.addActivity = function(activities, day, location) {
-//   var user = this;
-//   return user.addPopular('activities', activities)
-//   .then(function(){
-//     return user.getDay(day)
-//       .then(function(foundDay) {
-//       if (foundDay.gotWeather === false) {
-//         var dateForWeather = foundDay.date.split('T')[0].split('-').join('');
-
-//          return user.getWeather(dateForWeather, location)
-//           .then(function(newWeatherParams) {
-//             activities = activities.concat(newWeatherParams);
-//             activities.forEach(function(activity) {
-//               if (user.userActivities.indexOf(activity) === -1) {
-//                 user.userActivities.push(activity);
-//               }
-//             });
-//             foundDay.activities = foundDay.activities.concat(activities);
-//             foundDay.gotWeather = true;
-//             return user.save();
-//           })
-
-//       } else {
-//         activities.forEach(function(activity) {
-//           if (user.userActivities.indexOf(activity) === -1) {
-//             user.userActivities.push(activity);
-//           }
-//         });
-//         foundDay.activities = foundDay.activities.concat(activities);
-//         return user.save();
-//       }
-//     })
-//   }).catch(function(err){
-//     console.log("Error from addActivity", err)
-//   })
-// };
-
 User.prototype.deleteActivity = function(activity, day) {
   var user = this;
   return user.getDay(day)
