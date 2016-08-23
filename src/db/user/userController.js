@@ -55,7 +55,6 @@ User.prototype.addActivity = function(activities, day, location) {
 
     }
   }).then(function(user) {
-    user.markModified('popularItems');
     return user.save();
   })
   .catch(function(err){
@@ -92,7 +91,6 @@ User.prototype.addMetric = function(metrics, day) {
       }
     });
     foundDay.metrics = foundDay.metrics.concat(metrics);
-    user.markModified('popularItems');
     return user.save();
   });
 };
@@ -158,9 +156,6 @@ User.prototype.getDay = function(date) {
 User.prototype.addPopular = function(type, datums){
   var user = this;
 
-   console.log('before popularItemAct', user.popularItems.act);
-
-
   datums.forEach(function(datum){
     if (type === 'activities') {
       if (user.popularItems.act[datum] === undefined) {
@@ -175,9 +170,8 @@ User.prototype.addPopular = function(type, datums){
         user.popularItems.met[datum]++;
       }
     }
-    console.log('middle popularItemAct', user.popularItems.met)
   });
-  console.log('after popularItemAct', user.popularItems.met)
+  user.markModified('popularItems');
   return user.save();
 }
 
