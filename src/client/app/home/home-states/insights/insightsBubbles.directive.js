@@ -73,7 +73,7 @@ angular.module('app.home.insights').
         // var posColorScale = d3.scale.category20c();
         // var posColorScale = d3.scale.linear().domain([-100,100]).range(['#BCCFO2', '#5BB12F']);
         // var posColorScale = d3.interpolateYlGn;
-       var posColorScale = d3.scale.linear().domain([0,50, 100])
+       var posColorScale = d3.scale.linear().domain([0,75, 100])
         .interpolate(d3.interpolateHcl)
         .range(['#ffff66','green']);
 
@@ -84,7 +84,7 @@ angular.module('app.home.insights').
         //negative colors
         // var negColorScale = d3.scale.category20b();
         // var negColorScale = d3.scale.linear().domain([0, -100]).range(['#ddd', '#EB65A0']);
-        var negColorScale = d3.scale.linear().domain([0,50,100])
+        var negColorScale = d3.scale.linear().domain([0,75,100])
           .interpolate(d3.interpolateHcl)
           .range(['#ff8080', '#5900b3']);
 
