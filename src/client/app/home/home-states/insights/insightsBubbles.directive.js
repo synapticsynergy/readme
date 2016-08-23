@@ -113,7 +113,7 @@ angular.module('app.home.insights').
         /*Create the circle for each block */
         var circle = elemEnter.append("circle")
           .attr('class', 'node')
-          .attr("r", function(d){return d.r > 0 ? d.r / 0.5 : (d.r * -1) / 0.5} )
+          .attr("r", function(d){return d.r > 0 ? d.r / 1.2 : (d.r * -1) / 1.2} )
           .attr('fill',function(d) {
             if (d.r < 0) {
               console.log('negative', d.r * -1)
