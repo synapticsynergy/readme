@@ -57,7 +57,7 @@ angular.module('app.home.insights').
 
 
 
-        var width = width; //600
+        var width = width; 
         var height = height;
 
         //create svg container.
@@ -73,9 +73,9 @@ angular.module('app.home.insights').
         // var posColorScale = d3.scale.category20c();
         // var posColorScale = d3.scale.linear().domain([-100,100]).range(['#BCCFO2', '#5BB12F']);
         // var posColorScale = d3.interpolateYlGn;
-       var posColorScale = d3.scale.linear().domain([0,1])
+       var posColorScale = d3.scale.linear().domain([0,50, 100])
         .interpolate(d3.interpolateHcl)
-        .range(["white", d3.rgb('#FFF500')]);
+        .range(['yellow','green']);
 
 
 
@@ -84,18 +84,18 @@ angular.module('app.home.insights').
         //negative colors
         // var negColorScale = d3.scale.category20b();
         // var negColorScale = d3.scale.linear().domain([0, -100]).range(['#ddd', '#EB65A0']);
-        var negColorScale = d3.scale.linear().domain([0,1])
+        var negColorScale = d3.scale.linear().domain([0,50,100])
           .interpolate(d3.interpolateHcl)
-          .range(['white', d3.rgb('#00FFFF')]);
+          .range(['pink', 'purple']);
 
 
         var nodes = d3.values(data);
 
-        
+        /**/
         // layout for gravitational effect.
         var force = d3.layout.force()//build the layout
           .charge(-300) // node distance from eachother.
-          .gravity(.05)
+          .gravity(.09)
           .size([width, height]) //specified earlier
           .nodes(nodes) //add nodes
           .on("tick", tick) //what to do
@@ -114,29 +114,28 @@ angular.module('app.home.insights').
         var circle = elemEnter.append("circle")
           .attr('class', 'node')
           .attr("r", function(d){return d.r > 0 ? d.r / 1.2 : 40} )
-          .attr("stroke","grey")
           .attr('fill',function(d) {
             if (d.r < 0) {
+              console.log('negative', d.r * -1)
               return negColorScale(d.r * -1);
             }
-            var colorScl = d.r/100;
+            var colorScl = d.r * 1;
+            console.log('positive', colorScl);
             return posColorScale(colorScl);
           })
           // .attr("fill", "lightblue");
 
         /* Create the text for each block */
-        elemEnter.append("text")
-          .attr("text-anchor", "middle")
-          .text(function(d){return d.label})
+       elemEnter.append("text")
+           .attr("text-anchor", "middle")
+           .text(function(d){return d.label})
           .attr('dy','0em');
 
 
         elemEnter.append("text")
           .attr("text-anchor", "middle")
-          .text(function(d){return ~~d.r + "%"})
-          .attr('dy','1.5em');
-
-
+           .text(function(d){return ~~d.r + "%"})
+           .attr('dy','1.5em');
 
         function tick(e) {
           node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })

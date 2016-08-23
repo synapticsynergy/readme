@@ -249,7 +249,7 @@ a,a:hover {
     margin-top: 2%;
     border: 1px solid #ddd;
     opacity: 1;
-    background-color: lightgreen;
+    background-color: transparent;
     text-align: center;
 }
 
