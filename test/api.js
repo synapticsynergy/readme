@@ -12,7 +12,9 @@ describe('RESTful API', function () {
   var newUser = {
     firstname: firstname,
     lastname: lastname,
-    email: testEmail
+    email: testEmail,
+    location: { lat: 33.671521999999996, lng: -117.84693320000001 },
+    date: testDate
   };
 
   var testDate = new Date(2016, 6, 6);
@@ -142,7 +144,7 @@ describe('RESTful API', function () {
         .expect(200)
         .end(function (err, data) {
           var parsedData = JSON.parse(data.text);
-          expect(parsedData).to.equal(0);
+          expect(parsedData[0]['ate breakfast']).to.equal(0);
           done();
         });
     });

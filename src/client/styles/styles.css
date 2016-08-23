@@ -118,7 +118,7 @@ footer {
 .side-menu-options.active {
     background-color: #247abd;
     font-weight: bold;
-} 
+}
 
 .date-picker {
     margin: 5% auto auto 7%;
@@ -163,7 +163,7 @@ a,a:hover {
 
 .datum-input-area {
     margin-top: 2%;
-    
+
 }
 
 .metric-input-area {
@@ -266,10 +266,10 @@ a,a:hover {
 }
 
 .black-box {
-    background-color: black; 
-    width: 70%; 
-    height: 250px; 
-    color: #fff; 
+    background-color: black;
+    width: 70%;
+    height: 250px;
+    color: #fff;
     padding: 8%;
 }
 
@@ -296,7 +296,7 @@ body {
 }
 
 .landing-nav-custom {
-   background-color: #000000; 
+   background-color: #000000;
 }
 
 .avatar {
@@ -313,7 +313,7 @@ body {
     transform: translateZ(0);
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26);  
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.26);
 }
 
 .tag-cloud {
@@ -374,7 +374,7 @@ body {
 }
 
 
-@media only screen and (min-width:950px) { 
+@media only screen and (min-width:950px) {
     .menuButton {
         display: none;
     }
@@ -391,4 +391,6 @@ body {
     }
 }
 
-
+.marginOnBottom {
+    margin-bottom: 100px;
+}
