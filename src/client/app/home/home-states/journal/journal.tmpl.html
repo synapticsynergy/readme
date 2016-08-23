@@ -1,11 +1,26 @@
-  <div text-angular="text-angular" ng-model="journal.entry" 
-        ta-text-editor-class="form-control myform2-height" ta-html-editor-class="form-control myform2-height">
-  </div>
 
-<div class="form-group">
-  <div>
-    <md-button class="md-raised" ng-click="journal.saveJournal(); journal.getSentiment(journal.entry)"> Submit </md-button>
+<div layout='row' layout-xs='column'>
+  <div flex='50'>
+      <h2>Add A Journal Entry</h2>
+      <br>
+      <p>Enter a journal entry for what happened today.<br> 
+          You can write anything: thoughts, feelings, note or notable memories. <br> 
+      </p>
+      <br>
+
+    <div text-angular="text-angular" ng-model="journal.entry" 
+          ta-text-editor-class="form-control myform2-height" ta-html-editor-class="form-control myform2-height">
+    </div>
+
+    <div class="form-group">
+      <div class='journal-submit'>
+        <md-button class="md-raised md-primary submit-button" ng-click="journal.saveJournal(); journal.getSentiment(journal.entry)"> Submit </md-button>
+      </div>
+      {{ journal.message }} <br />
+      
+    </div>
   </div>
-  {{ journal.message }} <br />
-  {{ journal.sentiment }}
+  <div flex style='background-color:transparent; !important;'>
+    The sentiment for today's entry seems: {{ journal.sentiment }}
+  </div>
 </div>

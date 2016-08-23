@@ -7,6 +7,14 @@
     /*jshint validthis: true */
     var insights = this;
 
+    insights.switch = false;
+
+    insights.showSVG = false;
+
+    insights.width = $(window).width() * 0.45;
+
+    insights.height = 400;
+
     insights.userMetrics = store.get('userData').userMetrics;
 
     insights.currentCorrelationData = [{'Null': 'null'}];
@@ -23,7 +31,7 @@
             datums: selection
           }
         }).then(function success(resp){
-          console.table(resp.data);
+          // console.table(resp.data);
           return resp.data;
         }, function error(resp){
           console.log("Error!", resp)
@@ -35,13 +43,13 @@
       insights.metricDisplay = selection.charAt(0).toUpperCase() + selection.slice(1);
       insights.getCorrelations(selection)
       .then(function(dataArr){
-        console.log('This is the correl data', dataArr)
+        // console.log('This is the correl data', dataArr)
           store.set('currentCorrelationData', dataArr);
           insights.currentCorrelationData = dataArr;
-          $rootScope.$broadcast('newData', { data:dataArr });
+          $rootScope.$broadcast('newData', { data:dataArr, width: insights.width, height: insights.height});
           insights.displayData = dataArr;
           insights.displayData = insights.displayData.map(function(obj) {
-            console.log(Object.keys(obj));
+            // console.log(Object.keys(obj));
             var key = Object.keys(obj)[0];
             obj[key] = ~~(obj[key] * 100);
             return obj;
@@ -54,6 +62,7 @@
       .catch(function(err){
         console.log('There was an error getting your correlations', err);
       })
+      insights.showSVG = true;
     }
 
   }

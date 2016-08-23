@@ -241,6 +241,30 @@ a,a:hover {
     width: 45%;
 }
 
+.journal-submit {
+    text-align: center;
+}
+
+.svg-container {
+    margin-top: 2%;
+    border: 1px solid #ddd;
+    opacity: 1;
+    background-color: transparent;
+    text-align: center;
+}
+
+.svg-container.ng-hide-add, .svg-container.ng-hide-remove {
+  transition: all linear 1s;
+}
+
+.svg-container.ng-hide {
+  opacity: 0;
+}
+
+.insights-switch {
+    display: inline;
+}
+
 .black-box {
     background-color: black; 
     width: 70%; 
@@ -253,8 +277,22 @@ a,a:hover {
     border-bottom: 1px solid #FFF;
 }
 
+md-switch.md-checked .md-thumb {
+  background-color: rgb(91,177,47);
+}
+
+md-switch.md-checked .md-bar {
+  background-color: rgba(91,177,47,0.5);
+}
+
+md-switch.md-checked .md-ink-ripple {
+  color: rgb(91,177,47);
+}
+
+
 body {
     color: #2f2d2d;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .landing-nav-custom {
