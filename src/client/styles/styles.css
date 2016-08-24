@@ -9,6 +9,21 @@
     font-size: 100%;
 }*/
 
+* {
+  font-weight: 200;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+ /* text-shadow: rgba(0,0,0,.01) 0 0 1px;*/
+}
+
+h2 {
+  font-weight: 200;
+}
+
+h4 {
+  font-weight: 200;
+}
+
 .index {
     margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
@@ -147,6 +162,7 @@ footer {
     border-bottom: 1px solid #ddd;
     position: fixed;
     bottom: 0;
+    background-color: white;
 }
 
 .template-view {
@@ -190,6 +206,21 @@ a,a:hover {
 }
 
 .sentiment-container.ng-hide {
+    opacity: 0;
+}
+
+.repeated-container {
+    opacity: 1;
+    text-align: center;
+}
+
+.repeated-container.ng-hide-add, .repeated-container.ng-hide-remove {
+    transition-duration: 2s;
+    transition-timing-function: linear;
+    transition-delay: 1s;
+}
+
+.repeated-container.ng-hide {
     opacity: 0;
 }
 
@@ -361,6 +392,7 @@ body {
     background-color: #73c5e1 !important;
     width: 45%;
     color: white !important;
+    font-weight: 600;
 }
 
 .vertical-divider {
@@ -372,6 +404,11 @@ body {
 
 .reuse-items {
     text-align: center;
+}
+
+.all-correlations {
+    text-align: center;
+    margin: 10px;
 }
 
 .cancel-button {

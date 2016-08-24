@@ -36,7 +36,7 @@
 </div> -->
 
 
-<div layout='column' layout-xs='column'>
+<div layout='column' layout-xs='column' class='marginOnBottom'>
   <div layout='row'>
     <div flex='60'>
       <h2>Discover Insights</h2>
@@ -74,11 +74,12 @@
       
         <bubble-chart style='background-color: transparent;'></bubble-chart>
       </div>
-        <div ng-repeat="item in insights.displayData" class='col-sm-12'>
-          <ul>
-            <li ng-repeat="(key, value) in item">{{key}}: {{value}}%</li>
-          </ul>
+      <div class='repeated-container' ng-show='insights.showSVG'>
+        <h3 style="font-weight: 200;">All correlations with <strong style="font-weight">{{insights.metricDisplay}}</strong>:</h3>
+        <div class='all-correlations' ng-repeat="item in insights.displayData">
+            <span  ng-repeat="(key, value) in item">{{key}}: {{value}}%</span>
         </div>
+      </div>
     </div>
   </div>
 </div>
