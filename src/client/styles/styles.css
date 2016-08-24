@@ -14,7 +14,7 @@
 }
 
 .background-image {
-background: url("../images/BackGroundImage3.png") no-repeat center;
+background: url("../images/BackGroundImage5.png") no-repeat center;
 height: 489px;
 }
 
@@ -358,7 +358,7 @@ body {
 
 .sign-up-button {
     margin-top: 8%;
-    background-color: #9b539c !important;
+    background-color: #73c5e1 !important;
     width: 45%;
     color: white !important;
 }
