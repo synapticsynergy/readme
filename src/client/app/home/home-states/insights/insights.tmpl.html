@@ -48,9 +48,9 @@
       <div style="margin-bottom: 2%;">
         <md-switch class='insights-switch' ng-model="insights.switch" aria-label="Timeshift"></md-switch>
         <span style='color: #ddd;'ng-hide='insights.switch'>Timeshift off</span>
-        <span ng-hide='!insights.switch'>Timeshift days by:
+        <span ng-hide='!insights.switch'>Timeshift by:
           <md-input-container style='margin: 0px 0px; padding: 0px;'>
-            <input type="number" ng-model="insights.timeShiftAmount" style="width: 25%; text-align:center;">
+            <input type="number" ng-model="insights.timeShiftAmount" placeholder="days" style="width: 25%; text-align:center;">
           </md-input-container>
         </span>
       </div>
