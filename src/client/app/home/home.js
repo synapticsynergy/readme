@@ -32,8 +32,6 @@
       }
     }()
 
-    // setTimeout(home.userNameGetter, 1000);
-
     home.currentState = function(){
       var page = $state.current.url.slice(1)
       page = page.charAt(0).toUpperCase() + page.slice(1);

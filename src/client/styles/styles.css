@@ -325,6 +325,17 @@ a,a:hover {
   opacity: 0;
 }
 
+.avatar-container {
+  margin-top: 5%; 
+  text-align:center;
+}
+
+.avatar-container.hidden {
+  margin-top: 5%; 
+  text-align:center;
+  visibility: hidden;
+}
+
 .insights-switch {
     display: inline;
 }

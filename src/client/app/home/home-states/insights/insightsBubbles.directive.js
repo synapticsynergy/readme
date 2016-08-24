@@ -95,7 +95,7 @@ angular.module('app.home.insights').
         // layout for gravitational effect.
         var force = d3.layout.force()//build the layout
           .charge(-300) // node distance from eachother.
-          .gravity(.09)
+          .gravity(.05)
           .size([width, height]) //specified earlier
           .nodes(nodes) //add nodes
           .on("tick", tick) //what to do
