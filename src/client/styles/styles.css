@@ -303,7 +303,10 @@ a,a:hover {
     width: 70%;
     height: 250px;
     color: #fff;
-    padding: 8%;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 15px;
+    text-align: center;
 }
 
 #last-menu-item {
@@ -351,6 +354,13 @@ body {
 
 .tag-cloud {
     margin-top: 5%;
+}
+
+.sign-up-button {
+    margin-top: 8%;
+    background-color: #9b539c !important;
+    width: 45%;
+    color: white !important;
 }
 
 .vertical-divider {

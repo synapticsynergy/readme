@@ -26,7 +26,7 @@
         home.userName = profile.nickname;
         return;
       }
-      else {
+      if (profile !== null && profile.nickname) {
         home.userName = profile.email.split('@')[0];
         return;
       }
