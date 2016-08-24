@@ -26,7 +26,7 @@
   <md-content tabindex="-1" role='main' class='layout-column flex'>
     <md-toolbar class='site-content-toolbar _md' layout='row'>
       <md-button class='menuButton' aria-label='Toggle Side Bar' ng-click="home.openLeftMenu()">
-        <img style='max-width: 20px;' src="http://www.getkumbu.com/wp-content/themes/kumbu-blog-theme/assets/img/mobile-menu.svg">
+        <img style='max-width: 20px;' src="../images/ic_menu_black_24dp_1x.png">
       </md-button>
       <div class="md-toolbar-tools">
         <span>{{home.currentState}}</span>
@@ -53,7 +53,11 @@
 
     </div>
 
-      <div ui-view class='template-view'></div>
+      <div ui-view class='template-view'>
+        <h2>Welcome to ReadMe {{ home.userName}}</h2>
+        <br>
+        <p>Enter a date to get started!</p>
+      </div>
   </md-content>
 
 </div>

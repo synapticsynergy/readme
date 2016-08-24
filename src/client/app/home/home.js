@@ -3,11 +3,36 @@
   angular.module('app.home', ['app.home.entries', 'app.home.insights', 'app.home.journal', 'app.home.about'])
   .controller('HomeController', HomeController);
 
-  HomeController.$inject = ['$scope', '$mdSidenav', '$window', '$location', 'Home', 'Auth', '$rootScope', '$state'];
+  HomeController.$inject = ['$scope', '$mdSidenav', '$window', '$location', 'Home', 'Auth', '$rootScope', '$state', 'store'];
 
-  function HomeController($scope, $mdSidenav, $window, $location, Home, Auth, $rootScope, $state) {
+  function HomeController($scope, $mdSidenav, $window, $location, Home, Auth, $rootScope, $state, store) {
     // jshint validthis: true (prevents linting from throwing a warning)
     var home = this;
+
+    home.userName;
+
+    home.userNameGetter = function(){
+      var userData = store.get('userData');
+      var profile = store.get('profile');
+      if (userData.firstname !== undefined) {
+        home.userName = userData.firstname;
+        return;
+      } 
+      if (profile !== null && profile.given_name) {
+        home.userName = profile.given_name;
+        return;
+      }
+      if (profile !== null && profile.nickname) {
+        home.userName = profile.nickname;
+        return;
+      }
+      if (profile !== null && profile.nickname) {
+        home.userName = profile.email.split('@')[0];
+        return;
+      }
+    }()
+
+    // setTimeout(home.userNameGetter, 1000);
 
     home.currentState = function(){
       var page = $state.current.url.slice(1)
