@@ -18,8 +18,8 @@ angular.module('app.home.insights').
       //in the HTML mark-up
       replace: false,
 
-      scope: { 
-        data: '=', 
+      scope: {
+        data: '=',
         width: '=',
         height: '='
       },
@@ -57,7 +57,7 @@ angular.module('app.home.insights').
 
 
 
-        var width = width; 
+        var width = width;
         var height = height;
 
         //create svg container.
@@ -100,7 +100,7 @@ angular.module('app.home.insights').
           .nodes(nodes) //add nodes
           .on("tick", tick) //what to do
           .start();
-        
+
 
         // add the nodes
         var node = svg.selectAll('.node')
@@ -113,8 +113,16 @@ angular.module('app.home.insights').
         /*Create the circle for each block */
         var circle = elemEnter.append("circle")
           .attr('class', 'node')
-          .attr("r", function(d){return d.r > 0 ? d.r / 1.2 : (d.r * -1) / 1.2} )
+          .attr("r", function(d){
+            if (d.r > -20 && d.r < 20) {
+              return 30;
+            }
+            return d.r > 0 ? d.r / 1.2 : Math.max((d.r * -1) / 1.2, 30);
+          })
           .attr('fill',function(d) {
+            if (d.r === 100) {
+              return "#73C5E1";
+            }
             if (d.r < 0) {
               console.log('negative', d.r * -1)
               return negColorScale(d.r * -1);
