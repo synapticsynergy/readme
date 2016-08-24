@@ -13,7 +13,7 @@
 
     insights.width = $(window).width() * 0.45;
 
-    insights.height = 400;
+    insights.height = 700;
 
     insights.userMetrics = store.get('userData').userMetrics;
 
