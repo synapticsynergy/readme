@@ -34,7 +34,6 @@ User.prototype.addActivity = function(activities, day, location) {
 
   return user.addPopular('activities', activities)
   .then(function(user){
-    console.log(user.popularItems, 'did this work??');
     return user.getDay(day)
 
   })
@@ -52,12 +51,10 @@ User.prototype.addActivity = function(activities, day, location) {
         }
       });
       foundDay.activities = foundDay.activities.concat(activities);
-      console.log(user.popularItems,'last check items');
       return user.save();
 
     }
   }).then(function(user) {
-    console.log(user.popularItems,'complete last stop')
     return user.save();
   })
   .catch(function(err){
@@ -79,17 +76,23 @@ User.prototype.deleteActivity = function(activity, day) {
 };
 
 User.prototype.addMetric = function(metrics, day) {
+  console.log(metrics,'metrics data showing?');
   var user = this;
-  return user.getDay(day)
-    .then(function(foundDay) {
-      metrics.forEach(function(metric) {
-        if (user.userMetrics.indexOf(metric) === -1) {
-          user.userMetrics.push(metric);
-        }
-      });
-      foundDay.metrics = foundDay.metrics.concat(metrics);
-      return user.save();
+
+  user.addPopular('metrics', metrics)
+  .then(function(user){
+
+    return user.getDay(day);
+  })
+  .then(function(foundDay) {
+    metrics.forEach(function(metric) {
+      if (user.userMetrics.indexOf(metric) === -1) {
+        user.userMetrics.push(metric);
+      }
     });
+    foundDay.metrics = foundDay.metrics.concat(metrics);
+    return user.save();
+  });
 };
 
 User.prototype.deleteMetric = function(metric, day) {
@@ -153,8 +156,6 @@ User.prototype.getDay = function(date) {
 User.prototype.addPopular = function(type, datums){
   var user = this;
 
-   console.log('before popularItemAct', user.popularItems.act)
-
   datums.forEach(function(datum){
     if (type === 'activities') {
       if (user.popularItems.act[datum] === undefined) {
@@ -169,9 +170,8 @@ User.prototype.addPopular = function(type, datums){
         user.popularItems.met[datum]++;
       }
     }
-    console.log('middle popularItemAct', user.popularItems.act)
   });
-  console.log('after popularItemAct', user.popularItems.act)
+  user.markModified('popularItems');
   return user.save();
 }
 

@@ -16,8 +16,30 @@
     entries.daysActivities = [];
     entries.daysMetrics = [];
 
-    entries.popularAct = ['hops', 'skips', 'jumps', 'google', 'computer', 'play music', 'read book','flip', 'roger', 'go for a walk', 'dog walk', 'wirte with pen', 'play bass', 'read novel'];
-    entries.popularMet = ['happy', 'sad', 'headache', 'car crash', 'creative', 'artisitic', 'sick']; 
+
+    entries.sortKeys = function(obj) {
+      var result = [];
+
+      for (var key in obj) {
+        result.push([key,obj[key]]);
+      }
+
+      console.log(result,'tuple');
+
+      result = result.sort(function(a,b) {
+            return b[1] - a[1];
+          }).slice(0,20);
+
+      result = result.map(function(tuple) {
+        return tuple[0];
+      });
+
+      console.log(result);
+      return result;
+    }
+
+    entries.popularAct = entries.sortKeys(store.get('userData').popularItems.act);
+    entries.popularMet = entries.sortKeys(store.get('userData').popularItems.met);
 
     entries.showActivities = function(){
       if (entries.daysActivities.length > 0 || entries.daysMetrics.length > 0){
@@ -102,6 +124,10 @@
       .then(function(resp) {
         console.log("Post Success! " + entries.activeField, resp)
         Home.getUserData();
+      }).then(function() {
+        entries.popularAct = entries.sortKeys(store.get('userData').popularItems.act);
+      }).then(function() {
+        entries.popularMet = entries.sortKeys(store.get('userData').popularItems.met);
       })
       .catch(function(err) {
         console.log('There was an error adding your datums', err)
