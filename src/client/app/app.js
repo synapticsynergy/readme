@@ -9,17 +9,10 @@
     '$locationProvider', 'jwtInterceptorProvider',
     function myAppConfig ($routeProvider, authProvider, $httpProvider,
       $locationProvider, jwtInterceptorProvider) {
-      var options = {
-        theme: {
-          logo: '../images/logo-icon.png',
-          primaryColor: 'green'
-        }  
-      };
       authProvider.init({
         domain: 'synapticsynergy.auth0.com',
         clientID: 'kg0sT6tTpDoBwb2A1WllySYiarHLz8HV',
-        loginState: 'landing',
-        options: options
+        loginState: 'landing'
       });
 
       // Called when login is successful
