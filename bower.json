@@ -23,6 +23,7 @@
     "angular-material": "^1.0.9",
     "angular-sanitize": "^1.5.8",
     "angular-tag-cloud": "^0.3.0",
-    "material-design-icons": "^2.2.3"
+    "material-design-icons": "^2.2.3",
+    "angular-messages": "^1.5.8"
   }
 }

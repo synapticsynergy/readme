@@ -172,6 +172,27 @@ a,a:hover {
 
 }
 
+.sentiment-container {
+    opacity: 1;
+}
+
+.sentiment-box {
+  min-height: 100px; 
+  margin-top:150px; 
+  background-color:#bccf02; 
+  top: 50%; 
+  left: 50%;
+  opacity: 1;
+}
+
+.sentiment-container.ng-hide-add, .sentiment-container.ng-hide-remove {
+    transition: all linear 0.5s;
+}
+
+.sentiment-container.ng-hide {
+    opacity: 0;
+}
+
 .metric-input-area {
     opacity: 1;
     margin-top: 3%;
@@ -195,6 +216,12 @@ a,a:hover {
 
 .reuse-items-container.ng-hide {
   opacity: 0;
+}
+
+.validation-messages {
+  font-size: 12px;
+  color: #dd2c00;
+  margin-left: 15px; 
 }
 
 .switch {
