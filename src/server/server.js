@@ -121,6 +121,12 @@ app.route('/user/journal')
       .then(function (user) {
         return user.saveJournal(entry, day);
       })
+      // .then(function (user) {
+      //   return sentiment.getSentiment(entry)
+      // })
+      // .then(function (sentimentRes) {
+      //   // return User.addSentiment(day, sentiment);
+      // })
       .then(function (user) {
         var userString = JSON.stringify(user);
         res.send(userString);

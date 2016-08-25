@@ -173,7 +173,17 @@ User.prototype.addPopular = function(type, datums){
   });
   user.markModified('popularItems');
   return user.save();
-}
+};
+
+User.prototype.addSentiment = function (date, sentiment) {
+  var user = this;
+
+  return user.getDay(date)
+    .then(function (day) {
+      day.sentiment = sentiment;
+      return user.save();
+    });
+};
 
 //calls the wunderground API for weather data and pulls pertinent info out of the response
 User.prototype.getWeather = function(date, location, activities, foundDay) {
