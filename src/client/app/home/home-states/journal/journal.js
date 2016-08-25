@@ -10,10 +10,13 @@
     var journal = this;
     journal.message = '';
     journal.sentiment = '';
-    journal.entry = "Enter your thoughts for today...";
+    journal.entry = Home.date === undefined ? '' : Home.getDay(Home.date.toISOString()).journalEntry;
     journal.showSent = true;
 
-    journal.saveJournal = Journal.saveJournal;
+    journal.saveJournal = function () {
+      Journal.saveJournal.call(journal);
+      Home.getUserData();
+    };
 
     journal.getSentiment = function (text) {
       Journal.getSentiment(text)
