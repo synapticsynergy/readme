@@ -24,8 +24,6 @@
         result.push([key,obj[key]]);
       }
 
-      console.log(result,'tuple');
-
       result = result.sort(function(a,b) {
             return b[1] - a[1];
           }).slice(0,20);
@@ -75,12 +73,22 @@
     }
 
     entries.addItem = function(selection, type) {
+      console.log(selection.split(','),'item to be added');
+      selection = selection.split(',');
       if (type === 'activity') {
-        entries.daysActivities.push(selection);
+        if (Array.isArray(selection)) {
+          entries.daysActivities = entries.daysActivities.concat(selection);
+        } else {
+          entries.daysActivities.push(selection);
+        }
         entries.searchTextAct = null;
         entries.activityForm.$setPristine();
       } else {
-        entries.daysMetrics.push(selection);
+          if (Array.isArray(selection)) {
+            entries.daysMetrics = entries.daysMetrics.concat(selection);
+          } else {
+            entries.daysMetrics.push(selection);
+          }
         entries.searchTextMet = null;
         entries.metricForm.$setPristine();
       }
