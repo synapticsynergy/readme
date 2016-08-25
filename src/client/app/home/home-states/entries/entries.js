@@ -123,7 +123,7 @@
       })
       .then(function(resp) {
         console.log("Post Success! " + entries.activeField, resp)
-        Home.getUserData();
+        return Home.getUserData();
       }).then(function() {
         entries.popularAct = entries.sortKeys(store.get('userData').popularItems.act);
       }).then(function() {
