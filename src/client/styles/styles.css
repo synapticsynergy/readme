@@ -116,7 +116,7 @@ footer {
 .side-menu-options {
     color: #FFFFFF !important;
     padding: 15px;
- /*   text-align: center;*/
+    background-color: transparent;
     display: block;
     border-top: 1px solid #FFFFFF;
     width: 100%;
