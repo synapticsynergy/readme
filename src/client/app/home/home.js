@@ -11,11 +11,22 @@
 
     home.userName;
 
-    home.userDate = new Date();
-    home.maxDate = new Date(
-        home.userDate.getFullYear(),
-        home.userDate.getMonth(),
-        home.userDate.getDate());
+    $scope.userDate;
+
+    $scope.userDateInit = function(){
+      
+      //Sets the default date to current day at midnight
+      var d = new Date();
+      d.setHours(0,0,0,0);
+      $scope.userDate = d;
+
+      //Sets the max date to the current date
+      $scope.maxDate = new Date(
+        $scope.userDate.getFullYear(),
+        $scope.userDate.getMonth(),
+        $scope.userDate.getDate());
+    }();
+
 
     // $scope.userDate = Home.userDate || new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).toISOString();
 

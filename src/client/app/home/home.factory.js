@@ -57,6 +57,7 @@
     var date = {};
 
     function dateSetter(value) {
+      console.log(value);
       services.date = value;
     }
 
