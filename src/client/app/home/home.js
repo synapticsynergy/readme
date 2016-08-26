@@ -11,26 +11,42 @@
 
     home.userName;
 
-    home.userNameGetter = function(){
-      var userData = store.get('userData');
-      var profile = store.get('profile');
-      if (userData.firstname !== undefined) {
-        home.userName = userData.firstname;
-        return;
-      } 
-      if (profile !== null && profile.given_name) {
-        home.userName = profile.given_name;
-        return;
-      }
-      if (profile !== null && profile.nickname) {
-        home.userName = profile.nickname;
-        return;
-      }
-      if (profile !== null && profile.nickname) {
-        home.userName = profile.email.split('@')[0];
-        return;
-      }
-    }()
+    $scope.userDate;
+
+    $scope.userDateInit = function(){
+
+      //Sets the default date to current day at midnight
+      var d = new Date();
+      d.setHours(0,0,0,0);
+      $scope.userDate = d;
+
+      //Sets the max date to the current date
+      $scope.maxDate = new Date(
+        $scope.userDate.getFullYear(),
+        $scope.userDate.getMonth(),
+        $scope.userDate.getDate());
+    }();
+
+    // home.userNameGetter = function(){
+    //   var userData = store.get('userData');
+    //   var profile = store.get('profile');
+    //   if (userData.firstname !== undefined) {
+    //     home.userName = userData.firstname;
+    //     return;
+    //   } 
+    //   if (profile !== null && profile.given_name) {
+    //     home.userName = profile.given_name;
+    //     return;
+    //   }
+    //   if (profile !== null && profile.nickname) {
+    //     home.userName = profile.nickname;
+    //     return;
+    //   }
+    //   if (profile !== null && profile.nickname) {
+    //     home.userName = profile.email.split('@')[0];
+    //     return;
+    //   }
+    // }()
 
     home.currentState = function(){
       var page = $state.current.url.slice(1)
