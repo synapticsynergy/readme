@@ -1,21 +1,17 @@
 (function() {
   'use strict';
-  angular.module('app.home.insights')
-  .factory('Insights', Insights);
+  angular.module('app.home.insights').factory('Insights', Insights);
+  Insights.$inject = ['store'];
 
-    Insights.$inject = ['store'];
+  function Insights(store) {
+    var services = {
+      dataRefresh: dataRefresh
+    };
+    return services;
 
-    function Insights (store) {
-      var services = {
-        dataRefresh: dataRefresh
-      };
-
-      return services;
-
-      function dataRefresh () {
-        console.log('dataRefresh working');
-        return store.get('currentCorrelationData');
-      };
-
-    }
-  })();
+    function dataRefresh() {
+      console.log('dataRefresh working');
+      return store.get('currentCorrelationData');
+    };
+  }
+})();

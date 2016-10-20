@@ -1,67 +1,54 @@
 (function() {
   'use strict';
-  angular.module('app.home.entries', [])
-    .controller('EntriesController', EntriesController);
-
+  angular.module('app.home.entries', []).controller('EntriesController',
+    EntriesController);
   EntriesController.$inject = ['$http', 'Home', 'store', 'Entries'];
 
   function EntriesController($http, Home, store, Entries) {
     // jshint validthis: true
     var entries = this;
-
-    entries.activeField = "Activities"; //prune
-
+    entries.activeField = "Activities";
     entries.autoCompleteDisabled = false;
-
     entries.daysActivities = [];
     entries.daysMetrics = [];
-
-
     entries.sortKeys = function(obj) {
       var result = [];
-
       for (var key in obj) {
-        result.push([key,obj[key]]);
+        result.push([key, obj[key]]);
       }
-
-      result = result.sort(function(a,b) {
-            return b[1] - a[1];
-          }).slice(0,20);
-
+      result = result.sort(function(a, b) {
+        return b[1] - a[1];
+      }).slice(0, 20);
       result = result.map(function(tuple) {
         return tuple[0];
       });
-
       console.log(result);
       return result;
     }
-
-    entries.popularAct = entries.sortKeys(store.get('userData').popularItems.act);
-    entries.popularMet = entries.sortKeys(store.get('userData').popularItems.met);
-
-    entries.showActivities = function(){
-      if (entries.daysActivities.length > 0 || entries.daysMetrics.length > 0){
+    entries.popularAct = entries.sortKeys(store.get('userData').popularItems
+      .act);
+    entries.popularMet = entries.sortKeys(store.get('userData').popularItems
+      .met);
+    entries.showActivities = function() {
+      if (entries.daysActivities.length > 0 || entries.daysMetrics.length >
+        0) {
         return true;
       }
     };
-
     entries.userActivities = store.get('userData').userActivities;
     entries.userMetrics = store.get('userData').userMetrics;
-
-    entries.postBoth = function(){
+    entries.postBoth = function() {
       console.log(entries.daysActivities)
-      entries.postData('/user/activity', entries.daysActivities)
-        .then(function(){
+      entries.postData('/user/activity', entries.daysActivities).then(
+        function() {
           console.log(entries.daysMetrics)
           entries.postData('/user/metric', entries.daysMetrics);
-        }).then(function(){
-          console.log('Posteddddddd');
-          entries.daysActivities = [];
-          entries.daysMetrics = [];
-        });
+        }).then(function() {
+        console.log('Posteddddddd');
+        entries.daysActivities = [];
+        entries.daysMetrics = [];
+      });
     }
-
-
     entries.changeField = function() {
       if (entries.activeField === "Activities") {
         entries.activeField = "Metrics"
@@ -71,29 +58,28 @@
         entries.showActivities = true;
       }
     }
-
     entries.addItem = function(selection, type) {
-      console.log(selection.split(','),'item to be added');
+      console.log(selection.split(','), 'item to be added');
       selection = selection.split(',');
       if (type === 'activity') {
         if (Array.isArray(selection)) {
-          entries.daysActivities = entries.daysActivities.concat(selection);
+          entries.daysActivities = entries.daysActivities.concat(
+            selection);
         } else {
           entries.daysActivities.push(selection);
         }
         entries.searchTextAct = null;
         entries.activityForm.$setPristine();
       } else {
-          if (Array.isArray(selection)) {
-            entries.daysMetrics = entries.daysMetrics.concat(selection);
-          } else {
-            entries.daysMetrics.push(selection);
-          }
+        if (Array.isArray(selection)) {
+          entries.daysMetrics = entries.daysMetrics.concat(selection);
+        } else {
+          entries.daysMetrics.push(selection);
+        }
         entries.searchTextMet = null;
         entries.metricForm.$setPristine();
       }
     }
-
     entries.removeItem = function(index, type) {
       if (type === 'activity') {
         entries.daysActivities.splice(index, 1);
@@ -101,7 +87,6 @@
         entries.daysMetrics.splice(index, 1);
       }
     }
-
     entries.addItemSideOptions = function(index, type) {
       if (type === 'activity') {
         var item = entries.popularAct.splice(index, 1);
@@ -111,14 +96,12 @@
         entries.daysMetrics.push(item[0]);
       }
     }
-
     entries.postData = function(url, datums) {
       var url = url;
       var datums = datums;
       var profile = store.get('userData');
       var currentlySelectedDate = Home.date;
       var userLocation = Home.userLocation;
-
       return $http({
         method: "POST",
         url: url,
@@ -128,16 +111,16 @@
           date: currentlySelectedDate,
           location: userLocation
         }
-      })
-      .then(function(resp) {
+      }).then(function(resp) {
         console.log("Post Success! " + entries.activeField, resp)
         return Home.getUserData();
       }).then(function() {
-        entries.popularAct = entries.sortKeys(store.get('userData').popularItems.act);
+        entries.popularAct = entries.sortKeys(store.get('userData').popularItems
+          .act);
       }).then(function() {
-        entries.popularMet = entries.sortKeys(store.get('userData').popularItems.met);
-      })
-      .catch(function(err) {
+        entries.popularMet = entries.sortKeys(store.get('userData').popularItems
+          .met);
+      }).catch(function(err) {
         console.log('There was an error adding your datums', err)
       })
     }
