@@ -1,20 +1,17 @@
-(function () {
+(function() {
   'use strict';
-  angular.module('app.home.journal')
-  .factory('Journal', Journal);
-
+  angular.module('app.home.journal').factory('Journal', Journal);
   Journal.$inject = ['$http', 'store', 'Home'];
 
-  function Journal ($http, store, Home) {
+  function Journal($http, store, Home) {
     var services = {
       saveJournal: saveJournal,
       getSentiment: getSentiment
     };
 
-    function saveJournal () {
+    function saveJournal() {
       var profile = store.get('userData');
       var currentlySelectedDate = Home.date;
-
       return $http({
         method: 'POST',
         url: '/user/journal',
@@ -30,22 +27,19 @@
       });
     }
 
-    function getSentiment (text) {
+    function getSentiment(text) {
       return $http({
         method: 'POST',
         url: '/sentiment/',
         data: {
           text: text
         }
-      })
-        .then(function (res) {
-          return res;
-        })
-        .catch(function (err) {
-          console.error(err);
-        });
+      }).then(function(res) {
+        return res;
+      }).catch(function(err) {
+        console.error(err);
+      });
     }
-
     return services;
   }
 })();

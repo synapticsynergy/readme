@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-
 var userSchema = mongoose.Schema({
   email: String,
   firstname: String,
@@ -15,7 +14,10 @@ var userSchema = mongoose.Schema({
       // sentiment possibly from watson?
       journalEntry: String,
       sentiment: String,
-      gotWeather: {type: Boolean, default: false}
+      gotWeather: {
+        type: Boolean,
+        default: false
+      }
     }
   ],
   // things that the user has already done
@@ -24,15 +26,14 @@ var userSchema = mongoose.Schema({
   // metrics the user has already nominated
   // same, autocomplete or something
   userMetrics: [String],
-
   popularItems: {
     type: Object,
     default: {
-      act:{},
-      met:{}
+      act: {},
+      met: {}
     }
   }
-
-}, {minimize: false});
-
+}, {
+  minimize: false
+});
 module.exports = mongoose.model('User', userSchema);

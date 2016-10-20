@@ -1,19 +1,9 @@
-/*
- * Start Bootstrap - Full Width Pics (http://startbootstrap.com/)
- * Copyright 2013-2016 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
- */
-
-/*html *{
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    font-size: 100%;
-}*/
 
 * {
   font-weight: 200;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
- /* text-shadow: rgba(0,0,0,.01) 0 0 1px;*/
+
 }
 
 h2 {
