@@ -12,7 +12,7 @@
       authProvider.init({
         domain: 'synapticsynergy.auth0.com',
         clientID: 'kg0sT6tTpDoBwb2A1WllySYiarHLz8HV',
-        loginState: 'landing'
+        loginState: 'home'
       });
 
       // Called when login is successful

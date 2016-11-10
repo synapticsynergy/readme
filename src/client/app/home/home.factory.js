@@ -14,7 +14,7 @@
       getDay: getDay,
       getUserData: getUserData,
       userLocation: userLocation
-      
+
     };
     return services;
 
@@ -31,6 +31,8 @@
         })
         .then(function(returnedData) {
           store.set('userData', returnedData.data);
+        }).then(function(returnedData) {
+          return returnedData;
         });
     };
 
